@@ -1,0 +1,3 @@
+test:
+  override:
+    - php tests_and_examples/RunQueryTests.php

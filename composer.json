@@ -1,0 +1,24 @@
+{
+    "name": "slicingdice",
+    "description": "Official PHP client for SlicingDice, Data Warehouse and Analytics Database as a Service.",
+    "authors": [
+        {
+            "name": "SlicingDice LLC"
+        }
+    ],
+    "require": {
+        "php": ">=5.2.8"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "5.5.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Slicer\\": "src/",
+            "Vendor\\Namespace\\": ""
+        }
+    },
+    "autoload-dev": {
+        "psr-4": { "Slicer\\Tests\\": "tests/" }
+    }
+}
