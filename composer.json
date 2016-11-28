@@ -1,6 +1,17 @@
 {
     "name": "slicingdice",
     "description": "Official PHP client for SlicingDice, Data Warehouse and Analytics Database as a Service.",
+    "keywords": [
+        "slicingdice",
+        "slicing",
+        "dice",
+        "data",
+        "analysis",
+        "business",
+        "intelligence"
+    ],
+    "homepage": "https://github.com/SlicingDice/slicingdice-php",
+    "license": "MIT",
     "authors": [
         {
             "name": "SlicingDice LLC"
@@ -19,6 +30,8 @@
         }
     },
     "autoload-dev": {
-        "psr-4": { "Slicer\\Tests\\": "tests/" }
+        "psr-4": {
+            "Slicer\\Tests\\": "tests/"
+        }
     }
 }
