@@ -1,5 +1,5 @@
 {
-    "name": "slicingdice",
+    "name": "slicingdice/slicingdice",
     "description": "Official PHP client for SlicingDice, Data Warehouse and Analytics Database as a Service.",
     "keywords": [
         "slicingdice",
