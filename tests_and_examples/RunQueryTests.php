@@ -167,7 +167,13 @@ class SlicingDiceTester {
             $result = $this->client->topValues($queryData, true);
         } else if ($queryType == "aggregation"){
             $result = $this->client->aggregation($queryData, true);
+        } else if ($queryType == "result"){
+            $result = $this->client->result($queryData, true);
+        } else if ($queryType == "score"){
+            $result = $this->client->score($queryData, true);
         }
+
+
 
         return $result;
     }
@@ -252,7 +258,9 @@ function main(){
         'count_entity',
         'count_event',
         'top_values',
-        'aggregation'
+        'aggregation',
+        'result',
+        'score'
     );
 
     $sdTester = new SlicingDiceTester(
