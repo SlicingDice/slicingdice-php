@@ -4,3 +4,4 @@
 ### Added
 - Thin layers around SlicingDice API endpoints
 - Automatic regression test script RunQueryTests.php with its JSON data
+- Add tests for data extraction
