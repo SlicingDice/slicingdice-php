@@ -19,6 +19,9 @@ class FieldValidator {
             "decimal-time-series", "string-time-series");
     }
 
+    /**
+    * Validate field name
+    */
     private function validateName() {
         if (!array_key_exists("name", $this->queryData)) {
             throw new InvalidFieldException("The field should have a name.");
@@ -27,19 +30,25 @@ class FieldValidator {
             $name = $this->queryData["name"];
             if (strlen($name) > 80){
                 throw new InvalidFieldNameException(
-                    "The field's name have a very big name.(Max: 80 chars)");
+                    "The field's name have a very big content. (Max: 80 chars)");
             }
         }
     }
 
+    /**
+    * Validate field description
+    */
     private function validateDescription() {
         $description = $this->queryData["description"];
         if (strlen($description) > 300){
             throw new InvalidFieldDescriptionException(
-                "The field's description have a very big name.(Max: 300chars)");
+                "The field's description have a very big content. (Max: 300chars)");
         }
     }
 
+    /**
+    * Validate field type
+    */
     private function validateFieldType() {
         if (!array_key_exists("type", $this->queryData)) {
             throw new InvalidFieldException("The field should have a type.");
@@ -50,7 +59,10 @@ class FieldValidator {
         }
     }
 
-    private function validateDecimalPlaces() {
+    /**
+    * Verify if decimal has a valid type
+    */
+    private function validateDecimalType() {
         $decimalTypes = array("decimal", "decimal-time-series");
         $fieldType = $this->queryData["type"];
         if (!in_array($fieldType, $decimalTypes)){
@@ -60,6 +72,9 @@ class FieldValidator {
         }
     }
 
+    /**
+    * Check cardinality property on string fields
+    */
     private function checkStringIntegrity() {
         if (!array_key_exists("cardinality", $this->queryData)) {
             throw new InvalidFieldException(
@@ -73,6 +88,9 @@ class FieldValidator {
         }
     }
 
+    /**
+    * Validate enumerate field
+    */
     private function validateEnumerate() {
         if(!array_key_exists("range", $this->queryData)) {
             throw new InvalidFieldException(
@@ -80,6 +98,11 @@ class FieldValidator {
         }
     }
 
+    /** 
+    * Validate a field
+    *
+    * @return true if field is valid
+    */
     public function validator() {
         $this->validateName();
         $this->validateFieldType();
@@ -94,7 +117,7 @@ class FieldValidator {
             $this->validateDescription();
         }
         if (array_key_exists("decimal-place", $this->queryData)) {
-            $this->validateDecimalPlaces();
+            $this->validateDecimalType();
         }
         return true;
     }

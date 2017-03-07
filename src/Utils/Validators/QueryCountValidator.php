@@ -12,6 +12,11 @@ class QueryCountValidator {
         $this->queryData = $query;
     }
 
+    /** 
+    * Validate a data count query
+    *
+    * @return true if count query is valid
+    */
     public function validator() {
         if (count($this->queryData) > 10) {
             throw new MaxLimitException(
