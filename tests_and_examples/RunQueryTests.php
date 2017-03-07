@@ -10,10 +10,15 @@ use Slicer\SlicingDice;
 
 class SlicingDiceTester {
 
+    // The Slicing Dice API client
     private $client;
+    // Array for field translation
     private $fieldTranslation;
+    // Sleep time in seconds
     private $sleepTime;
+    // Examples path
     private $path;
+    // Examples file extension
     private $extension;
     public $numSuccess;
     public $numFails;
@@ -28,9 +33,9 @@ class SlicingDiceTester {
         // Translation table for fields with timestamp
         $this->fieldTranslation = array();
 
-        $this->sleepTime = 5; // seconds
-        $this->path = "/examples/"; // Directory containing examples to test
-        $this->extension = ".json"; // Examples file format
+        $this->sleepTime = 5;
+        $this->path = "/examples/"; 
+        $this->extension = ".json"; 
 
         $this->numSuccess = 0;
         $this->numFails = 0;
@@ -40,6 +45,11 @@ class SlicingDiceTester {
         $this->updateResults();
     }
 
+    /**
+    * Run tests 
+    *
+    * @param string $queryType the type of the query
+    */
     public function runTests($queryType){
         $testData = $this->loadTestData($queryType);
         $numTests = count($testData);
@@ -49,7 +59,7 @@ class SlicingDiceTester {
             $this->emptyFieldTranslation();
 
             $counter += 1;
-            $name =  $test["name"];
+            $name = $test["name"];
             print "($counter/$numTests) Executing test $name\n";
 
             if (array_key_exists('description', $test)){
@@ -72,17 +82,30 @@ class SlicingDiceTester {
         }
     }
 
+    /**
+    * Reset field translation
+    */
     private function emptyFieldTranslation(){
         $this->fieldTranslation = array();
     }
 
-    private function loadTestData($queryType){
+    /**
+    * Load test data from example files
+    *
+    * @param string $queryType the type of the query
+    */
+    private function loadTestData($queryType) {
         $filename = __DIR__ . $this->path . $queryType . $this->extension;
         $content = file_get_contents($filename);
         return json_decode($content, true);
     }
 
-    private function createFields($test){
+    /**
+    * Create fields on Slicing Dice API
+    *
+    * @param array $fieldObject the field object to create
+    */
+    private function createFields($fieldObject) {
         $isSingular = $this->numFails == 1;
         $fieldOrFields = null;
         if ($isSingular){
@@ -90,9 +113,9 @@ class SlicingDiceTester {
         } else {
             $fieldOrFields = "fields";
         }
-        print "  Creating " . count($test["fields"]) . " " . $fieldOrFields . "\n";
+        print "  Creating " . count($fieldObject["fields"]) . " " . $fieldOrFields . "\n";
 
-        foreach ($test["fields"] as $field) {
+        foreach ($fieldObject["fields"] as $field) {
             $newField = $this->appendTimestampToFieldName($field);
             $this->client->createField($newField, true);
 
@@ -102,6 +125,11 @@ class SlicingDiceTester {
         }
     }
 
+    /**
+    * Put timestamp to the end of the field name
+    * 
+    * @param array $field the field to append timestamp
+    */
     private function appendTimestampToFieldName($field){
         $oldName = '"' . $field['api-name'] . '"';
 
@@ -114,12 +142,22 @@ class SlicingDiceTester {
         return $field;
     }
 
+    /**
+    * Get actual timestamp
+    *
+    * @return string with the timestamp
+    */
     private function getTimestamp(){
         $date = new \DateTime();
         return strval($date->getTimestamp());
     }
 
-    private function indexData($test){
+    /**
+    * Index data 
+    *
+    * @param array $data the data to index
+    */
+    private function indexData($data){
         $isSingular = $this->numFails == 1;
         $entityOrEntities = null;
         if ($isSingular){
@@ -127,9 +165,9 @@ class SlicingDiceTester {
         } else {
             $entityOrEntities = "entities";
         }
-        print "  Indexing " . count($test["index"]) . " " . $entityOrEntities . "\n";
+        print "  Indexing " . count($data["index"]) . " " . $entityOrEntities . "\n";
 
-        $indexDataArray = $this->translateFieldNames($test["index"]);
+        $indexDataArray = $this->translateFieldNames($data["index"]);
 
         if ($this->verbose) {
             print_r($indexDataArray);
@@ -140,6 +178,11 @@ class SlicingDiceTester {
         sleep($this->sleepTime);
     }
 
+    /**
+    * Tranlate field name to use timestamp
+    *
+    * @param array $jsonData the json data to translate fields
+    */
     private function translateFieldNames($jsonData){
         $dataString = json_encode($jsonData);
 
@@ -150,8 +193,14 @@ class SlicingDiceTester {
         return json_decode($dataString, true);
     }
 
-    private function executeQuery($queryType, $test){
-        $queryData = $this->translateFieldNames($test["query"]);
+    /**
+    * Execute query on Slicing Dice API
+    *
+    * @param string $queryType the query type
+    * @param array $data the query array
+    */
+    private function executeQuery($queryType, $data){
+        $queryData = $this->translateFieldNames($data["query"]);
         $result = null;
         echo "  Querying\n";
 
@@ -173,22 +222,26 @@ class SlicingDiceTester {
             $result = $this->client->score($queryData, true);
         }
 
-
-
         return $result;
     }
 
-    private function compareResult($test, $result){
-        $expected = $this->translateFieldNames($test["expected"]);
+    /**
+    * Compare received result with expected
+    *
+    * @param array $expectedArray the expected array
+    * @param array $result the result array received
+    */
+    private function compareResult($expectedArray, $result){
+        $expected = $this->translateFieldNames($expectedArray["expected"]);
 
-        foreach ($test["expected"] as $key => $value) {
+        foreach ($expectedArray["expected"] as $key => $value) {
             if($value == "ignore"){
                 continue;
             }
 
             if (array_diff_key($expected[$key], $result[$key])){
                 $this->numFails += 1;
-                array_push($this->failedTests, $test["name"]);
+                array_push($this->failedTests, $expectedArray["name"]);
 
                 print_r('  Expected: "' . $key . '": ' . json_encode($expected[$key]) . "\n");
                 print_r('  Result: "' . $key . '": ' . json_encode($result[$key]) .  "\n");
@@ -203,6 +256,9 @@ class SlicingDiceTester {
         $this->updateResults();
     }
 
+    /**
+    * Update tests result on tests result file
+    */
     private function updateResults() {
         if (PHP_OS != "Linux") return;
         $finalMessage = null;
@@ -236,6 +292,9 @@ class SlicingDiceTester {
     }
 }
 
+/**
+* Print the content of tests result
+*/
 function showResult(){
     echo file_get_contents("testerResult.tmp");
     unlink("testerResult.tmp");
@@ -263,9 +322,12 @@ function main(){
         'score'
     );
 
+    // Use SlicingDiceTester with demo api key
+    // To get another demo api key visit: http://panel.slicingdice.com/docs/#api-details-api-connection-api-keys-demo-key
     $sdTester = new SlicingDiceTester(
         'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfX3NhbHQiOiJkZW1vNDFtIiwicGVybWlzc2lvbl9sZXZlbCI6MywicHJvamVjdF9pZCI6MjAyLCJjbGllbnRfaWQiOjEwfQ.ncguKQpOLBE97Y8-ODSnpMjWNjQ7nx7ruyTSS4OXL-A');
 
+    // run tests for each query type
     try{
         foreach($queryTypes as $item){
             $sdTester->runTests($item);

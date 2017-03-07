@@ -169,14 +169,6 @@ class SlicingDice {
     }
 
     /**
-    * Get errors in SlicingDice
-    */
-    public function getErrors($test=False){
-        $url = "https://localhost:5000/error/";
-        return $this->makeRequest($url, "GET", 2);
-    }
-
-    /**
     * Get all fields in SlicingDice API
     *
     * @param bool $test if true will use tests end-point
