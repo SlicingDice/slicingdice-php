@@ -11,6 +11,11 @@ class DataExtractionQueryValidator {
         $this->queryData = $query;
     }
 
+    /** 
+    * Validate a data extraction query
+    *
+    * @return true if query is valid 
+    */
     public function validator() {
         if (array_key_exists("limit", $this->queryData)) {
             if ($this->queryData["limit"] > 100) {

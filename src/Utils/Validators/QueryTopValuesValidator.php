@@ -12,6 +12,11 @@ class QueryTopValuesValidator {
         $this->queryData = $query;
     }
 
+    /**
+    * Check if top values query exceeds Query limit
+    * 
+    * @return false if not exceeds
+    */
     private function exceedsQueriesLimit() {
         if (count($this->queryData) > 5) {
             throw new MaxLimitException(
@@ -20,6 +25,11 @@ class QueryTopValuesValidator {
         return false;
     }
 
+    /**
+    * Check if top values query exceeds fields limit
+    * 
+    * @return false if not exceeds
+    */
     private function exceedsFieldsLimit() {
         foreach ($this->queryData as $key => $value) {
             if (count($value) > 6) {
@@ -31,6 +41,11 @@ class QueryTopValuesValidator {
         return false;
     }
 
+    /**
+    * Check if top values query exceeds contais limit
+    * 
+    * @return false if not exceeds
+    */
     private function exceedsValuesContainsLimit() {
         foreach ($this->queryData as $key => $value) {
             if (array_key_exists("contains", $value)) {
@@ -45,6 +60,11 @@ class QueryTopValuesValidator {
         return false;
     }
 
+    /** 
+    * Validate a data extraction query
+    *
+    * @return true if query is valid and false otherwise
+    */
     public function validator() {
         if (!$this->exceedsQueriesLimit() && !$this->exceedsFieldsLimit() && 
             !$this->exceedsValuesContainsLimit()) {
