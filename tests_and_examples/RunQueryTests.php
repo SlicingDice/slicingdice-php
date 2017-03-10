@@ -28,7 +28,7 @@ class SlicingDiceTester {
         // Translation table for fields with timestamp
         $this->fieldTranslation = array();
 
-        $this->sleepTime = 5; // seconds
+        $this->sleepTime = 10; // seconds
         $this->path = "/examples/"; // Directory containing examples to test
         $this->extension = ".json"; // Examples file format
 
