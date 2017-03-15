@@ -31,15 +31,22 @@ class SlicingDice {
     * @var string
     */
     private $baseURL;
+    /**
+    * Identify if client will use tests endpoint
+    *
+    * @var boolean
+    */
+    private $usesTestEndpoint;
 
     private $header;
     private $timeout;
 
-    function __construct($keys, $timeout=60) {
+    function __construct($keys, $usesTestEndpoint=false, $timeout=60) {
         $this->apiKey = $keys;
         $timeout = $timeout;
         $header = $this->getHeader();
         $this->baseURL = $this->getBaseURL();
+        $this->usesTestEndpoint = $usesTestEndpoint;
     }
 
     /**
@@ -147,12 +154,10 @@ class SlicingDice {
     }
 
     /**
-    * Define base url to make test
-    *
-    * @param bool $test if true the base url will be on tests end-point
+    * Define base url to make a request
     */
-    private function testWrapper($test) {
-        if ($test){
+    private function testWrapper() {
+        if ($this->usesTestEndpoint){
             return $this->baseURL . "/test";
         }
         return $this->baseURL;
@@ -160,21 +165,17 @@ class SlicingDice {
 
     /**
     * Get all projects in SlicingDice
-    *
-    ** @param bool $test if true will use tests end-point
     */
-    public function getProjects($test=False){
-        $url = $this->testWrapper($test) . URLResources::PROJECT;
+    public function getProjects(){
+        $url = $this->testWrapper() . URLResources::PROJECT;
         return $this->makeRequest($url, "GET", 2);
     }
 
     /**
     * Get all fields in SlicingDice API
-    *
-    * @param bool $test if true will use tests end-point
     */
-    public function getFields($test=False){
-        $url = $this->testWrapper($test) . URLResources::FIELD;
+    public function getFields(){
+        $url = $this->testWrapper() . URLResources::FIELD;
         return $this->makeRequest($url, "GET", 2);
     }
 
@@ -182,20 +183,17 @@ class SlicingDice {
     * Get a saved query in SlicingDice
     *
     * @param string $savedQueryName Saved query name to recover
-    * @param bool $test if true will use tests end-point
     */
-    public function getSavedQuery($savedQueryName, $test=False){
-        $url = $this->testWrapper($test) . URLResources::QUERY_SAVED . $savedQueryName;
+    public function getSavedQuery($savedQueryName){
+        $url = $this->testWrapper() . URLResources::QUERY_SAVED . $savedQueryName;
         return $this->makeRequest($url, "GET", 0);
     }
 
     /**
     * Get all saved queries in SlicingDice
-    *
-    * @param bool $test if true will use tests end-point
     */
-    public function getSavedQueries($test=False){
-        $url = $this->testWrapper($test) . URLResources::QUERY_SAVED;
+    public function getSavedQueries(){
+        $url = $this->testWrapper() . URLResources::QUERY_SAVED;
         return $this->makeRequest($url, "GET", 2);
     }
 
@@ -203,20 +201,18 @@ class SlicingDice {
     * Delete a saved query in SlicingDice
     *
     * @param string $savedQueryName Saved query name to recover
-    * @param bool $test if true will use tests end-point
     */
-    public function deleteSavedQuery($savedQueryName, $test=False){
-        $url = $this->testWrapper($test) . URLResources::QUERY_SAVED . $savedQueryName;
+    public function deleteSavedQuery($savedQueryName){
+        $url = $this->testWrapper() . URLResources::QUERY_SAVED . $savedQueryName;
         return $this->makeRequest($url, "DELETE", 2);
     }
     /**
     * Create a field in SlicingDice
     *
     * @param array $field An array with all field characteristics
-    * @param bool $test if true will use tests end-point
     */
-    public function createField($field, $test=False){
-        $url = $this->testWrapper($test) . URLResources::FIELD;
+    public function createField($field){
+        $url = $this->testWrapper() . URLResources::FIELD;
         $sdValidator = new FieldValidator($field);
         if ($sdValidator->validator()) {
             return $this->makeRequest($url, "POST", 1, $field);
@@ -229,23 +225,20 @@ class SlicingDice {
     * @param array $query A index query
     * @param bool $autoCreateFields if true SlicingDice API will automatically create
     * nonexistent fields
-    * @param bool $test if true will use tests end-point
     */
-    public function index($query, $autoCreateFields=False, $test=False){
+    public function index($query, $autoCreateFields=False){
         if ($autoCreateFields) {
             $query["auto-create-fields"] = true;
         }
-        $url = $this->testWrapper($test) . URLResources::INDEX;
+        $url = $this->testWrapper() . URLResources::INDEX;
         return $this->makeRequest($url, "POST", 1, $query);
     }
 
     /**
     * Get count entity total queries
-    *
-    * @param bool $test if true will use tests end-point
     */
-    public function countEntityTotal($test=False) {
-        $url = $this->testWrapper($test) . URLResources::QUERY_COUNT_ENTITY_TOTAL;
+    public function countEntityTotal() {
+        $url = $this->testWrapper() . URLResources::QUERY_COUNT_ENTITY_TOTAL;
         return $this->makeRequest($url, "GET", 0);
     }
 
@@ -253,10 +246,9 @@ class SlicingDice {
     * Make a count entity query in SlicingDice
     *
     * @param array $query A count entity query
-    * @param bool $test if true will use tests end-point
     */
-    public function countEntity($query, $test=False) {
-        $url = $this->testWrapper($test) . URLResources::QUERY_COUNT_ENTITY;
+    public function countEntity($query) {
+        $url = $this->testWrapper() . URLResources::QUERY_COUNT_ENTITY;
         return $this->countQueryWrapper($url, $query);
     }
 
@@ -264,10 +256,9 @@ class SlicingDice {
     * Make a count event query in SlicingDice
     *
     * @param array $query A count event query
-    * @param bool $test if true will use tests end-point
     */
-    public function countEvent($query, $test=False) {
-        $url = $this->testWrapper($test) . URLResources::QUERY_COUNT_EVENT;
+    public function countEvent($query) {
+        $url = $this->testWrapper() . URLResources::QUERY_COUNT_EVENT;
         return $this->countQueryWrapper($url, $query);
     }
 
@@ -275,10 +266,9 @@ class SlicingDice {
     * Get if exists entities SlicingDice
     *
     * @param array $ids A list of ids
-    * @param bool $test if true will use tests end-point
     */
-    public function existsEntity($ids, $test=False) {
-        $url = $this->testWrapper($test) . URLResources::QUERY_EXISTS_ENTITY;
+    public function existsEntity($ids) {
+        $url = $this->testWrapper() . URLResources::QUERY_EXISTS_ENTITY;
         $query = array('ids' => $ids, );
         return $this->makeRequest($url, "POST", 0, $query);
     }
@@ -287,10 +277,9 @@ class SlicingDice {
     * Make a aggregation query in SlicingDice
     *
     * @param array $query A aggregation query
-    * @param bool $test if true will use tests end-point
     */
-    public function aggregation($query, $test=False) {
-        $url = $this->testWrapper($test) . URLResources::QUERY_AGGREGATION;
+    public function aggregation($query) {
+        $url = $this->testWrapper() . URLResources::QUERY_AGGREGATION;
         return $this->makeRequest($url, "POST", 0, $query);
     }
 
@@ -298,10 +287,9 @@ class SlicingDice {
     * Make a top values query in SlicingDice
     *
     * @param array $query A top values query
-    * @param bool $test if true will use tests end-point
     */
-    public function topValues($query, $test=False) {
-        $url = $this->testWrapper($test) . URLResources::QUERY_TOP_VALUES;
+    public function topValues($query) {
+        $url = $this->testWrapper() . URLResources::QUERY_TOP_VALUES;
         $sdValidator = new QueryTopValuesValidator($query);
         if ($sdValidator->validator()) {
             return $this->makeRequest($url, "POST", 0, $query);
@@ -312,10 +300,9 @@ class SlicingDice {
     * Make a create saved query in SlicingDice
     *
     * @param array $query A saved query
-    * @param bool $test if true will use tests end-point
     */
-    public function createSavedQuery($query, $test=False) {
-        $url = $this->testWrapper($test) . URLResources::QUERY_SAVED;
+    public function createSavedQuery($query) {
+        $url = $this->testWrapper() . URLResources::QUERY_SAVED;
         $sdValidator = new SavedQueryValidator($query);
         if ($sdValidator->validator()) {
             return $this->makeRequest($url, "POST", 2, $query);
@@ -327,10 +314,9 @@ class SlicingDice {
     *
     * @param string $savedQueryName A saved query name
     * @param array $query A saved query
-    * @param bool $test if true will use tests end-point
     */
-    public function updateSavedQuery($savedQueryName, $query, $test=False) {
-        $url = $this->testWrapper($test) . URLResources::QUERY_SAVED . $savedQueryName;
+    public function updateSavedQuery($savedQueryName, $query) {
+        $url = $this->testWrapper() . URLResources::QUERY_SAVED . $savedQueryName;
         return $this->makeRequest($url, "PUT", 2, $query);
     }
 
@@ -338,10 +324,9 @@ class SlicingDice {
     * Make a data extraction result query in SlicingDice
     *
     * @param array $query A result query
-    * @param bool $test if true will use tests end-point
     */
-    public function result($query, $test=False) {
-        $url = $this->testWrapper($test) . URLResources::QUERY_DATA_EXTRACTION_RESULT;
+    public function result($query) {
+        $url = $this->testWrapper() . URLResources::QUERY_DATA_EXTRACTION_RESULT;
         return $this->dataExtractionWrapper($url, $query);
     }
 
@@ -349,10 +334,9 @@ class SlicingDice {
     * Make a data extraction score query in SlicingDice
     *
     * @param array $query A score query
-    * @param bool $test if true will use tests end-point
     */
-    public function score($query, $test=False) {
-        $url = $this->testWrapper($test) . URLResources::QUERY_DATA_EXTRACTION_SCORE;
+    public function score($query) {
+        $url = $this->testWrapper() . URLResources::QUERY_DATA_EXTRACTION_SCORE;
         return $this->dataExtractionWrapper($url, $query);
     }
 }

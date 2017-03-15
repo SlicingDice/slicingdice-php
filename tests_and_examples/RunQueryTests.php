@@ -28,7 +28,7 @@ class SlicingDiceTester {
     function __construct($apiKey, $verboseOption=false) {
         $this->client = new SlicingDice(array(
             "masterKey" => $apiKey
-        ));
+        ), true);
 
         // Translation table for fields with timestamp
         $this->fieldTranslation = array();
@@ -117,7 +117,7 @@ class SlicingDiceTester {
 
         foreach ($fieldObject["fields"] as $field) {
             $newField = $this->appendTimestampToFieldName($field);
-            $this->client->createField($newField, true);
+            $this->client->createField($newField);
 
             if ($this->verbose){
                 echo "    - " . $newField['api-name'] . "\n";
@@ -173,7 +173,7 @@ class SlicingDiceTester {
             print_r($indexDataArray);
         }
 
-        $this->client->index($indexDataArray, null, true);
+        $this->client->index($indexDataArray, null);
 
         sleep($this->sleepTime);
     }
@@ -209,17 +209,17 @@ class SlicingDiceTester {
         }
 
         if ($queryType == "count_entity"){
-            $result = $this->client->countEntity($queryData, true);
+            $result = $this->client->countEntity($queryData);
         } else if ($queryType == "count_event"){
-            $result = $this->client->countEvent($queryData, true);
+            $result = $this->client->countEvent($queryData);
         } else if ($queryType == "top_values"){
-            $result = $this->client->topValues($queryData, true);
+            $result = $this->client->topValues($queryData);
         } else if ($queryType == "aggregation"){
-            $result = $this->client->aggregation($queryData, true);
+            $result = $this->client->aggregation($queryData);
         } else if ($queryType == "result"){
-            $result = $this->client->result($queryData, true);
+            $result = $this->client->result($queryData);
         } else if ($queryType == "score"){
-            $result = $this->client->score($queryData, true);
+            $result = $this->client->score($queryData);
         }
 
         return $result;
