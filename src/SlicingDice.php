@@ -41,7 +41,7 @@ class SlicingDice {
     private $header;
     private $timeout;
 
-    function __construct($keys, $usesTestEndpoint=False, $timeout=60) {
+    function __construct($keys, $usesTestEndpoint=false, $timeout=60) {
         $this->apiKey = $keys;
         $timeout = $timeout;
         $header = $this->getHeader();

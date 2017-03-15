@@ -28,7 +28,7 @@ class SlicingDiceTester {
     function __construct($apiKey, $verboseOption=false) {
         $this->client = new SlicingDice(array(
             "masterKey" => $apiKey
-        ));
+        ), true);
 
         // Translation table for fields with timestamp
         $this->fieldTranslation = array();
