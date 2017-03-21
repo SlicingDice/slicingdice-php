@@ -259,7 +259,7 @@ Verify which entities exist in a project given a list of entity IDs. This method
 <?php
 use Slicer\SlicingDice;
 $usesTestEndpoint = true;
-$client = new SlicingDice(array("masterKey" => "MASTER_OR_READ_API_KEY"), $usesTestEndpoint);
+$client = new SlicingDice(array("masterKey" => "MASTER_API_KEY"), $usesTestEndpoint);
 $ids = array(
         "user1@slicingdice.com",
         "user2@slicingdice.com",
@@ -294,7 +294,7 @@ Count the number of indexed entities. This method corresponds to a [GET request 
 <?php
 use Slicer\SlicingDice;
 $usesTestEndpoint = true;
-$client = new SlicingDice(array("masterKey" => "MASTER_OR_READ_API_KEY"), $usesTestEndpoint);
+$client = new SlicingDice(array("masterKey" => "MASTER_API_KEY"), $usesTestEndpoint);
 print_r($client->countEntityTotal());
 ?>
 ```
@@ -320,7 +320,7 @@ Count the number of entities attending the given query. This method corresponds 
 <?php
 use Slicer\SlicingDice;
 $usesTestEndpoint = true;
-$client = new SlicingDice(array("masterKey" => "MASTER_OR_READ_API_KEY"), $usesTestEndpoint);
+$client = new SlicingDice(array("masterKey" => "MASTER_API_KEY"), $usesTestEndpoint);
 $query = array(
     "corolla-or-fit" => array(
         array(
@@ -370,7 +370,7 @@ Count the number of occurrences for time-series events attending the given query
 <?php
 use Slicer\SlicingDice;
 $usesTestEndpoint = true;
-$client = new SlicingDice(array("masterKey" => "MASTER_OR_READ_API_KEY"), $usesTestEndpoint);
+$client = new SlicingDice(array("masterKey" => "MASTER_API_KEY"), $usesTestEndpoint);
 $query = array(
     "test-drives-in-ny" => array(
         array(
@@ -422,7 +422,7 @@ Return the top values for entities attending the given query. This method corres
 <?php
 use Slicer\SlicingDice;
 $usesTestEndpoint = true;
-$client = new SlicingDice(array("masterKey" => "MASTER_OR_READ_API_KEY"), $usesTestEndpoint);
+$client = new SlicingDice(array("masterKey" => "MASTER_API_KEY"), $usesTestEndpoint);
 $query = array(
     "car-year" => array(
         "year" => 2
@@ -483,7 +483,7 @@ Return the aggregation of all fields in the given query. This method corresponds
 <?php
 use Slicer\SlicingDice;
 $usesTestEndpoint = true;
-$client = new SlicingDice(array("masterKey" => "MASTER_OR_READ_API_KEY"), $usesTestEndpoint);
+$client = new SlicingDice(array("masterKey" => "MASTER_API_KEY"), $usesTestEndpoint);
 $query = array(
     "query" => array(
         array(
@@ -783,7 +783,7 @@ Retrieve indexed values for entities attending the given query. This method corr
 <?php
 use Slicer\SlicingDice;
 $usesTestEndpoint = true;
-$client = new SlicingDice(array("masterKey" => "MASTER_OR_READ_API_KEY"), $usesTestEndpoint);
+$client = new SlicingDice(array("masterKey" => "MASTER_API_KEY"), $usesTestEndpoint);
 $query = array(
     "query" => array(
         array(
@@ -835,7 +835,7 @@ Retrieve indexed values as well as their relevance for entities attending the gi
 <?php
 use Slicer\SlicingDice;
 $usesTestEndpoint = true;
-$client = new SlicingDice(array("masterKey" => "MASTER_OR_READ_API_KEY"), $usesTestEndpoint);
+$client = new SlicingDice(array("masterKey" => "MASTER_API_KEY"), $usesTestEndpoint);
 $query = array(
     "query" => array(
         array(
