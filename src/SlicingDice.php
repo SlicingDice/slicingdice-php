@@ -16,7 +16,7 @@ class SlicingDice {
     /**
     * Valid api key
     *
-    * @var string
+    * @var array
     */
     private $apiKey;
     /**
@@ -41,8 +41,8 @@ class SlicingDice {
     private $header;
     private $timeout;
 
-    function __construct($keys, $usesTestEndpoint=false, $timeout=60) {
-        $this->apiKey = $keys;
+    function __construct($apiKeys, $usesTestEndpoint=false, $timeout=60) {
+        $this->apiKey = $apiKeys;
         $timeout = $timeout;
         $header = $this->getHeader();
         $this->baseURL = $this->getBaseURL();
@@ -80,8 +80,8 @@ class SlicingDice {
             return array($this->apiKey["customKey"], 2);
         } else if(array_key_exists("writeKey", $this->apiKey)){
             return array($this->apiKey["writeKey"], 1);
-        } else if(array_key_exists("writeKey", $this->apiKey)){
-            return array($this->apiKey["writeKey"], 1);
+        } else if(array_key_exists("readKey", $this->apiKey)){
+            return array($this->apiKey["readKey"], 0);
         }
 
         throw new SlicingDiceException("You need to put a key.");
