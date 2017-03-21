@@ -22,12 +22,12 @@ class FieldValidator {
     /**
     * Validate field name
     */
-    private function validateName() {
-        if (!array_key_exists("name", $this->queryData)) {
+    private function validateName($query) {
+        if (!array_key_exists("name", $query)) {
             throw new InvalidFieldException("The field should have a name.");
         }
         else {
-            $name = $this->queryData["name"];
+            $name = $query["name"];
             if (strlen($name) > 80){
                 throw new InvalidFieldNameException(
                     "The field's name have a very big content. (Max: 80 chars)");
@@ -38,8 +38,8 @@ class FieldValidator {
     /**
     * Validate field description
     */
-    private function validateDescription() {
-        $description = $this->queryData["description"];
+    private function validateDescription($query) {
+        $description = $query["description"];
         if (strlen($description) > 300){
             throw new InvalidFieldDescriptionException(
                 "The field's description have a very big content. (Max: 300chars)");
@@ -49,11 +49,11 @@ class FieldValidator {
     /**
     * Validate field type
     */
-    private function validateFieldType() {
-        if (!array_key_exists("type", $this->queryData)) {
+    private function validateFieldType($query) {
+        if (!array_key_exists("type", $query)) {
             throw new InvalidFieldException("The field should have a type.");
         }
-        $fieldType = $this->queryData["type"];
+        $fieldType = $query["type"];
         if (!in_array($fieldType, $this->validTypesFields)){
             throw new InvalidFieldException("This field have a invalid type.");
         }
@@ -62,9 +62,9 @@ class FieldValidator {
     /**
     * Verify if decimal has a valid type
     */
-    private function validateDecimalType() {
+    private function validateDecimalType($query) {
         $decimalTypes = array("decimal", "decimal-time-series");
-        $fieldType = $this->queryData["type"];
+        $fieldType = $query["type"];
         if (!in_array($fieldType, $decimalTypes)){
             throw new InvalidFieldException(
                 "This field is only accepted on type 'decimal' or " .
@@ -75,13 +75,13 @@ class FieldValidator {
     /**
     * Check cardinality property on string fields
     */
-    private function checkStringIntegrity() {
-        if (!array_key_exists("cardinality", $this->queryData)) {
+    private function checkStringIntegrity($query) {
+        if (!array_key_exists("cardinality", $query)) {
             throw new InvalidFieldException(
                 "The field with type string should have 'cardinality' key.");
         }
         $cardinalityTypes = array("high", "low");
-        $cardinality = $this->queryData["cardinality"];
+        $cardinality = $query["cardinality"];
         if (!in_array($cardinality, $cardinalityTypes)) {
             throw new InvalidFieldException(
                 "The field 'cardinality' has invalid value.");
@@ -91,8 +91,8 @@ class FieldValidator {
     /**
     * Validate enumerate field
     */
-    private function validateEnumerate() {
-        if(!array_key_exists("range", $this->queryData)) {
+    private function validateEnumerate($query) {
+        if(!array_key_exists("range", $query)) {
             throw new InvalidFieldException(
                 "The 'enumerate' type needs of the 'range' parameter.");
         }
@@ -104,22 +104,33 @@ class FieldValidator {
     * @return true if field is valid
     */
     public function validator() {
-        $this->validateName();
-        $this->validateFieldType();
-        $fieldType = $this->queryData["type"];
-        if ($fieldType == "string") {
-            $this->checkStringIntegrity();
+        if(isset($this->queryData[0]) && is_array($this->queryData[0])) {
+            foreach ($this->queryData as $query) {
+                $this->validateField($query);
+            }
+        } else {
+            $this->validateField($this->queryData);
         }
-        if ($fieldType == "enumerated") { 
-            $this->validateEnumerate();
-        }
-        if (array_key_exists("description", $this->queryData)) {
-            $this->validateDescription();
-        }
-        if (array_key_exists("decimal-place", $this->queryData)) {
-            $this->validateDecimalType();
-        }
+
         return true;
     }
+
+    private function validateField($query) {
+        $this->validateName($query);
+        $this->validateFieldType($query);
+        $fieldType = $query["type"];
+        if ($fieldType == "string") {
+            $this->checkStringIntegrity($query);
+        }
+        if ($fieldType == "enumerated") { 
+            $this->validateEnumerate($query);
+        }
+        if (array_key_exists("description", $query)) {
+            $this->validateDescription($query);
+        }
+        if (array_key_exists("decimal-place", $query)) {
+            $this->validateDecimalType($query);
+        }
+    }
 }
-?>
+?> 
