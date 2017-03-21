@@ -22,7 +22,7 @@ In order to install the PHP client, add the following excerpt to your [`composer
 ```json
 {
   "require": {
-    "simbiose/slicingdice": "*"
+    "slicingdice/slicingdice": "*"
   }
 }
 ```
@@ -40,7 +40,8 @@ composer install
 user Slicer\SlicingDice;
 
 // Configure the client
-$client = new SlicingDice("API_KEY");
+$usesTestEndpoint = false;
+$client = new SlicingDice(array("masterKey" => "MASTER_API_KEY", $usesTestEndpoint);
 
 // Indexing data
 $indexData = array(
@@ -49,7 +50,7 @@ $indexData = array(
     ),
     "auto-create-fields" => true
 );
-$client.index($indexData);
+$client->index($indexData);
 
 // Querying data
 $queryData = array(
@@ -61,7 +62,7 @@ $queryData = array(
         )
     )
 );
-print_r($client.countEntity($queryData));
+print_r($client->countEntity($queryData));
 ?>
 ```
 
@@ -71,13 +72,14 @@ print_r($client.countEntity($queryData));
 
 ### Attributes
 
-* `$key (string)` - [API key](http://panel.slicingdice.com/docs/#api-details-api-connection-api-keys) to authenticate requests with the SlicingDice API.
+* `$key (array)` - [API key](http://panel.slicingdice.com/docs/#api-details-api-connection-api-keys) to authenticate requests with the SlicingDice API.
 * `$timeout (int)` - Amount of time, in seconds, to wait for results for each request.
 
 ### Constructor
 
-`_construct($key, $timeout=60)`
-* `$key (string)` - [API key](http://panel.slicingdice.com/docs/#api-details-api-connection-api-keys) to authenticate requests with the SlicingDice API.
+`_construct($key, $usesTestEndpoint=false, $timeout=60)`
+* `$key (array)` - [API key](http://panel.slicingdice.com/docs/#api-details-api-connection-api-keys) to authenticate requests with the SlicingDice API.
+* `$usesTestEndpoint=false (boolean)` - If false the client will send requests to production end-point, otherwise to tests end-point.
 * `$timeout (int)` - Amount of time, in seconds, to wait for results for each request.
 
 ### `getProjects()`
@@ -88,8 +90,9 @@ Get all created projects, both active and inactive ones. This method corresponds
 ```php
 <?php
 use Slicer\SlicingDice;
-$slicingDice = new SlicingDice("MASTER_API_KEY");
-print_r($slicingDice->getProjects());
+$usesTestEndpoint = false;
+$client = new SlicingDice(array("masterKey" => "MASTER_API_KEY", $usesTestEndpoint);
+print_r($client->getProjects());
 ?>
 ```
 
@@ -124,8 +127,9 @@ Get all created fields, both active and inactive ones. This method corresponds t
 ```php
 <?php
 use Slicer\SlicingDice;
-$slicingDice = new SlicingDice("MASTER_API_KEY");
-print_r($slicingDice->getFields());
+$usesTestEndpoint = false;
+$client = new SlicingDice(array("masterKey" => "MASTER_API_KEY", $usesTestEndpoint);
+print_r($client->getFields());
 ?>
 ```
 
@@ -165,7 +169,8 @@ Create a new field. This method corresponds to a [POST request at /field](http:/
 ```php
 <?php
 use Slicer\SlicingDice;
-$slicingDice = new SlicingDice("MASTER_API_KEY");
+$usesTestEndpoint = false;
+$client = new SlicingDice(array("masterKey" => "MASTER_API_KEY", $usesTestEndpoint);
 $field = array(
     "name" => "Year",
     "api-name" => "year",
@@ -173,7 +178,7 @@ $field = array(
     "description" => "Year of manufacturing",
     "storage" => "latest-value"
 );
-print_r($slicingDice->createField($field));
+print_r($client->createField($field));
 ?>
 ```
 
@@ -194,7 +199,8 @@ Index data to existing entities or create new entities, if necessary. This metho
 ```php
 <?php
 use Slicer\SlicingDice;
-$slicingDice = new SlicingDice("MASTER_OR_WRITE_API_KEY");
+$usesTestEndpoint = false;
+$client = new SlicingDice(array("masterKey" => "MASTER_OR_WRITE_API_KEY", $usesTestEndpoint);
 $indexData = array(
     "user1@slicingdice.com" => array(
         "car-model" => "Ford Ka",
@@ -229,7 +235,7 @@ $indexData = array(
         )
     )
 );
-print_r($slicingDice->index($indexData));
+print_r($client->index($indexData));
 ?>
 ```
 
@@ -252,13 +258,14 @@ Verify which entities exist in a project given a list of entity IDs. This method
 ```php
 <?php
 use Slicer\SlicingDice;
-$slicingDice = new SlicingDice("MASTER_OR_READ_API_KEY");
-ids = array(
+$usesTestEndpoint = false;
+$client = new SlicingDice(array("masterKey" => "MASTER_OR_READ_API_KEY", $usesTestEndpoint);
+$ids = array(
         "user1@slicingdice.com",
         "user2@slicingdice.com",
         "user3@slicingdice.com"
 );
-print_r($slicingDice->existsEntity($ids));
+print_r($client->existsEntity($ids));
 ?>
 ```
 
@@ -286,8 +293,9 @@ Count the number of indexed entities. This method corresponds to a [GET request 
 ```php
 <?php
 use Slicer\SlicingDice;
-$slicingDice = new SlicingDice("MASTER_OR_READ_API_KEY");
-print_r($slicingDice->countEntityTotal());
+$usesTestEndpoint = false;
+$client = new SlicingDice(array("masterKey" => "MASTER_OR_READ_API_KEY", $usesTestEndpoint);
+print_r($client->countEntityTotal());
 ?>
 ```
 
@@ -311,31 +319,32 @@ Count the number of entities attending the given query. This method corresponds 
 ```php
 <?php
 use Slicer\SlicingDice;
-$slicingDice = new SlicingDice("MASTER_OR_READ_API_KEY");
+$usesTestEndpoint = false;
+$client = new SlicingDice(array("masterKey" => "MASTER_OR_READ_API_KEY", $usesTestEndpoint);
 $query = array(
-    "users-from-ny-or-ca" => array(
+    "corolla-or-fit" => array(
         array(
-            "state" => array(
-                "equals" => "NY"
+            "car-model" => array(
+                "equals" => "toyota corolla"
             )
         ),
         "or",
         array(
-            "state-origin" => array(
-                "equals" => "CA"
+            "car-model" => array(
+                "equals" => "honda fit"
             )
         ),
     ),
-    "users-from-ny" => array(
+    "ford-ka" => array(
         array(
-            "state" => array(
-                "equals" => "NY"
+            "car-model" => array(
+                "equals" => "ford ka"
             )
         )
     ),
     "bypass-cache" => false
 );
-print_r($slicingDice->countEntity($query));
+print_r($client->countEntity($query));
 ?>
 ```
 
@@ -343,12 +352,12 @@ print_r($slicingDice->countEntity($query));
 
 ```json
 {
-    "status": "success",
-    "result": {
-        "users-from-ny-or-ca": 175,
-        "users-from-ny": 296
-    },
-    "took": 0.103
+   "result":{
+      "ford-ka":2,
+      "corolla-or-fit":2
+   },
+   "took":0.083,
+   "status":"success"
 }
 ```
 
@@ -360,35 +369,34 @@ Count the number of occurrences for time-series events attending the given query
 ```php
 <?php
 use Slicer\SlicingDice;
-$slicingDice = new SlicingDice("MASTER_OR_READ_API_KEY");
+$usesTestEndpoint = false;
+$client = new SlicingDice(array("masterKey" => "MASTER_OR_READ_API_KEY", $usesTestEndpoint);
 $query = array(
-    "users-from-ny-in-jan" => array(
+    "test-drives-in-ny" => array(
         array(
-        "test-field" => array(
+        "test-drives" => array(
                 "equals" => "NY",
                 "between" => array(
-                    "2016-01-01T00:00:00Z",
-                    "2016-01-31T00:00:00Z"
-                ),
-                "minfreq" => 2
+                    "2016-08-16T00:00:00Z",
+                    "2016-08-18T00:00:00Z"
+                )
             )
         )
     ),
-    "users-from-ny-in-feb" => array(
+    "test-drives-in-ca" => array(
         array(
-            "test-field" => array(
-                "equals" => "NY",
+            "test-drives" => array(
+                "equals" => "CA",
                 "between" => array(
-                    "2016-02-01T00:00:00Z",
-                    "2016-02-28T00:00:00Z"
-                ),
-                "minfreq" => 2
+                    "2016-04-04T00:00:00Z",
+                    "2016-04-06T00:00:00Z"
+                )
             )
         )
     ),
     "bypass-cache" => true
 );
-print_r($slicingDice->countEvent($query));
+print_r($client->countEvent($query));
 ?>
 ```
 
@@ -396,12 +404,12 @@ print_r($slicingDice->countEvent($query));
 
 ```json
 {
-    "status": "success",
-    "result": {
-        "users-from-ny-in-jan": 175,
-        "users-from-ny-in-feb": 296
-    },
-    "took": 0.103
+   "result":{
+      "test-drives-in-ny":3,
+      "test-drives-in-ca":0
+   },
+   "took":0.063,
+   "status":"success"
 }
 ```
 
@@ -413,23 +421,17 @@ Return the top values for entities attending the given query. This method corres
 ```php
 <?php
 use Slicer\SlicingDice;
-$slicingDice = new SlicingDice("MASTER_OR_READ_API_KEY");
+$usesTestEndpoint = false;
+$client = new SlicingDice(array("masterKey" => "MASTER_OR_READ_API_KEY", $usesTestEndpoint);
 $query = array(
-    "user-gender" => array(
-        "gender" => 2
+    "car-year" => array(
+        "year" => 2
     ),
-    "operating-systems" => array(
-        "os" => 3
-    ),
-    "linux-operating-systems" => array(
-        "os" => 3,
-        "contains" => array(
-            "linux",
-            "unix"
-        )
+    "car models" => array(
+        "car-model" => 3
     )
 );
-print_r($slicingDice->topValues($query));
+print_r($client->topValues($query));
 ?>
 ```
 
@@ -437,49 +439,38 @@ print_r($slicingDice->topValues($query));
 
 ```json
 {
-    "status": "success",
-    "result": {
-        "user-gender": {
-            "gender": [
-                {
-                    "quantity": 6.0,
-                    "value": "male"
-                }, {
-                    "quantity": 4.0,
-                    "value": "female"
-                }
-            ]
-        },
-        "operating-systems": {
-            "os": [
-                {
-                    "quantity": 55.0,
-                    "value": "windows"
-                }, {
-                    "quantity": 25.0,
-                    "value": "macos"
-                }, {
-                    "quantity": 12.0,
-                    "value": "linux"
-                }
-            ]
-        },
-        "linux-operating-systems": {
-            "os": [
-                {
-                    "quantity": 12.0,
-                    "value": "linux"
-                }, {
-                    "quantity": 3.0,
-                    "value": "debian-linux"
-                }, {
-                    "quantity": 2.0,
-                    "value": "unix"
-                }
-            ]
-        }
-    },
-    "took": 0.103
+   "result":{
+      "car models":{
+         "car-model":[
+            {
+               "quantity":2,
+               "value":"ford ka"
+            },
+            {
+               "quantity":1,
+               "value":"honda fit"
+            },
+            {
+               "quantity":1,
+               "value":"toyota corolla"
+            }
+         ]
+      },
+      "car-year":{
+         "year":[
+            {
+               "quantity":2,
+               "value":"2016"
+            },
+            {
+               "quantity":1,
+               "value":"2010"
+            }
+         ]
+      }
+   },
+   "took":0.034,
+   "status":"success"
 }
 ```
 
@@ -491,26 +482,23 @@ Return the aggregation of all fields in the given query. This method corresponds
 ```php
 <?php
 use Slicer\SlicingDice;
-$slicingDice = new SlicingDice("MASTER_OR_READ_API_KEY");
+$usesTestEndpoint = false;
+$client = new SlicingDice(array("masterKey" => "MASTER_OR_READ_API_KEY", $usesTestEndpoint);
 $query = array(
     "query" => array(
         array(
-            "gender" => 2
+            "year" => 2
         ),
         array(
-            "os" => 2,
+            "car-model" => 2,
             "equals" => array(
-                "linux",
-                "macos",
-                "windows"
+                "honda fit",
+                "toyota corolla"
             )
-        ),
-        array(
-            "browser" => 2
         )
     )
 );
-print_r($slicingDice->aggregation($query));
+print_r($client->aggregation($query));
 ?>
 ```
 
@@ -518,64 +506,26 @@ print_r($slicingDice->aggregation($query));
 
 ```json
 {
-    "status": "success",
-    "result": {
-        "gender": [
-            {
-                "quantity": 6,
-                "value": "male",
-                "os": [
-                    {
-                        "quantity": 5,
-                        "value": "windows",
-                        "browser": [
-                            {
-                                "quantity": 3,
-                                "value": "safari"
-                            }, {
-                                "quantity": 2,
-                                "value": "internet explorer"
-                            }
-                        ]
-                    }, {
-                        "quantity": 1,
-                        "value": "linux",
-                        "browser": [
-                            {
-                                "quantity": 1,
-                                "value": "chrome"
-                            }
-                        ]
-                    }
-                ]
-            }, {
-                "quantity": 4,
-                "value": "female",
-                "os": [
-                    {
-                        "quantity": 3,
-                        "value": "macos",
-                        "browser": [
-                            {
-                                "quantity": 3,
-                                "value": "chrome"
-                            }
-                        ]
-                    }, {
-                        "quantity": 1,
-                        "value": "linux",
-                        "browser": [
-                            {
-                                "quantity": 1,
-                                "value": "chrome"
-                            }
-                        ]
-                    }
-                ]
-            }
-        ]
-    },
-    "took": 0.103
+   "result":{
+      "year":[
+         {
+            "quantity":2,
+            "value":"2016",
+            "car-model":[
+               {
+                  "quantity":1,
+                  "value":"honda fit"
+               }
+            ]
+         },
+         {
+            "quantity":1,
+            "value":"2005"
+         }
+      ]
+   },
+   "took":0.079,
+   "status":"success"
 }
 ```
 
@@ -587,8 +537,9 @@ Get all saved queries. This method corresponds to a [GET request at /query/saved
 ```php
 <?php
 use Slicer\SlicingDice;
-$slicingDice = new SlicingDice("MASTER_API_KEY");
-print_r($slicingDice->getSavedQueries());
+$usesTestEndpoint = false;
+$client = new SlicingDice(array("masterKey" => "MASTER_API_KEY", $usesTestEndpoint);
+print_r($client->getSavedQueries());
 ?>
 ```
 
@@ -640,26 +591,27 @@ Create a saved query at SlicingDice. This method corresponds to a [POST request 
 ```php
 <?php
 use Slicer\SlicingDice;
-$slicingDice = new SlicingDice("MASTER_API_KEY");
+$usesTestEndpoint = false;
+$client = new SlicingDice(array("masterKey" => "MASTER_API_KEY", $usesTestEndpoint);
 $query = array(
     "name" => "my-saved-query",
     "type" => "count/entity",
     "query" => array(
         array(
-            "state" => array(
-                "equals" => "NY"
+            "car-model" => array(
+                "equals" => "honda fit"
             )
         ),
         "or",
         array(
-            "state-origin" => array(
-                "equals" => "CA"
+            "car-model" => array(
+                "equals" => "toyota corolla"
             )
         )
     ),
     "cache-period" => 100
 );
-print_r($slicingDice->createSavedQuery($query));
+print_r($client->createSavedQuery($query));
 ?>
 ```
 
@@ -667,24 +619,24 @@ print_r($slicingDice->createSavedQuery($query));
 
 ```json
 {
-    "status": "success",
-    "name": "my-saved-query",
-    "type": "count/entity",
-    "query": [
-        {
-            "state": {
-                "equals": "NY"
-            }
-        },
-        "or",
-        {
-            "state-origin": {
-                "equals": "CA"
-            }
-        }
-    ],
-    "cache-period": 100,
-    "took": 0.103
+   "took":0.053,
+   "query":[
+      {
+         "car-model":{
+            "equals":"honda fit"
+         }
+      },
+      "or",
+      {
+         "car-model":{
+            "equals":"toyota corolla"
+         }
+      }
+   ],
+   "name":"my-saved-query",
+   "type":"count/entity",
+   "cache-period":100,
+   "status":"success"
 }
 ```
 
@@ -696,25 +648,26 @@ Update an existing saved query at SlicingDice. This method corresponds to a [PUT
 ```php
 <?php
 use Slicer\SlicingDice;
-$slicingDice = new SlicingDice("MASTER_API_KEY");
-new$query = array(
+$usesTestEndpoint = false;
+$client = new SlicingDice(array("masterKey" => "MASTER_API_KEY", $usesTestEndpoint);
+$newQuery = array(
     "type" => "count/entity",
     "query" => array(
         array(
-            "state" => array(
-                "equals" => "NY"
+            "car-model" => array(
+                "equals" => "ford ka"
             )
         ),
         "or",
         array(
-            "state-origin" => array(
-                "equals" => "CA"
+            "car-model" => array(
+                "equals" => "toyota corolla"
             )
         )
     ),
     "cache-period" => 100
 );
-print_r($slicingDice->updateSavedQuery("my-saved-query", $newQuery));
+print_r($client->updateSavedQuery("my-saved-query", $newQuery));
 ?>
 ```
 
@@ -722,24 +675,23 @@ print_r($slicingDice->updateSavedQuery("my-saved-query", $newQuery));
 
 ```json
 {
-    "status": "success",
-    "name": "my-saved-query",
-    "type": "count/entity",
-    "query": [
-        {
-            "state": {
-                "equals": "NY"
-            }
-        },
-        "or",
-        {
-            "state-origin": {
-                "equals": "CA"
-            }
-        }
-    ],
-    "cache-period": 100,
-    "took": 0.103
+   "took":0.037,
+   "query":[
+      {
+         "car-model":{
+            "equals":"ford ka"
+         }
+      },
+      "or",
+      {
+         "car-model":{
+            "equals":"toyota corolla"
+         }
+      }
+   ],
+   "type":"count/entity",
+   "cache-period":100,
+   "status":"success"
 }
 ```
 
@@ -751,8 +703,9 @@ Executed a saved query at SlicingDice. This method corresponds to a [GET request
 ```php
 <?php
 use Slicer\SlicingDice;
-$slicingDice = new SlicingDice("MASTER_API_KEY");
-print_r($slicingDice->getSavedQuery("my-saved-query"));
+$usesTestEndpoint = false;
+$client = new SlicingDice(array("masterKey" => "MASTER_API_KEY", $usesTestEndpoint);
+print_r($client->getSavedQuery("my-saved-query"));
 ?>
 ```
 
@@ -760,25 +713,25 @@ print_r($slicingDice->getSavedQuery("my-saved-query"));
 
 ```json
 {
-    "status": "success",
-    "type": "count/entity",
-    "query": [
-        {
-            "state": {
-                "equals": "NY"
-            }
-        },
-        "or",
-        {
-            "state-origin": {
-                "equals": "CA"
-            }
-        }
-    ],
-    "result": {
-        "my-saved-query": 175
-    },
-    "took": 0.103
+   "result":{
+      "query":2
+   },
+   "took":0.035,
+   "query":[
+      {
+         "car-model":{
+            "equals":"honda fit"
+         }
+      },
+      "or",
+      {
+         "car-model":{
+            "equals":"toyota corolla"
+         }
+      }
+   ],
+   "type":"count/entity",
+   "status":"success"
 }
 ```
 
@@ -790,8 +743,9 @@ Delete a saved query at SlicingDice. This method corresponds to a [DELETE reques
 ```php
 <?php
 use Slicer\SlicingDice;
-$slicingDice = new SlicingDice("MASTER_API_KEY");
-print_r($slicingDice->deleteSavedQuery("my-saved-query"));
+$usesTestEndpoint = false;
+$client = new SlicingDice(array("masterKey" => "MASTER_API_KEY", $usesTestEndpoint);
+print_r($client->deleteSavedQuery("my-saved-query"));
 ?>
 ```
 
@@ -799,23 +753,24 @@ print_r($slicingDice->deleteSavedQuery("my-saved-query"));
 
 ```json
 {
-    "status": "success",
-    "deleted-query": "my-saved-query",
-    "type": "count/entity",
-    "query": [
-        {
-            "state": {
-                "equals": "NY"
-            }
-        },
-        "or",
-        {
-            "state-origin": {
-                "equals": "CA"
-            }
-        }
-    ],
-    "took": 0.103
+   "took":0.029,
+   "query":[
+      {
+         "car-model":{
+            "equals":"honda fit"
+         }
+      },
+      "or",
+      {
+         "car-model":{
+            "equals":"toyota corolla"
+         }
+      }
+   ],
+   "type":"count/entity",
+   "cache-period":100,
+   "status":"success",
+   "deleted-query":"my-saved-query"
 }
 ```
 
@@ -827,25 +782,26 @@ Retrieve indexed values for entities attending the given query. This method corr
 ```php
 <?php
 use Slicer\SlicingDice;
-$slicingDice = new SlicingDice("MASTER_OR_READ_API_KEY");
+$usesTestEndpoint = false;
+$client = new SlicingDice(array("masterKey" => "MASTER_OR_READ_API_KEY", $usesTestEndpoint);
 $query = array(
     "query" => array(
         array(
-            "users-from-ny" => array(
-                "equals" => "NY"
+            "car-model" => array(
+                "equals" => "ford ka"
             )
         ),
         "or",
         array(
-            "users-from-ca" => array(
-                "equals" => "CA"
+            "car-model" => array(
+                "equals" => "toyota corolla"
             )
         )
     ),
-    "fields" => array("name", "year"),
+    "fields" => array("car-model", "year"),
     "limit" => 2
 );
-print_r($slicingDice->result($query));
+print_r($client->result($query));
 ?>
 ```
 
@@ -853,18 +809,20 @@ print_r($slicingDice->result($query));
 
 ```json
 {
-    "status": "success",
-    "data": {
-        "user1@slicingdice.com": {
-            "name": "John",
-            "year": 2016
-        },
-        "user2@slicingdice.com": {
-            "name": "Mary",
-            "year": 2005
-        }
-    },
-    "took": 0.103
+   "took":0.113,
+   "next-page":null,
+   "data":{
+      "customer5@mycustomer.com":{
+         "year":"2005",
+         "car-model":"ford ka"
+      },
+      "user1@slicingdice.com":{
+         "year":"2016",
+         "car-model":"ford ka"
+      }
+   },
+   "page":1,
+   "status":"success"
 }
 ```
 
@@ -876,25 +834,26 @@ Retrieve indexed values as well as their relevance for entities attending the gi
 ```php
 <?php
 use Slicer\SlicingDice;
-$slicingDice = new SlicingDice("MASTER_OR_READ_API_KEY");
+$usesTestEndpoint = false;
+$client = new SlicingDice(array("masterKey" => "MASTER_OR_READ_API_KEY", $usesTestEndpoint);
 $query = array(
     "query" => array(
         array(
-            "users-from-ny" => array(
-                "equals" => "NY"
+            "car-model" => array(
+                "equals" => "ford ka"
             )
         ),
         "or",
         array(
-            "users-from-ca" => array(
-                "equals" => "CA"
+            "car-model" => array(
+                "equals" => "toyota corolla"
             )
         )
     ),
-    "fields" => array("name", "year"),
+    "fields" => array("car-model", "year"),
     "limit" => 2
 );
-print_r($slicingDice->score($query));
+print_r($client->score($query));
 ?>
 ```
 
@@ -902,20 +861,22 @@ print_r($slicingDice->score($query));
 
 ```json
 {
-    "status": "success",
-    "data": {
-        "user1@slicingdice.com": {
-            "name": "John",
-            "year": 2016,
-            "score": 2
-        },
-        "user2@slicingdice.com": {
-            "name": "Mary",
-            "year": 2005,
-            "score": 1
-        }
-    },
-    "took": 0.103
+   "took":0.063,
+   "next-page":null,
+   "data":{
+      "user3@slicingdice.com":{
+         "score":1,
+         "year":"2010",
+         "car-model":"toyota corolla"
+      },
+      "user2@slicingdice.com":{
+         "score":1,
+         "year":"2016",
+         "car-model":"honda fit"
+      }
+   },
+   "page":1,
+   "status":"success"
 }
 ```
 

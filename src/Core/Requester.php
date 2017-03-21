@@ -3,8 +3,7 @@
 namespace Slicer\Core;
 
 use Slicer\Core\HandlerResponse;
-
-require_once "src/Exceptions/SlicingDiceHTTPException.php";
+use Slicer\Exceptions\SlicingDiceHTTPException;
 
 class Requester {
 
