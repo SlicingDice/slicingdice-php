@@ -40,8 +40,8 @@ composer install
 user Slicer\SlicingDice;
 
 // Configure the client
-$usesTestEndpoint = false;
-$client = new SlicingDice(array("masterKey" => "MASTER_API_KEY", $usesTestEndpoint);
+$usesTestEndpoint = true;
+$client = new SlicingDice(array("masterKey" => "MASTER_API_KEY"), $usesTestEndpoint);
 
 // Indexing data
 $indexData = array(
@@ -90,8 +90,8 @@ Get all created projects, both active and inactive ones. This method corresponds
 ```php
 <?php
 use Slicer\SlicingDice;
-$usesTestEndpoint = false;
-$client = new SlicingDice(array("masterKey" => "MASTER_API_KEY", $usesTestEndpoint);
+$usesTestEndpoint = true;
+$client = new SlicingDice(array("masterKey" => "MASTER_API_KEY"), $usesTestEndpoint);
 print_r($client->getProjects());
 ?>
 ```
@@ -127,8 +127,8 @@ Get all created fields, both active and inactive ones. This method corresponds t
 ```php
 <?php
 use Slicer\SlicingDice;
-$usesTestEndpoint = false;
-$client = new SlicingDice(array("masterKey" => "MASTER_API_KEY", $usesTestEndpoint);
+$usesTestEndpoint = true;
+$client = new SlicingDice(array("masterKey" => "MASTER_API_KEY"), $usesTestEndpoint);
 print_r($client->getFields());
 ?>
 ```
@@ -169,8 +169,8 @@ Create a new field. This method corresponds to a [POST request at /field](http:/
 ```php
 <?php
 use Slicer\SlicingDice;
-$usesTestEndpoint = false;
-$client = new SlicingDice(array("masterKey" => "MASTER_API_KEY", $usesTestEndpoint);
+$usesTestEndpoint = true;
+$client = new SlicingDice(array("masterKey" => "MASTER_API_KEY"), $usesTestEndpoint);
 $field = array(
     "name" => "Year",
     "api-name" => "year",
@@ -199,8 +199,8 @@ Index data to existing entities or create new entities, if necessary. This metho
 ```php
 <?php
 use Slicer\SlicingDice;
-$usesTestEndpoint = false;
-$client = new SlicingDice(array("masterKey" => "MASTER_OR_WRITE_API_KEY", $usesTestEndpoint);
+$usesTestEndpoint = true;
+$client = new SlicingDice(array("masterKey" => "MASTER_API_KEY"), $usesTestEndpoint);
 $indexData = array(
     "user1@slicingdice.com" => array(
         "car-model" => "Ford Ka",
@@ -258,8 +258,8 @@ Verify which entities exist in a project given a list of entity IDs. This method
 ```php
 <?php
 use Slicer\SlicingDice;
-$usesTestEndpoint = false;
-$client = new SlicingDice(array("masterKey" => "MASTER_OR_READ_API_KEY", $usesTestEndpoint);
+$usesTestEndpoint = true;
+$client = new SlicingDice(array("masterKey" => "MASTER_API_KEY"), $usesTestEndpoint);
 $ids = array(
         "user1@slicingdice.com",
         "user2@slicingdice.com",
@@ -293,8 +293,8 @@ Count the number of indexed entities. This method corresponds to a [GET request 
 ```php
 <?php
 use Slicer\SlicingDice;
-$usesTestEndpoint = false;
-$client = new SlicingDice(array("masterKey" => "MASTER_OR_READ_API_KEY", $usesTestEndpoint);
+$usesTestEndpoint = true;
+$client = new SlicingDice(array("masterKey" => "MASTER_API_KEY"), $usesTestEndpoint);
 print_r($client->countEntityTotal());
 ?>
 ```
@@ -319,8 +319,8 @@ Count the number of entities attending the given query. This method corresponds 
 ```php
 <?php
 use Slicer\SlicingDice;
-$usesTestEndpoint = false;
-$client = new SlicingDice(array("masterKey" => "MASTER_OR_READ_API_KEY", $usesTestEndpoint);
+$usesTestEndpoint = true;
+$client = new SlicingDice(array("masterKey" => "MASTER_API_KEY"), $usesTestEndpoint);
 $query = array(
     "corolla-or-fit" => array(
         array(
@@ -369,8 +369,8 @@ Count the number of occurrences for time-series events attending the given query
 ```php
 <?php
 use Slicer\SlicingDice;
-$usesTestEndpoint = false;
-$client = new SlicingDice(array("masterKey" => "MASTER_OR_READ_API_KEY", $usesTestEndpoint);
+$usesTestEndpoint = true;
+$client = new SlicingDice(array("masterKey" => "MASTER_API_KEY"), $usesTestEndpoint);
 $query = array(
     "test-drives-in-ny" => array(
         array(
@@ -421,8 +421,8 @@ Return the top values for entities attending the given query. This method corres
 ```php
 <?php
 use Slicer\SlicingDice;
-$usesTestEndpoint = false;
-$client = new SlicingDice(array("masterKey" => "MASTER_OR_READ_API_KEY", $usesTestEndpoint);
+$usesTestEndpoint = true;
+$client = new SlicingDice(array("masterKey" => "MASTER_API_KEY"), $usesTestEndpoint);
 $query = array(
     "car-year" => array(
         "year" => 2
@@ -482,8 +482,8 @@ Return the aggregation of all fields in the given query. This method corresponds
 ```php
 <?php
 use Slicer\SlicingDice;
-$usesTestEndpoint = false;
-$client = new SlicingDice(array("masterKey" => "MASTER_OR_READ_API_KEY", $usesTestEndpoint);
+$usesTestEndpoint = true;
+$client = new SlicingDice(array("masterKey" => "MASTER_API_KEY"), $usesTestEndpoint);
 $query = array(
     "query" => array(
         array(
@@ -537,8 +537,8 @@ Get all saved queries. This method corresponds to a [GET request at /query/saved
 ```php
 <?php
 use Slicer\SlicingDice;
-$usesTestEndpoint = false;
-$client = new SlicingDice(array("masterKey" => "MASTER_API_KEY", $usesTestEndpoint);
+$usesTestEndpoint = true;
+$client = new SlicingDice(array("masterKey" => "MASTER_API_KEY"), $usesTestEndpoint);
 print_r($client->getSavedQueries());
 ?>
 ```
@@ -591,8 +591,8 @@ Create a saved query at SlicingDice. This method corresponds to a [POST request 
 ```php
 <?php
 use Slicer\SlicingDice;
-$usesTestEndpoint = false;
-$client = new SlicingDice(array("masterKey" => "MASTER_API_KEY", $usesTestEndpoint);
+$usesTestEndpoint = true;
+$client = new SlicingDice(array("masterKey" => "MASTER_API_KEY"), $usesTestEndpoint);
 $query = array(
     "name" => "my-saved-query",
     "type" => "count/entity",
@@ -648,8 +648,8 @@ Update an existing saved query at SlicingDice. This method corresponds to a [PUT
 ```php
 <?php
 use Slicer\SlicingDice;
-$usesTestEndpoint = false;
-$client = new SlicingDice(array("masterKey" => "MASTER_API_KEY", $usesTestEndpoint);
+$usesTestEndpoint = true;
+$client = new SlicingDice(array("masterKey" => "MASTER_API_KEY"), $usesTestEndpoint);
 $newQuery = array(
     "type" => "count/entity",
     "query" => array(
@@ -703,8 +703,8 @@ Executed a saved query at SlicingDice. This method corresponds to a [GET request
 ```php
 <?php
 use Slicer\SlicingDice;
-$usesTestEndpoint = false;
-$client = new SlicingDice(array("masterKey" => "MASTER_API_KEY", $usesTestEndpoint);
+$usesTestEndpoint = true;
+$client = new SlicingDice(array("masterKey" => "MASTER_API_KEY"), $usesTestEndpoint);
 print_r($client->getSavedQuery("my-saved-query"));
 ?>
 ```
@@ -743,8 +743,8 @@ Delete a saved query at SlicingDice. This method corresponds to a [DELETE reques
 ```php
 <?php
 use Slicer\SlicingDice;
-$usesTestEndpoint = false;
-$client = new SlicingDice(array("masterKey" => "MASTER_API_KEY", $usesTestEndpoint);
+$usesTestEndpoint = true;
+$client = new SlicingDice(array("masterKey" => "MASTER_API_KEY"), $usesTestEndpoint);
 print_r($client->deleteSavedQuery("my-saved-query"));
 ?>
 ```
@@ -782,8 +782,8 @@ Retrieve indexed values for entities attending the given query. This method corr
 ```php
 <?php
 use Slicer\SlicingDice;
-$usesTestEndpoint = false;
-$client = new SlicingDice(array("masterKey" => "MASTER_OR_READ_API_KEY", $usesTestEndpoint);
+$usesTestEndpoint = true;
+$client = new SlicingDice(array("masterKey" => "MASTER_API_KEY"), $usesTestEndpoint);
 $query = array(
     "query" => array(
         array(
@@ -834,8 +834,8 @@ Retrieve indexed values as well as their relevance for entities attending the gi
 ```php
 <?php
 use Slicer\SlicingDice;
-$usesTestEndpoint = false;
-$client = new SlicingDice(array("masterKey" => "MASTER_OR_READ_API_KEY", $usesTestEndpoint);
+$usesTestEndpoint = true;
+$client = new SlicingDice(array("masterKey" => "MASTER_API_KEY"), $usesTestEndpoint);
 $query = array(
     "query" => array(
         array(
