@@ -30,6 +30,7 @@ class MappedExceptions {
             31 => 'AccountPaymentRequiredException',
             32 => 'AccountBannedException',
             33 => 'AccountDisabledException',
+            39 => 'IndexInvalidRangeException',
             # Field errors (40 - 59)
             40 => 'FieldMissingParamException',
             41 => 'FieldTypeException',
