@@ -1,6 +1,8 @@
 <?php
 
-//namespace Slicer\Exceptions\Field;
+namespace Slicer\Exceptions\Field;
+
+use Slicer\Exceptions\SlicingDiceException;
 
 class FieldAlreadyExistsException extends SlicingDiceException
 {

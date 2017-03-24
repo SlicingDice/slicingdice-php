@@ -2,6 +2,8 @@
 
 namespace Slicer\Exceptions\Client;
 
+use Slicer\Exceptions\SlicingDiceException;
+
 class InvalidQueryException extends SlicingDiceException
 {
     public function __construct($message, $code = 0, Exception $previous = null) {

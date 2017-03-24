@@ -1,4 +1,9 @@
 <?php
+
+namespace Slicer\Exceptions\Field;
+
+use Slicer\Exceptions\SlicingDiceException;
+
 class FieldInvalidNameException extends SlicingDiceException
 {
     public function __construct($message, $code = 0, Exception $previous = null) {

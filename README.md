@@ -1,5 +1,5 @@
 # SlicingDice Official PHP Client (v1.0)
-![](https://circleci.com/gh/SlicingDice/slicingdice-php/tree/master.svg?style=shield)
+### Build Status: [![CircleCI](https://circleci.com/gh/SlicingDice/slicingdice-php.svg?style=svg)](https://circleci.com/gh/SlicingDice/slicingdice-php)
 
 Official PHP client for [SlicingDice](http://www.slicingdice.com/), Data Warehouse and Analytics Database as a Service.  
 
@@ -34,6 +34,13 @@ composer install
 ```
 
 ## Usage
+
+The following code snippet is an example of how to add and query data
+using the SlicingDice PHP client. We entry data informing
+'user1@slicingdice.com' has age 22 and then query the database for
+the number of users with age between 20 and 40 years old.
+If this is the first register ever entered into the system,
+ the answer should be 1.
 
 ```php
 <?php
@@ -312,7 +319,7 @@ print_r($client->countEntityTotal());
 ```
 
 ### `countEntity($jsonData)`
-Count the number of entities attending the given query. This method corresponds to a [POST request at /query/count/entity](http://panel.slicingdice.com/docs/#api-details-api-endpoints-post-query-count-entity).
+Count the number of entities matching the given query. This method corresponds to a [POST request at /query/count/entity](http://panel.slicingdice.com/docs/#api-details-api-endpoints-post-query-count-entity).
 
 #### Request example
 
@@ -362,7 +369,7 @@ print_r($client->countEntity($query));
 ```
 
 ### `countEvent($jsonData)`
-Count the number of occurrences for time-series events attending the given query. This method corresponds to a [POST request at /query/count/event](http://panel.slicingdice.com/docs/#api-details-api-endpoints-post-query-count-event).
+Count the number of occurrences for time-series events matching the given query. This method corresponds to a [POST request at /query/count/event](http://panel.slicingdice.com/docs/#api-details-api-endpoints-post-query-count-event).
 
 #### Request example
 
@@ -414,7 +421,7 @@ print_r($client->countEvent($query));
 ```
 
 ### `topValues($jsonData)`
-Return the top values for entities attending the given query. This method corresponds to a [POST request at /query/top_values](http://panel.slicingdice.com/docs/#api-details-api-endpoints-post-query-top-values).
+Return the top values for entities matching the given query. This method corresponds to a [POST request at /query/top_values](http://panel.slicingdice.com/docs/#api-details-api-endpoints-post-query-top-values).
 
 #### Request example
 
@@ -775,7 +782,7 @@ print_r($client->deleteSavedQuery("my-saved-query"));
 ```
 
 ### `result($jsonData)`
-Retrieve indexed values for entities attending the given query. This method corresponds to a [POST request at /data_extraction/result](http://panel.slicingdice.com/docs/#api-details-api-endpoints-post-data-extraction-result).
+Retrieve indexed values for entities matching the given query. This method corresponds to a [POST request at /data_extraction/result](http://panel.slicingdice.com/docs/#api-details-api-endpoints-post-data-extraction-result).
 
 #### Request example
 
@@ -827,7 +834,7 @@ print_r($client->result($query));
 ```
 
 ### `score($jsonData)`
-Retrieve indexed values as well as their relevance for entities attending the given query. This method corresponds to a [POST request at /data_extraction/score](http://panel.slicingdice.com/docs/#api-details-api-endpoints-post-data-extraction-score).
+Retrieve indexed values as well as their relevance for entities matching the given query. This method corresponds to a [POST request at /data_extraction/score](http://panel.slicingdice.com/docs/#api-details-api-endpoints-post-data-extraction-score).
 
 #### Request example
 
