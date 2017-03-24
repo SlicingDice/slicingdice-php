@@ -4,22 +4,16 @@ namespace Slicer\Core;
 
 use Slicer\Exceptions\MappedExceptions;
 use Slicer\Exceptions\Field\FieldAlreadyExistsException;
-
-$exceptions = array(
-    "src/Exceptions/Account",
-    "src/Exceptions/Auth",
-    "src/Exceptions/Field",
-    "src/Exceptions/Request",
-    "src/Exceptions/Query",
-    "src/Exceptions/Index",
-);
-
-$generalExceptions = array(
-    "src/Exceptions/SlicingDiceException.php",
-    "src/Exceptions/InternalServerException.php",
-    "src/Exceptions/SlicingDiceHTTPException.php",
-    "src/Exceptions/FieldCreateInternalException.php"
-);
+use Slicer\Exceptions\Account;
+use Slicer\Exceptions\Auth;
+use Slicer\Exceptions\Field;
+use Slicer\Exceptions\Request;
+use Slicer\Exceptions\Query;
+use Slicer\Exceptions\Index;
+use Slicer\Exceptions\SlicingDiceException;
+use Slicer\Exceptions\InternalServerException;
+use Slicer\Exceptions\SlicingDiceHTTPException;
+use Slicer\Exceptions\FieldCreateInternalException;
 
 function loadExceptions($ownExceptions, $ownGeneralExceptions){
     foreach ($ownGeneralExceptions as $exceptionPathName) {
@@ -32,21 +26,6 @@ function loadExceptions($ownExceptions, $ownGeneralExceptions){
         }
     }
 }
-
-if (file_exists('../src/Exceptions/SlicingDiceException.php')){
-    $ownExceptions = array();
-    $ownGeneralExceptions = array();
-    foreach ($exceptions as $exceptionFolder) {
-        array_push($ownExceptions, "../" . $exceptionFolder);
-    }
-    foreach ($generalExceptions as $exceptionPath) {
-        array_push($ownGeneralExceptions, "../" . $exceptionPath);
-    }
-    loadExceptions($ownExceptions, $ownGeneralExceptions);
-} else {
-    loadExceptions($exceptions, $generalExceptions);
-}
-
 
 class HandlerResponse {
 

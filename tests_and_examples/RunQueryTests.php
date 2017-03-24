@@ -307,12 +307,6 @@ function signal_handler(){
 
 function main(){
 
-    if (PHP_OS == "Linux"){
-        declare(ticks = 1);
-        pcntl_signal(SIGINT, "Slicer\Tests\signal_handler");
-        pcntl_signal(SIGTSTP, "Slicer\Tests\signal_handler");
-    }
-
     $queryTypes = array(
         'count_entity',
         'count_event',
