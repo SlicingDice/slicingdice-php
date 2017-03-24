@@ -1,6 +1,8 @@
 <?php
 
-//require_once "src/Exceptions/SlicingDiceException.php";
+namespace Slicer\Exceptions\Account;
+
+use Slicer\Exceptions\SlicingDiceException;
 
 class AccountDisabledException extends SlicingDiceException
 {

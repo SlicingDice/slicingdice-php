@@ -1,6 +1,6 @@
 <?php
 
-//namespace Slicer\Exceptions;
+namespace Slicer\Exceptions;
 
 class SlicingDiceException extends \Exception
 {

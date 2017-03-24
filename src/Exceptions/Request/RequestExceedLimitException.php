@@ -1,4 +1,9 @@
 <?php 
+
+namespace Slicer\Exceptions\Request;
+
+use Slicer\Exceptions\SlicingDiceException;
+
 class RequestExceedLimitException extends SlicingDiceException
 {
     public function __construct($message, $code = 0, Exception $previous = null) {

@@ -1,4 +1,9 @@
 <?php 
+
+namespace Slicer\Exceptions\Auth;
+
+use Slicer\Exceptions\SlicingDiceException;
+
 class AuthInvalidRemoteAddrException extends SlicingDiceException
 {
     public function __construct($message, $code = 0, Exception $previous = null) {
