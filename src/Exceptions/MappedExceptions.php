@@ -30,6 +30,7 @@ class MappedExceptions {
             31 => 'Slicer\Exceptions\Account\AccountPaymentRequiredException',
             32 => 'Slicer\Exceptions\Account\AccountBannedException',
             33 => 'Slicer\Exceptions\Account\AccountDisabledException',
+            39 => 'Slicer\Exceptions\Index\IndexInvalidRangeException',
             # Field errors (40 - 59)
             40 => 'Slicer\Exceptions\Field\FieldMissingParamException',
             41 => 'Slicer\Exceptions\Field\FieldTypeException',
