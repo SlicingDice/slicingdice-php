@@ -1,4 +1,9 @@
 <?php 
+
+namespace Slicer\Exceptions\Account;
+
+use Slicer\Exceptions\SlicingDiceException;
+
 class AccountMissingPaymentMethodException extends SlicingDiceException
 {
     public function __construct($message, $code = 0, Exception $previous = null) {

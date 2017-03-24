@@ -1,4 +1,9 @@
 <?php
+
+namespace Slicer\Exceptions\Index;
+
+use Slicer\Exceptions\SlicingDiceException;
+
 class QueryRelativeIntervalException extends SlicingDiceException
 {
     public function __construct($message, $code = 0, Exception $previous = null) {

@@ -1,4 +1,9 @@
 <?php
+
+namespace Slicer\Exceptions\Query;
+
+use Slicer\Exceptions\SlicingDiceException;
+
 class QueryMetricsLevelException extends \Exception
 {
     public function __construct($message, $code = 0, Exception $previous = null) {
