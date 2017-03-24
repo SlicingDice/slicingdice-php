@@ -15,18 +15,6 @@ use Slicer\Exceptions\InternalServerException;
 use Slicer\Exceptions\SlicingDiceHTTPException;
 use Slicer\Exceptions\FieldCreateInternalException;
 
-function loadExceptions($ownExceptions, $ownGeneralExceptions){
-    foreach ($ownGeneralExceptions as $exceptionPathName) {
-        require_once $exceptionPathName;
-    }
-    foreach ($ownExceptions as $exceptionFolder) {
-        foreach (glob("{$exceptionFolder}/*.php") as $filename)
-        {
-            require_once $filename;
-        }
-    }
-}
-
 class HandlerResponse {
 
     /**
