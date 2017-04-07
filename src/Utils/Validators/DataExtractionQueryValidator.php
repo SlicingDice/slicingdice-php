@@ -17,12 +17,6 @@ class DataExtractionQueryValidator {
     * @return true if query is valid 
     */
     public function validator() {
-        if (array_key_exists("limit", $this->queryData)) {
-            if ($this->queryData["limit"] > 100) {
-                throw new InvalidQueryException(
-                    "The field 'limit' has a value max of 100.");
-            }
-        }
         if (array_key_exists("fields", $this->queryData)) {
             if (count($this->queryData["fields"]) > 10) {
                 throw new InvalidQueryException(
