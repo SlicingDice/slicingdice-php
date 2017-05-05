@@ -61,7 +61,8 @@ $client->index($indexData);
 
 // Querying data
 $queryData = array(
-    "users-between-20-and-40" => array(
+    "query-name" => "users-between-20-and-40",
+    "query" => array(
         array(
             "age" => array(
                 "range" => array(20, 40)
@@ -240,7 +241,8 @@ $indexData = array(
             "value" => "NY",
             "date" => "2016-08-17T13:23:47+00:00"
         )
-    )
+    ),
+    "auto-create-fields" => true
 );
 print_r($client->index($indexData));
 ?>
@@ -329,27 +331,34 @@ use Slicer\SlicingDice;
 $usesTestEndpoint = true;
 $client = new SlicingDice(array("masterKey" => "MASTER_API_KEY"), $usesTestEndpoint);
 $query = array(
-    "corolla-or-fit" => array(
-        array(
-            "car-model" => array(
-                "equals" => "toyota corolla"
+    array(
+        "query-name" => "corolla-or-fit",
+        "query" => array(
+            array(
+                "car-model" => array(
+                    "equals" => "toyota corolla"
+                )
+            ),
+            "or",
+            array(
+                "car-model" => array(
+                    "equals" => "honda fit"
+                )
             )
         ),
-        "or",
-        array(
-            "car-model" => array(
-                "equals" => "honda fit"
+        "bypass-cache" => false
+    ),
+    array(
+        "query-name" => "ford-ka",
+        "query" => array(
+            array(
+                "car-model" => array(
+                    "equals" => "ford ka"
+                )
             )
         ),
-    ),
-    "ford-ka" => array(
-        array(
-            "car-model" => array(
-                "equals" => "ford ka"
-            )
-        )
-    ),
-    "bypass-cache" => false
+        "bypass-cache" => false
+    )
 );
 print_r($client->countEntity($query));
 ?>
@@ -379,29 +388,36 @@ use Slicer\SlicingDice;
 $usesTestEndpoint = true;
 $client = new SlicingDice(array("masterKey" => "MASTER_API_KEY"), $usesTestEndpoint);
 $query = array(
-    "test-drives-in-ny" => array(
-        array(
-        "test-drives" => array(
-                "equals" => "NY",
-                "between" => array(
-                    "2016-08-16T00:00:00Z",
-                    "2016-08-18T00:00:00Z"
-                )
-            )
-        )
-    ),
-    "test-drives-in-ca" => array(
-        array(
+    array(
+        "query-name" => "test-drives-in-ny",
+        "query" => array(
+            array(
             "test-drives" => array(
-                "equals" => "CA",
-                "between" => array(
-                    "2016-04-04T00:00:00Z",
-                    "2016-04-06T00:00:00Z"
+                    "equals" => "NY",
+                    "between" => array(
+                        "2016-08-16T00:00:00Z",
+                        "2016-08-18T00:00:00Z"
+                    )
                 )
             )
-        )
+        ),
+        "bypass-cache" => true
     ),
-    "bypass-cache" => true
+    array(
+        "query-name" => "test-drives-in-ca",
+        "query" => array(
+            array(
+                "test-drives" => array(
+                    "equals" => "CA",
+                    "between" => array(
+                        "2016-04-04T00:00:00Z",
+                        "2016-04-06T00:00:00Z"
+                    )
+                )
+            )
+        ),
+        "bypass-cache" => true
+    )
 );
 print_r($client->countEvent($query));
 ?>
