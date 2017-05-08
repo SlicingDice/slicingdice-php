@@ -9,7 +9,7 @@ Official PHP client for [SlicingDice](http://www.slicingdice.com/), Data Warehou
 
 If you are new to SlicingDice, check our [quickstart guide](http://panel.slicingdice.com/docs/#quickstart-guide) and learn to use it in 15 minutes.
 
-Please refer to the [SlicingDice official documentation](http://panel.slicingdice.com/docs/) for more information on [analytics databases](http://panel.slicingdice.com/docs/#analytics-concepts), [data modeling](http://panel.slicingdice.com/docs/#data-modeling), [indexing](http://panel.slicingdice.com/docs/#data-indexing), [querying](http://panel.slicingdice.com/docs/#data-querying), [limitations](http://panel.slicingdice.com/docs/#current-slicingdice-limitations) and [API details](http://panel.slicingdice.com/docs/#api-details).
+Please refer to the [SlicingDice official documentation](http://panel.slicingdice.com/docs/) for more information on [analytics databases](http://panel.slicingdice.com/docs/#analytics-concepts), [data modeling](http://panel.slicingdice.com/docs/#data-modeling), [data insertion](http://panel.slicingdice.com/docs/#data-insertion), [querying](http://panel.slicingdice.com/docs/#data-querying), [limitations](http://panel.slicingdice.com/docs/#current-slicingdice-limitations) and [API details](http://panel.slicingdice.com/docs/#api-details).
 
 ## Tests and Examples
 
@@ -50,14 +50,14 @@ user Slicer\SlicingDice;
 $usesTestEndpoint = true;
 $client = new SlicingDice(array("masterKey" => "MASTER_API_KEY"), $usesTestEndpoint);
 
-// Indexing data
-$indexData = array(
+// Inserting data
+$insertData = array(
     "user1@slicingdice.com" => array(
         "age" => 22
     ),
-    "auto-create-fields" => true
+    "auto-create" => array("table", "column")
 );
-$client->index($indexData);
+$client->insert($insertData);
 
 // Querying data
 $queryData = array(
@@ -90,8 +90,8 @@ print_r($client->countEntity($queryData));
 * `$usesTestEndpoint=false (boolean)` - If false the client will send requests to production end-point, otherwise to tests end-point.
 * `$timeout (int)` - Amount of time, in seconds, to wait for results for each request.
 
-### `getProjects()`
-Get all created projects, both active and inactive ones. This method corresponds to a [GET request at /project](http://panel.slicingdice.com/docs/#api-details-api-endpoints-get-project).
+### `getDatabase()`
+Get information about current database. This method corresponds to a [GET request at /database](http://panel.slicingdice.com/docs/#api-details-api-endpoints-get-database).
 
 #### Request example
 
@@ -100,7 +100,7 @@ Get all created projects, both active and inactive ones. This method corresponds
 use Slicer\SlicingDice;
 $usesTestEndpoint = true;
 $client = new SlicingDice(array("masterKey" => "MASTER_API_KEY"), $usesTestEndpoint);
-print_r($client->getProjects());
+print_r($client->getDatabase());
 ?>
 ```
 
@@ -108,27 +108,15 @@ print_r($client->getProjects());
 
 ```json
 {
-    "active": [
-        {
-            "name": "Project 1",
-            "description": "My first project",
-            "data-expiration": 30,
-            "created-at": "2016-04-05T10:20:30Z"
-        }
-    ],
-    "inactive": [
-        {
-            "name": "Project 2",
-            "description": "My second project",
-            "data-expiration": 90,
-            "created-at": "2016-04-05T10:20:30Z"
-        }
-    ]
+    "name": "Database 1",
+    "description": "My first database",
+    "data-expiration": 30,
+    "created-at": "2016-04-05T10:20:30Z"
 }
 ```
 
-### `getFields()`
-Get all created fields, both active and inactive ones. This method corresponds to a [GET request at /field](http://panel.slicingdice.com/docs/#api-details-api-endpoints-get-field).
+### `getColumns()`
+Get all created columns, both active and inactive ones. This method corresponds to a [GET request at /column](http://panel.slicingdice.com/docs/#api-details-api-endpoints-get-column).
 
 #### Request example
 
@@ -137,7 +125,7 @@ Get all created fields, both active and inactive ones. This method corresponds t
 use Slicer\SlicingDice;
 $usesTestEndpoint = true;
 $client = new SlicingDice(array("masterKey" => "MASTER_API_KEY"), $usesTestEndpoint);
-print_r($client->getFields());
+print_r($client->getColumns());
 ?>
 ```
 
@@ -169,8 +157,8 @@ print_r($client->getFields());
 }
 ```
 
-### `createField($jsonData)`
-Create a new field. This method corresponds to a [POST request at /field](http://panel.slicingdice.com/docs/#api-details-api-endpoints-post-field).
+### `createColumn($jsonData)`
+Create a new column. This method corresponds to a [POST request at /column](http://panel.slicingdice.com/docs/#api-details-api-endpoints-post-column).
 
 #### Request example
 
@@ -179,14 +167,14 @@ Create a new field. This method corresponds to a [POST request at /field](http:/
 use Slicer\SlicingDice;
 $usesTestEndpoint = true;
 $client = new SlicingDice(array("masterKey" => "MASTER_API_KEY"), $usesTestEndpoint);
-$field = array(
+$column = array(
     "name" => "Year",
     "api-name" => "year",
     "type" => "integer",
     "description" => "Year of manufacturing",
     "storage" => "latest-value"
 );
-print_r($client->createField($field));
+print_r($client->createColumn($column));
 ?>
 ```
 
@@ -199,8 +187,8 @@ print_r($client->createField($field));
 }
 ```
 
-### `index($jsonData)`
-Index data to existing entities or create new entities, if necessary. This method corresponds to a [POST request at /index](http://panel.slicingdice.com/docs/#api-details-api-endpoints-post-index).
+### `insert($jsonData)`
+Insert data to existing entities or create new entities, if necessary. This method corresponds to a [POST request at /insert](http://panel.slicingdice.com/docs/#api-details-api-endpoints-post-insert).
 
 #### Request example
 
@@ -209,7 +197,7 @@ Index data to existing entities or create new entities, if necessary. This metho
 use Slicer\SlicingDice;
 $usesTestEndpoint = true;
 $client = new SlicingDice(array("masterKey" => "MASTER_API_KEY"), $usesTestEndpoint);
-$indexData = array(
+$insertData = array(
     "user1@slicingdice.com" => array(
         "car-model" => "Ford Ka",
         "year" => 2016
@@ -242,9 +230,9 @@ $indexData = array(
             "date" => "2016-08-17T13:23:47+00:00"
         )
     ),
-    "auto-create-fields" => true
+    "auto-create" => array("table", "column")
 );
-print_r($client->index($indexData));
+print_r($client->insert($insertData));
 ?>
 ```
 
@@ -253,14 +241,14 @@ print_r($client->index($indexData));
 ```json
 {
     "status": "success",
-    "indexed-entities": 4,
-    "indexed-fields": 10,
+    "inserted-entities": 4,
+    "inserted-columns": 10,
     "took": 0.023
 }
 ```
 
 ### `existsEntity($ids)`
-Verify which entities exist in a project given a list of entity IDs. This method corresponds to a [POST request at /query/exists/entity](http://panel.slicingdice.com/docs/#api-details-api-endpoints-post-query-exists-entity).
+Verify which entities exist in a database given a list of entity IDs. This method corresponds to a [POST request at /query/exists/entity](http://panel.slicingdice.com/docs/#api-details-api-endpoints-post-query-exists-entity).
 
 #### Request example
 
@@ -295,7 +283,7 @@ print_r($client->existsEntity($ids));
 ```
 
 ### `countEntityTotal()`
-Count the number of indexed entities. This method corresponds to a [GET request at /query/count/entity/total](http://panel.slicingdice.com/docs/#api-details-api-endpoints-get-query-count-entity-total).
+Count the number of inserted entities. This method corresponds to a [GET request at /query/count/entity/total](http://panel.slicingdice.com/docs/#api-details-api-endpoints-get-query-count-entity-total).
 
 #### Request example
 
@@ -498,7 +486,7 @@ print_r($client->topValues($query));
 ```
 
 ### `aggregation($jsonData)`
-Return the aggregation of all fields in the given query. This method corresponds to a [POST request at /query/aggregation](http://panel.slicingdice.com/docs/#api-details-api-endpoints-post-query-aggregation).
+Return the aggregation of all columns in the given query. This method corresponds to a [POST request at /query/aggregation](http://panel.slicingdice.com/docs/#api-details-api-endpoints-post-query-aggregation).
 
 #### Request example
 
@@ -798,7 +786,7 @@ print_r($client->deleteSavedQuery("my-saved-query"));
 ```
 
 ### `result($jsonData)`
-Retrieve indexed values for entities matching the given query. This method corresponds to a [POST request at /data_extraction/result](http://panel.slicingdice.com/docs/#api-details-api-endpoints-post-data-extraction-result).
+Retrieve inserted values for entities matching the given query. This method corresponds to a [POST request at /data_extraction/result](http://panel.slicingdice.com/docs/#api-details-api-endpoints-post-data-extraction-result).
 
 #### Request example
 
@@ -821,7 +809,7 @@ $query = array(
             )
         )
     ),
-    "fields" => array("car-model", "year"),
+    "columns" => array("car-model", "year"),
     "limit" => 2
 );
 print_r($client->result($query));
@@ -850,7 +838,7 @@ print_r($client->result($query));
 ```
 
 ### `score($jsonData)`
-Retrieve indexed values as well as their relevance for entities matching the given query. This method corresponds to a [POST request at /data_extraction/score](http://panel.slicingdice.com/docs/#api-details-api-endpoints-post-data-extraction-score).
+Retrieve inserted values as well as their relevance for entities matching the given query. This method corresponds to a [POST request at /data_extraction/score](http://panel.slicingdice.com/docs/#api-details-api-endpoints-post-data-extraction-score).
 
 #### Request example
 
@@ -873,7 +861,7 @@ $query = array(
             )
         )
     ),
-    "fields" => array("car-model", "year"),
+    "columns" => array("car-model", "year"),
     "limit" => 2
 );
 print_r($client->score($query));

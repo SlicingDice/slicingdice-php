@@ -3,9 +3,9 @@
 namespace Slicer\Utils;
 
 class URLResources {
-    const PROJECT = "/project/";
-    const FIELD = "/field/";
-    const INDEX = "/index/";
+    const DATABASE = "/project/";
+    const COLUMN = "/column/";
+    const INSERT = "/index/";
     const QUERY_COUNT_ENTITY = "/query/count/entity/";
     const QUERY_COUNT_ENTITY_TOTAL = "/query/count/entity/total/";
     const QUERY_COUNT_EVENT = "/query/count/event/";

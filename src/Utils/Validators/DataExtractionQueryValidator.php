@@ -17,11 +17,11 @@ class DataExtractionQueryValidator {
     * @return true if query is valid 
     */
     public function validator() {
-        if (array_key_exists("fields", $this->queryData)) {
-            if (count($this->queryData["fields"]) > 10) {
+        if (array_key_exists("columns", $this->queryData)) {
+            if (count($this->queryData["columns"]) > 10) {
                 throw new InvalidQueryException(
-                    "The key 'fields' in data extraction result must " . 
-                    "have up to 10 fields.");
+                    "The key 'columns' in data extraction result must " . 
+                    "have up to 10 columns.");
             }
         }
         return true;
