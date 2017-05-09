@@ -4,7 +4,7 @@ namespace Slicer\Exceptions\Insert;
 
 use Slicer\Exceptions\SlicingDiceException;
 
-class InsertColumnTimeseriesInvalidParameterException extends SlicingDiceException
+class InsertColumnTimeSeriesMissingValueException extends SlicingDiceException
 {
     public function __construct($message, $code = 0, Exception $previous = null) {
         parent::__construct($message, $code, $previous);

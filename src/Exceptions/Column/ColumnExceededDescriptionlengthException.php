@@ -1,10 +1,10 @@
-<?php 
+<?php
 
-namespace Slicer\Exceptions\Request;
+namespace Slicer\Exceptions\Column;
 
 use Slicer\Exceptions\SlicingDiceException;
 
-class RequestExceedLimitException extends SlicingDiceException
+class ColumnExceededDescriptionlengthException extends SlicingDiceException
 {
     public function __construct($message, $code = 0, Exception $previous = null) {
         parent::__construct($message, $code, $previous);
