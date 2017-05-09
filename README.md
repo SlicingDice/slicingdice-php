@@ -33,6 +33,16 @@ Install the dependencies by executing the command below:
 composer install
 ```
 
+### Troubleshooting
+If you have problem to install on Linux, try to install these system dependencies:
+
+```bash
+# PHP 7
+sudo apt-get install php-curl php7.0-dom php7.0-mbstring php7.0-xml 
+# PHP >= 5.2.8
+sudo apt-get install php-curl php5.6-dom php-mbstring php5.6-xml
+```
+
 ## Usage
 
 The following code snippet is an example of how to add and query data

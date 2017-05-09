@@ -77,7 +77,7 @@ class Requester {
         curl_setopt($this->curl, CURLOPT_URL, $url);
         curl_setopt($this->curl, CURLOPT_HTTPHEADER, $this->header);
         // curl_setopt($this->curl, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4 );
-        curl_setopt($this->curl, CURLOPT_POSTCOLUMNS, $dataToSend);
+        curl_setopt($this->curl, CURLOPT_POSTFIELDS, $dataToSend);
         curl_setopt($this->curl, CURLOPT_RETURNTRANSFER, true);
         if ($update) {
             curl_setopt($this->curl, CURLOPT_CUSTOMREQUEST, "PUT");
