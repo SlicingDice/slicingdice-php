@@ -34,8 +34,8 @@ class SlicingDiceTester {
         $this->columnTranslation = array();
 
         $this->sleepTime = 10;
-        $this->path = "/examples/"; 
-        $this->extension = ".json"; 
+        $this->path = "/examples/";
+        $this->extension = ".json";
 
         $this->numSuccess = 0;
         $this->numFails = 0;
@@ -46,7 +46,7 @@ class SlicingDiceTester {
     }
 
     /**
-    * Run tests 
+    * Run tests
     *
     * @param string $queryType the type of the query
     */
@@ -127,7 +127,7 @@ class SlicingDiceTester {
 
     /**
     * Put timestamp to the end of the column name
-    * 
+    *
     * @param array $column the column to append timestamp
     */
     private function appendTimestampToColumnName($column){
@@ -153,7 +153,7 @@ class SlicingDiceTester {
     }
 
     /**
-    * Insert data 
+    * Insert data
     *
     * @param array $data the data to insert
     */
@@ -173,7 +173,7 @@ class SlicingDiceTester {
             print_r($insertDataArray);
         }
 
-        $this->client->insert($insertDataArray, null);
+        $this->client->insert($insertDataArray);
 
         sleep($this->sleepTime);
     }
@@ -238,7 +238,6 @@ class SlicingDiceTester {
             if($value == "ignore"){
                 continue;
             }
-
             if (array_diff_key($expected[$key], $result[$key])){
                 $this->numFails += 1;
                 array_push($this->failedTests, $expectedArray["name"]);
@@ -319,7 +318,7 @@ function main(){
     // Use SlicingDiceTester with demo api key
     // To get another demo api key visit: http://panel.slicingdice.com/docs/#api-details-api-connection-api-keys-demo-key
     $sdTester = new SlicingDiceTester(
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfX3NhbHQiOiJkZW1vNDFtIiwicGVybWlzc2lvbl9sZXZlbCI6MywicHJvamVjdF9pZCI6MjAyLCJjbGllbnRfaWQiOjEwfQ.ncguKQpOLBE97Y8-ODSnpMjWNjQ7nx7ruyTSS4OXL-A');
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfX3NhbHQiOiJkZW1vMjAwMG0iLCJwZXJtaXNzaW9uX2xldmVsIjozLCJwcm9qZWN0X2lkIjoyMjAwMCwiY2xpZW50X2lkIjoxMH0.ok7Fwv86fap8BEdFMMs06Pjfe8CdXRODEYGRDbXPxu0');
 
     // run tests for each query type
     try{

@@ -1,11 +1,11 @@
-<?php  
+<?php
 
 namespace Slicer\Utils;
 
 class URLResources {
-    const DATABASE = "/project/";
+    const DATABASE = "/database/";
     const COLUMN = "/column/";
-    const INSERT = "/index/";
+    const INSERT = "/insert/";
     const QUERY_COUNT_ENTITY = "/query/count/entity/";
     const QUERY_COUNT_ENTITY_TOTAL = "/query/count/entity/total/";
     const QUERY_COUNT_EVENT = "/query/count/event/";
