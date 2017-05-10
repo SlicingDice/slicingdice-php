@@ -238,7 +238,8 @@ class SlicingDiceTester {
             if($value == "ignore"){
                 continue;
             }
-            if (array_diff_key($expected[$key], $result[$key])){
+
+            if (!array_key_exists($key, $result) || array_diff_key($expected[$key], $result[$key])){
                 $this->numFails += 1;
                 array_push($this->failedTests, $expectedArray["name"]);
 
