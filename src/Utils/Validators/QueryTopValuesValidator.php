@@ -26,15 +26,15 @@ class QueryTopValuesValidator {
     }
 
     /**
-    * Check if top values query exceeds fields limit
+    * Check if top values query exceeds columns limit
     * 
     * @return false if not exceeds
     */
-    private function exceedsFieldsLimit() {
+    private function exceedsColumnsLimit() {
         foreach ($this->queryData as $key => $value) {
             if (count($value) > 6) {
                 throw new MaxLimitException(
-                    "The query '{$value}' exceeds the limit of fields per ".
+                    "The query '{$value}' exceeds the limit of columns per ".
                     "query in request");
             }
         }
@@ -66,7 +66,7 @@ class QueryTopValuesValidator {
     * @return true if query is valid and false otherwise
     */
     public function validator() {
-        if (!$this->exceedsQueriesLimit() && !$this->exceedsFieldsLimit() && 
+        if (!$this->exceedsQueriesLimit() && !$this->exceedsColumnsLimit() && 
             !$this->exceedsValuesContainsLimit()) {
             return true;
         }

@@ -4,7 +4,7 @@ namespace Slicer;
 
 use Slicer\Core\Requester;
 use Slicer\Utils\Validators\DataExtractionQueryValidator;
-use Slicer\Utils\Validators\FieldValidator;
+use Slicer\Utils\Validators\ColumnValidator;
 use Slicer\Utils\Validators\QueryCountValidator;
 use Slicer\Utils\Validators\QueryTopValuesValidator;
 use Slicer\Utils\Validators\SavedQueryValidator;
@@ -164,18 +164,18 @@ class SlicingDice {
     }
 
     /**
-    * Get all projects in SlicingDice
+    * Get information about current database in SlicingDice
     */
-    public function getProjects(){
-        $url = $this->testWrapper() . URLResources::PROJECT;
+    public function getDatabase(){
+        $url = $this->testWrapper() . URLResources::DATABASE;
         return $this->makeRequest($url, "GET", 2);
     }
 
     /**
-    * Get all fields in SlicingDice API
+    * Get all columns in SlicingDice API
     */
-    public function getFields(){
-        $url = $this->testWrapper() . URLResources::FIELD;
+    public function getColumns(){
+        $url = $this->testWrapper() . URLResources::COLUMN;
         return $this->makeRequest($url, "GET", 2);
     }
 
@@ -207,31 +207,26 @@ class SlicingDice {
         return $this->makeRequest($url, "DELETE", 2);
     }
     /**
-    * Create a field in SlicingDice
+    * Create a column in SlicingDice
     *
-    * @param array $field An array with all field characteristics
+    * @param array $column An array with all column characteristics
     */
-    public function createField($field){
-        $url = $this->testWrapper() . URLResources::FIELD;
-        $sdValidator = new FieldValidator($field);
+    public function createColumn($column){
+        $url = $this->testWrapper() . URLResources::COLUMN;
+        $sdValidator = new ColumnValidator($column);
         if ($sdValidator->validator()) {
-            return $this->makeRequest($url, "POST", 1, $field);
+            return $this->makeRequest($url, "POST", 1, $column);
         }
     }
 
     /**
-    * Index a query in SlicingDice
+    * Insert data in SlicingDice
     *
-    * @param array $query A index query
-    * @param bool $autoCreateFields if true SlicingDice API will automatically create
-    * nonexistent fields
+    * @param array $data Data you want to insert
     */
-    public function index($query, $autoCreateFields=False){
-        if ($autoCreateFields) {
-            $query["auto-create-fields"] = true;
-        }
-        $url = $this->testWrapper() . URLResources::INDEX;
-        return $this->makeRequest($url, "POST", 1, $query);
+    public function insert($data){
+        $url = $this->testWrapper() . URLResources::INSERT;
+        return $this->makeRequest($url, "POST", 1, $data);
     }
 
     /**

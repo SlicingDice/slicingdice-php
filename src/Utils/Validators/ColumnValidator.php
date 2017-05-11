@@ -2,60 +2,60 @@
 
 namespace Slicer\Utils\Validators;
 
-use Slicer\Exceptions\Client\InvalidFieldDescriptionException;
-use Slicer\Exceptions\Client\InvalidFieldNameException;
-use Slicer\Exceptions\Client\InvalidFieldException;
+use Slicer\Exceptions\Client\InvalidColumnDescriptionException;
+use Slicer\Exceptions\Client\InvalidColumnNameException;
+use Slicer\Exceptions\Client\InvalidColumnException;
 
-class FieldValidator {
+class ColumnValidator {
 
     private $queryData;
-    private $validTypesFields;
+    private $validTypesColumns;
 
     function __construct($query) {
         $this->queryData = $query;
-        $this->validTypesFields = array(
+        $this->validTypesColumns = array(
             "unique-id", "boolean", "string", "integer", "decimal",
             "enumerated", "date", "integer-time-series",
             "decimal-time-series", "string-time-series");
     }
 
     /**
-    * Validate field name
+    * Validate column name
     */
     private function validateName($query) {
         if (!array_key_exists("name", $query)) {
-            throw new InvalidFieldException("The field should have a name.");
+            throw new InvalidColumnException("The column should have a name.");
         }
         else {
             $name = $query["name"];
             if (strlen($name) > 80){
-                throw new InvalidFieldNameException(
-                    "The field's name have a very big content. (Max: 80 chars)");
+                throw new InvalidColumnNameException(
+                    "The column's name have a very big content. (Max: 80 chars)");
             }
         }
     }
 
     /**
-    * Validate field description
+    * Validate column description
     */
     private function validateDescription($query) {
         $description = $query["description"];
         if (strlen($description) > 300){
-            throw new InvalidFieldDescriptionException(
-                "The field's description have a very big content. (Max: 300chars)");
+            throw new InvalidColumnDescriptionException(
+                "The column's description have a very big content. (Max: 300chars)");
         }
     }
 
     /**
-    * Validate field type
+    * Validate column type
     */
-    private function validateFieldType($query) {
+    private function validateColumnType($query) {
         if (!array_key_exists("type", $query)) {
-            throw new InvalidFieldException("The field should have a type.");
+            throw new InvalidColumnException("The column should have a type.");
         }
-        $fieldType = $query["type"];
-        if (!in_array($fieldType, $this->validTypesFields)){
-            throw new InvalidFieldException("This field have a invalid type.");
+        $columnType = $query["type"];
+        if (!in_array($columnType, $this->validTypesColumns)){
+            throw new InvalidColumnException("This column have a invalid type.");
         }
     }
 
@@ -64,65 +64,65 @@ class FieldValidator {
     */
     private function validateDecimalType($query) {
         $decimalTypes = array("decimal", "decimal-time-series");
-        $fieldType = $query["type"];
-        if (!in_array($fieldType, $decimalTypes)){
-            throw new InvalidFieldException(
-                "This field is only accepted on type 'decimal' or " .
+        $columnType = $query["type"];
+        if (!in_array($columnType, $decimalTypes)){
+            throw new InvalidColumnException(
+                "This column is only accepted on type 'decimal' or " .
                 "'decimal-time-series'");
         }
     }
 
     /**
-    * Check cardinality property on string fields
+    * Check cardinality property on string columns
     */
     private function checkStringIntegrity($query) {
         if (!array_key_exists("cardinality", $query)) {
-            throw new InvalidFieldException(
-                "The field with type string should have 'cardinality' key.");
+            throw new InvalidColumnException(
+                "The column with type string should have 'cardinality' key.");
         }
         $cardinalityTypes = array("high", "low");
         $cardinality = $query["cardinality"];
         if (!in_array($cardinality, $cardinalityTypes)) {
-            throw new InvalidFieldException(
-                "The field 'cardinality' has invalid value.");
+            throw new InvalidColumnException(
+                "The column 'cardinality' has invalid value.");
         }
     }
 
     /**
-    * Validate enumerate field
+    * Validate enumerate column
     */
     private function validateEnumerate($query) {
         if(!array_key_exists("range", $query)) {
-            throw new InvalidFieldException(
+            throw new InvalidColumnException(
                 "The 'enumerate' type needs of the 'range' parameter.");
         }
     }
 
     /** 
-    * Validate a field
+    * Validate a column
     *
-    * @return true if field is valid
+    * @return true if column is valid
     */
     public function validator() {
         if(isset($this->queryData[0]) && is_array($this->queryData[0])) {
             foreach ($this->queryData as $query) {
-                $this->validateField($query);
+                $this->validateColumn($query);
             }
         } else {
-            $this->validateField($this->queryData);
+            $this->validateColumn($this->queryData);
         }
 
         return true;
     }
 
-    private function validateField($query) {
+    private function validateColumn($query) {
         $this->validateName($query);
-        $this->validateFieldType($query);
-        $fieldType = $query["type"];
-        if ($fieldType == "string") {
+        $this->validateColumnType($query);
+        $columnType = $query["type"];
+        if ($columnType == "string") {
             $this->checkStringIntegrity($query);
         }
-        if ($fieldType == "enumerated") { 
+        if ($columnType == "enumerated") { 
             $this->validateEnumerate($query);
         }
         if (array_key_exists("description", $query)) {

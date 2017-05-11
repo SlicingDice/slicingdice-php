@@ -12,8 +12,8 @@ class SlicingDiceTester {
 
     // The Slicing Dice API client
     private $client;
-    // Array for field translation
-    private $fieldTranslation;
+    // Array for column translation
+    private $columnTranslation;
     // Sleep time in seconds
     private $sleepTime;
     // Examples path
@@ -30,12 +30,12 @@ class SlicingDiceTester {
             "masterKey" => $apiKey
         ), true);
 
-        // Translation table for fields with timestamp
-        $this->fieldTranslation = array();
+        // Translation table for columns with timestamp
+        $this->columnTranslation = array();
 
         $this->sleepTime = 10;
-        $this->path = "/examples/"; 
-        $this->extension = ".json"; 
+        $this->path = "/examples/";
+        $this->extension = ".json";
 
         $this->numSuccess = 0;
         $this->numFails = 0;
@@ -46,7 +46,7 @@ class SlicingDiceTester {
     }
 
     /**
-    * Run tests 
+    * Run tests
     *
     * @param string $queryType the type of the query
     */
@@ -56,7 +56,7 @@ class SlicingDiceTester {
 
         $counter = 0;
         foreach($testData as $test){
-            $this->emptyFieldTranslation();
+            $this->emptyColumnTranslation();
 
             $counter += 1;
             $name = $test["name"];
@@ -68,8 +68,8 @@ class SlicingDiceTester {
 
             print "\n  Query type: $queryType \n";
             try{
-                $this->createFields($test);
-                $this->indexData($test);
+                $this->createColumns($test);
+                $this->insertData($test);
                 $result = $this->executeQuery($queryType, $test);
             } catch (\Exception $e){
                 $result = array("result" => array(
@@ -83,10 +83,10 @@ class SlicingDiceTester {
     }
 
     /**
-    * Reset field translation
+    * Reset column translation
     */
-    private function emptyFieldTranslation(){
-        $this->fieldTranslation = array();
+    private function emptyColumnTranslation(){
+        $this->columnTranslation = array();
     }
 
     /**
@@ -101,45 +101,45 @@ class SlicingDiceTester {
     }
 
     /**
-    * Create fields on Slicing Dice API
+    * Create columns on Slicing Dice API
     *
-    * @param array $fieldObject the field object to create
+    * @param array $columnObject the column object to create
     */
-    private function createFields($fieldObject) {
+    private function createColumns($columnObject) {
         $isSingular = $this->numFails == 1;
-        $fieldOrFields = null;
+        $columnOrColumns = null;
         if ($isSingular){
-            $fieldOrFields = "field";
+            $columnOrColumns = "column";
         } else {
-            $fieldOrFields = "fields";
+            $columnOrColumns = "columns";
         }
-        print "  Creating " . count($fieldObject["fields"]) . " " . $fieldOrFields . "\n";
+        print "  Creating " . count($columnObject["columns"]) . " " . $columnOrColumns . "\n";
 
-        foreach ($fieldObject["fields"] as $field) {
-            $newField = $this->appendTimestampToFieldName($field);
-            $this->client->createField($newField);
+        foreach ($columnObject["columns"] as $column) {
+            $newColumn = $this->appendTimestampToColumnName($column);
+            $this->client->createColumn($newColumn);
 
             if ($this->verbose){
-                echo "    - " . $newField['api-name'] . "\n";
+                echo "    - " . $newColumn['api-name'] . "\n";
             }
         }
     }
 
     /**
-    * Put timestamp to the end of the field name
-    * 
-    * @param array $field the field to append timestamp
+    * Put timestamp to the end of the column name
+    *
+    * @param array $column the column to append timestamp
     */
-    private function appendTimestampToFieldName($field){
-        $oldName = '"' . $field['api-name'] . '"';
+    private function appendTimestampToColumnName($column){
+        $oldName = '"' . $column['api-name'] . '"';
 
         $timestamp = $this->getTimestamp();
-        $field['name'] = $field['name'] . $timestamp;
-        $field['api-name'] = $field['api-name'] . $timestamp;
-        $newName = '"' . $field['api-name'] . '"';
+        $column['name'] = $column['name'] . $timestamp;
+        $column['api-name'] = $column['api-name'] . $timestamp;
+        $newName = '"' . $column['api-name'] . '"';
 
-        $this->fieldTranslation[$oldName] = $newName;
-        return $field;
+        $this->columnTranslation[$oldName] = $newName;
+        return $column;
     }
 
     /**
@@ -153,11 +153,11 @@ class SlicingDiceTester {
     }
 
     /**
-    * Index data 
+    * Insert data
     *
-    * @param array $data the data to index
+    * @param array $data the data to insert
     */
-    private function indexData($data){
+    private function insertData($data){
         $isSingular = $this->numFails == 1;
         $entityOrEntities = null;
         if ($isSingular){
@@ -165,28 +165,28 @@ class SlicingDiceTester {
         } else {
             $entityOrEntities = "entities";
         }
-        print "  Indexing " . count($data["index"]) . " " . $entityOrEntities . "\n";
+        print "  Inserting " . count($data["insert"]) . " " . $entityOrEntities . "\n";
 
-        $indexDataArray = $this->translateFieldNames($data["index"]);
+        $insertDataArray = $this->translateColumnNames($data["insert"]);
 
         if ($this->verbose) {
-            print_r($indexDataArray);
+            print_r($insertDataArray);
         }
 
-        $this->client->index($indexDataArray, null);
+        $this->client->insert($insertDataArray);
 
         sleep($this->sleepTime);
     }
 
     /**
-    * Tranlate field name to use timestamp
+    * Tranlate column name to use timestamp
     *
-    * @param array $jsonData the json data to translate fields
+    * @param array $jsonData the json data to translate columns
     */
-    private function translateFieldNames($jsonData){
+    private function translateColumnNames($jsonData){
         $dataString = json_encode($jsonData);
 
-        foreach ($this->fieldTranslation as $oldName => $newName) {
+        foreach ($this->columnTranslation as $oldName => $newName) {
             $dataString = str_replace($oldName, $newName, $dataString);
         }
 
@@ -200,7 +200,7 @@ class SlicingDiceTester {
     * @param array $data the query array
     */
     private function executeQuery($queryType, $data){
-        $queryData = $this->translateFieldNames($data["query"]);
+        $queryData = $this->translateColumnNames($data["query"]);
         $result = null;
         echo "  Querying\n";
 
@@ -232,14 +232,14 @@ class SlicingDiceTester {
     * @param array $result the result array received
     */
     private function compareResult($expectedArray, $result){
-        $expected = $this->translateFieldNames($expectedArray["expected"]);
+        $expected = $this->translateColumnNames($expectedArray["expected"]);
 
         foreach ($expectedArray["expected"] as $key => $value) {
             if($value == "ignore"){
                 continue;
             }
 
-            if (array_diff_key($expected[$key], $result[$key])){
+            if (!array_key_exists($key, $result) || array_diff_key($expected[$key], $result[$key])){
                 $this->numFails += 1;
                 array_push($this->failedTests, $expectedArray["name"]);
 
