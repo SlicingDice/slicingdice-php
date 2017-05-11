@@ -231,10 +231,17 @@ class SlicingDice {
 
     /**
     * Get count entity total queries
+    * @param array $tables An array containing the tables in which
+    *                      the total query will be performed
     */
-    public function countEntityTotal() {
+    public function countEntityTotal($tables=null) {
+        if($tables == null){
+            $tables = array(
+                    "tables" => array()
+                );
+        }
         $url = $this->testWrapper() . URLResources::QUERY_COUNT_ENTITY_TOTAL;
-        return $this->makeRequest($url, "GET", 0);
+        return $this->makeRequest($url, "POST", 0, $tables);
     }
 
     /**
