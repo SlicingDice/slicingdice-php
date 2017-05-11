@@ -54,7 +54,7 @@ If this is the first register ever entered into the system,
 
 ```php
 <?php
-user Slicer\SlicingDice;
+use Slicer\SlicingDice;
 
 // Configure the client
 $usesTestEndpoint = true;
