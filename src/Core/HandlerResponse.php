@@ -35,10 +35,9 @@ class HandlerResponse {
         $mappedExceptions = MappedExceptions::all();
         if (array_key_exists($status, $mappedExceptions)) {
             $exception = new $mappedExceptions[$status]($error);
-        } else{
+        } else {
             $exception = new SlicingDiceException($error);
         }
-        print $exception;
         throw $exception;
     }
 
