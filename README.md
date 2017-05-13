@@ -293,7 +293,7 @@ print_r($client->existsEntity($ids));
 ```
 
 ### `countEntityTotal()`
-Count the number of inserted entities. This method corresponds to a [GET request at /query/count/entity/total](http://panel.slicingdice.com/docs/#api-details-api-endpoints-get-query-count-entity-total).
+Count the number of inserted entities in the whole database. This method corresponds to a [POST request at /query/count/entity/total](http://panel.slicingdice.com/docs/#api-details-api-endpoints-get-query-count-entity-total).
 
 #### Request example
 
@@ -302,7 +302,37 @@ Count the number of inserted entities. This method corresponds to a [GET request
 use Slicer\SlicingDice;
 $usesTestEndpoint = true;
 $client = new SlicingDice(array("masterKey" => "MASTER_API_KEY"), $usesTestEndpoint);
+
 print_r($client->countEntityTotal());
+?>
+```
+
+#### Output example
+
+```json
+{
+    "status": "success",
+    "result": {
+        "total": 42
+    },
+    "took": 0.103
+}
+```
+
+### `countEntityTotal($tables)`
+Count the total number of inserted entities in the given tables. This method corresponds to a [POST request at /query/count/entity/total](http://panel.slicingdice.com/docs/#api-details-api-endpoints-get-query-count-entity-total).
+
+#### Request example
+
+```php
+<?php
+use Slicer\SlicingDice;
+$usesTestEndpoint = true;
+$client = new SlicingDice(array("masterKey" => "MASTER_API_KEY"), $usesTestEndpoint);
+
+$tables = array("default");
+
+print_r($client->countEntityTotal($tables));
 ?>
 ```
 
