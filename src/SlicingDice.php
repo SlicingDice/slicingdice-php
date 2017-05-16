@@ -263,11 +263,15 @@ class SlicingDice {
     /**
     * Get if exists entities SlicingDice
     *
-    * @param array $ids A list of ids
+    * @param array $ids     A list of ids
+    * @param string $table  In which table entities check be checked
     */
-    public function existsEntity($ids) {
+    public function existsEntity($ids, $table=NULL) {
         $url = $this->testWrapper() . URLResources::QUERY_EXISTS_ENTITY;
         $query = array('ids' => $ids, );
+        if ($table) {
+            $query['table'] = $table;
+        }
         return $this->makeRequest($url, "POST", 0, $query);
     }
 
