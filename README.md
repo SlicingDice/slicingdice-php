@@ -7,9 +7,9 @@ Official PHP client for [SlicingDice](http://www.slicingdice.com/), Data Warehou
 
 ## Documentation
 
-If you are new to SlicingDice, check our [quickstart guide](http://panel.slicingdice.com/docs/#quickstart-guide) and learn to use it in 15 minutes.
+If you are new to SlicingDice, check our [quickstart guide](https://docs.slicingdice.com/docs/quickstart-guide) and learn to use it in 15 minutes.
 
-Please refer to the [SlicingDice official documentation](http://panel.slicingdice.com/docs/) for more information on [analytics databases](http://panel.slicingdice.com/docs/#analytics-concepts), [data modeling](http://panel.slicingdice.com/docs/#data-modeling), [data insertion](http://panel.slicingdice.com/docs/#data-insertion), [querying](http://panel.slicingdice.com/docs/#data-querying), [limitations](http://panel.slicingdice.com/docs/#current-slicingdice-limitations) and [API details](http://panel.slicingdice.com/docs/#api-details).
+Please refer to the [SlicingDice official documentation](https://docs.slicingdice.com/) for more information on [how to create a database](https://docs.slicingdice.com/docs/how-to-create-a-database), [how to insert data](https://docs.slicingdice.com/docs/how-to-insert-data), [how to make queries](https://docs.slicingdice.com/docs/how-to-make-queries), [how to create columns](https://docs.slicingdice.com/docs/how-to-create-columns), [SlicingDice restrictions](https://docs.slicingdice.com/docs/current-restrictions) and [API details](https://docs.slicingdice.com/docs/api-details).
 
 ## Tests and Examples
 
@@ -47,7 +47,7 @@ sudo apt-get install php-curl php5.6-dom php-mbstring php5.6-xml
 
 The following code snippet is an example of how to add and query data
 using the SlicingDice PHP client. We entry data informing
-'user1@slicingdice.com' has age 22 and then query the database for
+`user1@slicingdice.com` has age 22 and then query the database for
 the number of users with age between 20 and 40 years old.
 If this is the first register ever entered into the system,
  the answer should be 1.
@@ -86,22 +86,23 @@ print_r($client->countEntity($queryData));
 
 ## Reference
 
-`SlicingDice` encapsulates logic for sending requests to the API. Its methods are thin layers around the [API endpoints](http://panel.slicingdice.com/docs/#api-details-api-endpoints), so their parameters and return values are JSON-like `Object` objects with the same syntax as the [API endpoints](http://panel.slicingdice.com/docs/#api-details-api-endpoints)
+`SlicingDice` encapsulates logic for sending requests to the API. Its methods are thin layers around the [API endpoints](https://docs.slicingdice.com/docs/api-details), so their parameters and return values are JSON-like `Object` objects with the same syntax as the [API endpoints](https://docs.slicingdice.com/docs/api-details)
 
 ### Attributes
 
-* `$key (array)` - [API key](http://panel.slicingdice.com/docs/#api-details-api-connection-api-keys) to authenticate requests with the SlicingDice API.
+* `$key (array)` - [API key](https://docs.slicingdice.com/docs/api-keys) to authenticate requests with the SlicingDice API.
 * `$timeout (int)` - Amount of time, in seconds, to wait for results for each request.
 
 ### Constructor
 
 `_construct($key, $usesTestEndpoint=false, $timeout=60)`
-* `$key (array)` - [API key](http://panel.slicingdice.com/docs/#api-details-api-connection-api-keys) to authenticate requests with the SlicingDice API.
+* `$key (array)` - [API key](https://docs.slicingdice.com/docs/api-keys) to authenticate requests with the SlicingDice API.
 * `$usesTestEndpoint=false (boolean)` - If false the client will send requests to production end-point, otherwise to tests end-point.
 * `$timeout (int)` - Amount of time, in seconds, to wait for results for each request.
 
 ### `getDatabase()`
-Get information about current database. This method corresponds to a [GET request at /database](http://panel.slicingdice.com/docs/#api-details-api-endpoints-get-database).
+Get information about current database. This method corresponds to a `GET` request at `/database`.  
+**IMPORTANT:** You can't make this request on `/test` end-point.
 
 #### Request example
 
@@ -126,7 +127,7 @@ print_r($client->getDatabase());
 ```
 
 ### `getColumns()`
-Get all created columns, both active and inactive ones. This method corresponds to a [GET request at /column](http://panel.slicingdice.com/docs/#api-details-api-endpoints-get-column).
+Get all created columns, both active and inactive ones. This method corresponds to a [GET request at /column](https://docs.slicingdice.com/docs/how-to-list-edit-or-delete-columns).
 
 #### Request example
 
@@ -168,7 +169,7 @@ print_r($client->getColumns());
 ```
 
 ### `createColumn($jsonData)`
-Create a new column. This method corresponds to a [POST request at /column](http://panel.slicingdice.com/docs/#api-details-api-endpoints-post-column).
+Create a new column. This method corresponds to a [POST request at /column](https://docs.slicingdice.com/docs/how-to-create-columns#section-creating-columns-using-column-endpoint).
 
 #### Request example
 
@@ -198,7 +199,7 @@ print_r($client->createColumn($column));
 ```
 
 ### `insert($jsonData)`
-Insert data to existing entities or create new entities, if necessary. This method corresponds to a [POST request at /insert](http://panel.slicingdice.com/docs/#api-details-api-endpoints-post-insert).
+Insert data to existing entities or create new entities, if necessary. This method corresponds to a [POST request at /insert](https://docs.slicingdice.com/docs/how-to-insert-data).
 
 #### Request example
 
@@ -258,7 +259,7 @@ print_r($client->insert($insertData));
 ```
 
 ### `existsEntity($ids, $table)`
-Verify which entities exist in a table (uses `default` table if not provided) given a list of entity IDs. This method corresponds to a [POST request at /query/exists/entity](http://panel.slicingdice.com/docs/#api-details-api-endpoints-post-query-exists-entity).
+Verify which entities exist in a table (uses `default` table if not provided) given a list of entity IDs. This method corresponds to a [POST request at /query/exists/entity](https://docs.slicingdice.com/docs/exists).
 
 #### Request example
 
@@ -293,7 +294,7 @@ print_r($client->existsEntity($ids));
 ```
 
 ### `countEntityTotal()`
-Count the number of inserted entities in the whole database. This method corresponds to a [POST request at /query/count/entity/total](http://panel.slicingdice.com/docs/#api-details-api-endpoints-get-query-count-entity-total).
+Count the number of inserted entities in the whole database. This method corresponds to a [POST request at /query/count/entity/total](https://docs.slicingdice.com/docs/total).
 
 #### Request example
 
@@ -320,7 +321,7 @@ print_r($client->countEntityTotal());
 ```
 
 ### `countEntityTotal($tables)`
-Count the total number of inserted entities in the given tables. This method corresponds to a [POST request at /query/count/entity/total](http://panel.slicingdice.com/docs/#api-details-api-endpoints-get-query-count-entity-total).
+Count the total number of inserted entities in the given tables. This method corresponds to a [POST request at /query/count/entity/total](https://docs.slicingdice.com/docs/total#section-counting-specific-tables).
 
 #### Request example
 
@@ -349,7 +350,7 @@ print_r($client->countEntityTotal($tables));
 ```
 
 ### `countEntity($jsonData)`
-Count the number of entities matching the given query. This method corresponds to a [POST request at /query/count/entity](http://panel.slicingdice.com/docs/#api-details-api-endpoints-post-query-count-entity).
+Count the number of entities matching the given query. This method corresponds to a [POST request at /query/count/entity](https://docs.slicingdice.com/docs/count-entities).
 
 #### Request example
 
@@ -406,7 +407,7 @@ print_r($client->countEntity($query));
 ```
 
 ### `countEvent($jsonData)`
-Count the number of occurrences for time-series events matching the given query. This method corresponds to a [POST request at /query/count/event](http://panel.slicingdice.com/docs/#api-details-api-endpoints-post-query-count-event).
+Count the number of occurrences for time-series events matching the given query. This method corresponds to a [POST request at /query/count/event](https://docs.slicingdice.com/docs/count-events).
 
 #### Request example
 
@@ -465,7 +466,7 @@ print_r($client->countEvent($query));
 ```
 
 ### `topValues($jsonData)`
-Return the top values for entities matching the given query. This method corresponds to a [POST request at /query/top_values](http://panel.slicingdice.com/docs/#api-details-api-endpoints-post-query-top-values).
+Return the top values for entities matching the given query. This method corresponds to a [POST request at /query/top_values](https://docs.slicingdice.com/docs/top-values).
 
 #### Request example
 
@@ -526,7 +527,7 @@ print_r($client->topValues($query));
 ```
 
 ### `aggregation($jsonData)`
-Return the aggregation of all columns in the given query. This method corresponds to a [POST request at /query/aggregation](http://panel.slicingdice.com/docs/#api-details-api-endpoints-post-query-aggregation).
+Return the aggregation of all columns in the given query. This method corresponds to a [POST request at /query/aggregation](https://docs.slicingdice.com/docs/aggregations).
 
 #### Request example
 
@@ -581,7 +582,7 @@ print_r($client->aggregation($query));
 ```
 
 ### `getSavedQueries()`
-Get all saved queries. This method corresponds to a [GET request at /query/saved](http://panel.slicingdice.com/docs/#api-details-api-endpoints-get-query-saved).
+Get all saved queries. This method corresponds to a [GET request at /query/saved](https://docs.slicingdice.com/docs/saved-queries).
 
 #### Request example
 
@@ -635,7 +636,7 @@ print_r($client->getSavedQueries());
 ```
 
 ### `createSavedQuery($jsonData)`
-Create a saved query at SlicingDice. This method corresponds to a [POST request at /query/saved](http://panel.slicingdice.com/docs/#api-details-api-endpoints-post-query-saved).
+Create a saved query at SlicingDice. This method corresponds to a [POST request at /query/saved](https://docs.slicingdice.com/docs/saved-queries).
 
 #### Request example
 
@@ -692,7 +693,7 @@ print_r($client->createSavedQuery($query));
 ```
 
 ### `updateSavedQuery($queryName, $jsonData)`
-Update an existing saved query at SlicingDice. This method corresponds to a [PUT request at /query/saved/QUERY_NAME](http://panel.slicingdice.com/docs/#api-details-api-endpoints-put-query-saved-query-name).
+Update an existing saved query at SlicingDice. This method corresponds to a [PUT request at /query/saved/QUERY_NAME](https://docs.slicingdice.com/docs/saved-queries).
 
 #### Request example
 
@@ -747,7 +748,7 @@ print_r($client->updateSavedQuery("my-saved-query", $newQuery));
 ```
 
 ### `getSavedQuery($queryName)`
-Executed a saved query at SlicingDice. This method corresponds to a [GET request at /query/saved/QUERY_NAME](http://panel.slicingdice.com/docs/#api-details-api-endpoints-get-query-saved-query-name).
+Executed a saved query at SlicingDice. This method corresponds to a [GET request at /query/saved/QUERY_NAME](https://docs.slicingdice.com/docs/saved-queries).
 
 #### Request example
 
@@ -787,7 +788,7 @@ print_r($client->getSavedQuery("my-saved-query"));
 ```
 
 ### `deleteSavedQuery($queryName)`
-Delete a saved query at SlicingDice. This method corresponds to a [DELETE request at /query/saved/QUERY_NAME](http://panel.slicingdice.com/docs/#api-details-api-endpoints-delete-query-saved-query-name).
+Delete a saved query at SlicingDice. This method corresponds to a [DELETE request at /query/saved/QUERY_NAME](https://docs.slicingdice.com/docs/saved-queries).
 
 #### Request example
 
@@ -826,7 +827,7 @@ print_r($client->deleteSavedQuery("my-saved-query"));
 ```
 
 ### `result($jsonData)`
-Retrieve inserted values for entities matching the given query. This method corresponds to a [POST request at /data_extraction/result](http://panel.slicingdice.com/docs/#api-details-api-endpoints-post-data-extraction-result).
+Retrieve inserted values for entities matching the given query. This method corresponds to a [POST request at /data_extraction/result](https://docs.slicingdice.com/docs/result-extraction).
 
 #### Request example
 
@@ -878,7 +879,7 @@ print_r($client->result($query));
 ```
 
 ### `score($jsonData)`
-Retrieve inserted values as well as their relevance for entities matching the given query. This method corresponds to a [POST request at /data_extraction/score](http://panel.slicingdice.com/docs/#api-details-api-endpoints-post-data-extraction-score).
+Retrieve inserted values as well as their relevance for entities matching the given query. This method corresponds to a [POST request at /data_extraction/score](https://docs.slicingdice.com/docs/score-extraction).
 
 #### Request example
 
