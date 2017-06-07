@@ -101,8 +101,7 @@ print_r($client->countEntity($queryData));
 * `$timeout (int)` - Amount of time, in seconds, to wait for results for each request.
 
 ### `getDatabase()`
-Get information about current database. This method corresponds to a `GET` request at `/database`.  
-**IMPORTANT:** You can't make this request on `/test` end-point.
+Get information about current database. This method corresponds to a `GET` request at `/database`.
 
 #### Request example
 
@@ -119,10 +118,13 @@ print_r($client->getDatabase());
 
 ```json
 {
-    "name": "Database 1",
-    "description": "My first database",
-    "data-expiration": 30,
-    "created-at": "2016-04-05T10:20:30Z"
+	"tables": [
+		"users"
+	],
+	"updated-at": "2017-05-19T14:27:47.417415",
+	"created-at": "2017-05-12T02:23:34.231418",
+	"name": "Database 1",
+	"description": "My first database"
 }
 ```
 
