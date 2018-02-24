@@ -31,22 +31,15 @@ class SlicingDice {
     * @var string
     */
     private $baseURL;
-    /**
-    * Identify if client will use tests endpoint
-    *
-    * @var boolean
-    */
-    private $usesTestEndpoint;
 
     private $header;
     private $timeout;
 
-    function __construct($apiKeys, $usesTestEndpoint=false, $timeout=60) {
+    function __construct($apiKeys, $timeout=60) {
         $this->apiKey = $apiKeys;
         $timeout = $timeout;
         $header = $this->getHeader();
         $this->baseURL = $this->getBaseURL();
-        $this->usesTestEndpoint = $usesTestEndpoint;
     }
 
     /**
@@ -67,6 +60,12 @@ class SlicingDice {
     private function getHeader() {
         return array(
             "Content-Type" => "application/json",
+            "Authorization" => $this->apiKey);
+    }
+
+    private function getHeaderSQL() {
+        return array(
+            "Content-Type" => "application/sql",
             "Authorization" => $this->apiKey);
     }
 
@@ -110,8 +109,8 @@ class SlicingDice {
     * @param integer $levelKey Define the min level to do the query
     * @param array $query A SlicingDice query
     */
-    private function makeRequest($url, $reqType, $levelKey, $query=null) {
-        $requester = new Requester($this->header, $this->timeout);
+    private function makeRequest($url, $reqType, $levelKey, $query=null, $sql=false) {
+        $requester = new Requester($this->timeout, $sql);
         $key = $this->getAPIKey($levelKey);
         if ($reqType == "GET") {
             return $requester->get($url, $key);
@@ -156,10 +155,7 @@ class SlicingDice {
     /**
     * Define base url to make a request
     */
-    private function testWrapper() {
-        if ($this->usesTestEndpoint){
-            return $this->baseURL . "/test";
-        }
+    private function urlWrapper() {
         return $this->baseURL;
     }
 
@@ -167,7 +163,7 @@ class SlicingDice {
     * Get information about current database in SlicingDice
     */
     public function getDatabase(){
-        $url = $this->testWrapper() . URLResources::DATABASE;
+        $url = $this->urlWrapper() . URLResources::DATABASE;
         return $this->makeRequest($url, "GET", 2);
     }
 
@@ -175,7 +171,7 @@ class SlicingDice {
     * Get all columns in SlicingDice API
     */
     public function getColumns(){
-        $url = $this->testWrapper() . URLResources::COLUMN;
+        $url = $this->urlWrapper() . URLResources::COLUMN;
         return $this->makeRequest($url, "GET", 2);
     }
 
@@ -185,7 +181,7 @@ class SlicingDice {
     * @param string $savedQueryName Saved query name to recover
     */
     public function getSavedQuery($savedQueryName){
-        $url = $this->testWrapper() . URLResources::QUERY_SAVED . $savedQueryName;
+        $url = $this->urlWrapper() . URLResources::QUERY_SAVED . $savedQueryName;
         return $this->makeRequest($url, "GET", 0);
     }
 
@@ -193,7 +189,7 @@ class SlicingDice {
     * Get all saved queries in SlicingDice
     */
     public function getSavedQueries(){
-        $url = $this->testWrapper() . URLResources::QUERY_SAVED;
+        $url = $this->urlWrapper() . URLResources::QUERY_SAVED;
         return $this->makeRequest($url, "GET", 2);
     }
 
@@ -203,7 +199,7 @@ class SlicingDice {
     * @param string $savedQueryName Saved query name to recover
     */
     public function deleteSavedQuery($savedQueryName){
-        $url = $this->testWrapper() . URLResources::QUERY_SAVED . $savedQueryName;
+        $url = $this->urlWrapper() . URLResources::QUERY_SAVED . $savedQueryName;
         return $this->makeRequest($url, "DELETE", 2);
     }
     /**
@@ -212,7 +208,7 @@ class SlicingDice {
     * @param array $column An array with all column characteristics
     */
     public function createColumn($column){
-        $url = $this->testWrapper() . URLResources::COLUMN;
+        $url = $this->urlWrapper() . URLResources::COLUMN;
         $sdValidator = new ColumnValidator($column);
         if ($sdValidator->validator()) {
             return $this->makeRequest($url, "POST", 1, $column);
@@ -225,7 +221,7 @@ class SlicingDice {
     * @param array $data Data you want to insert
     */
     public function insert($data){
-        $url = $this->testWrapper() . URLResources::INSERT;
+        $url = $this->urlWrapper() . URLResources::INSERT;
         return $this->makeRequest($url, "POST", 1, $data);
     }
 
@@ -236,7 +232,7 @@ class SlicingDice {
     */
     public function countEntityTotal($tables=array()) {
         $query = array("tables" => $tables);
-        $url = $this->testWrapper() . URLResources::QUERY_COUNT_ENTITY_TOTAL;
+        $url = $this->urlWrapper() . URLResources::QUERY_COUNT_ENTITY_TOTAL;
         return $this->makeRequest($url, "POST", 0, $query);
     }
 
@@ -246,7 +242,7 @@ class SlicingDice {
     * @param array $query A count entity query
     */
     public function countEntity($query) {
-        $url = $this->testWrapper() . URLResources::QUERY_COUNT_ENTITY;
+        $url = $this->urlWrapper() . URLResources::QUERY_COUNT_ENTITY;
         return $this->countQueryWrapper($url, $query);
     }
 
@@ -256,7 +252,7 @@ class SlicingDice {
     * @param array $query A count event query
     */
     public function countEvent($query) {
-        $url = $this->testWrapper() . URLResources::QUERY_COUNT_EVENT;
+        $url = $this->urlWrapper() . URLResources::QUERY_COUNT_EVENT;
         return $this->countQueryWrapper($url, $query);
     }
 
@@ -267,7 +263,7 @@ class SlicingDice {
     * @param string $table  In which table entities check be checked
     */
     public function existsEntity($ids, $table=NULL) {
-        $url = $this->testWrapper() . URLResources::QUERY_EXISTS_ENTITY;
+        $url = $this->urlWrapper() . URLResources::QUERY_EXISTS_ENTITY;
         $query = array('ids' => $ids, );
         if ($table) {
             $query['table'] = $table;
@@ -281,7 +277,7 @@ class SlicingDice {
     * @param array $query A aggregation query
     */
     public function aggregation($query) {
-        $url = $this->testWrapper() . URLResources::QUERY_AGGREGATION;
+        $url = $this->urlWrapper() . URLResources::QUERY_AGGREGATION;
         return $this->makeRequest($url, "POST", 0, $query);
     }
 
@@ -291,7 +287,7 @@ class SlicingDice {
     * @param array $query A top values query
     */
     public function topValues($query) {
-        $url = $this->testWrapper() . URLResources::QUERY_TOP_VALUES;
+        $url = $this->urlWrapper() . URLResources::QUERY_TOP_VALUES;
         $sdValidator = new QueryTopValuesValidator($query);
         if ($sdValidator->validator()) {
             return $this->makeRequest($url, "POST", 0, $query);
@@ -304,7 +300,7 @@ class SlicingDice {
     * @param array $query A saved query
     */
     public function createSavedQuery($query) {
-        $url = $this->testWrapper() . URLResources::QUERY_SAVED;
+        $url = $this->urlWrapper() . URLResources::QUERY_SAVED;
         $sdValidator = new SavedQueryValidator($query);
         if ($sdValidator->validator()) {
             return $this->makeRequest($url, "POST", 2, $query);
@@ -318,7 +314,7 @@ class SlicingDice {
     * @param array $query A saved query
     */
     public function updateSavedQuery($savedQueryName, $query) {
-        $url = $this->testWrapper() . URLResources::QUERY_SAVED . $savedQueryName;
+        $url = $this->urlWrapper() . URLResources::QUERY_SAVED . $savedQueryName;
         return $this->makeRequest($url, "PUT", 2, $query);
     }
 
@@ -328,7 +324,7 @@ class SlicingDice {
     * @param array $query A result query
     */
     public function result($query) {
-        $url = $this->testWrapper() . URLResources::QUERY_DATA_EXTRACTION_RESULT;
+        $url = $this->urlWrapper() . URLResources::QUERY_DATA_EXTRACTION_RESULT;
         return $this->dataExtractionWrapper($url, $query);
     }
 
@@ -338,8 +334,13 @@ class SlicingDice {
     * @param array $query A score query
     */
     public function score($query) {
-        $url = $this->testWrapper() . URLResources::QUERY_DATA_EXTRACTION_SCORE;
+        $url = $this->urlWrapper() . URLResources::QUERY_DATA_EXTRACTION_SCORE;
         return $this->dataExtractionWrapper($url, $query);
+    }
+
+    public function sql($query) {
+        $url = $this->urlWrapper() . URLResources::QUERY_SQL;
+        return $this->makeRequest($url, "POST", 2, $query, true);
     }
 }
 ?>

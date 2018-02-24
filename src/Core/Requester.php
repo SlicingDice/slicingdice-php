@@ -19,11 +19,15 @@ class Requester {
     private $timeoutReq;
     private $response;
     private $header = array("Content-Type: application/json");
+    private $headerSQL = array("Content-Type: application/sql");
 
-    function __construct($timeout) {
+    private $isSQL;
+
+    function __construct($timeout, $sql=false) {
         $this->curl = curl_init();
         $this->timeoutReq = $timeout;
         $this->setRequestSettings();
+        $this->isSQL = $sql;
     }
 
     /**
@@ -72,10 +76,20 @@ class Requester {
     * @param bool $update Define if request is PUT or POST
     */
     public function data($url, $apiKey, $query, $update=false) {
-        $dataToSend = json_encode($query);
-        array_push($this->header, "Authorization: " . $apiKey);
+        if ($this->isSQL) {
+            $dataToSend = $query;
+        } else {
+            $dataToSend = json_encode($query);
+        }
+        $header_request = $this->header;
+
+        if ($this->isSQL) {
+            $header_request = $this->headerSQL;
+        }
+
+        array_push($header_request, "Authorization: " . $apiKey);
         curl_setopt($this->curl, CURLOPT_URL, $url);
-        curl_setopt($this->curl, CURLOPT_HTTPHEADER, $this->header);
+        curl_setopt($this->curl, CURLOPT_HTTPHEADER, $header_request);
         // curl_setopt($this->curl, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4 );
         curl_setopt($this->curl, CURLOPT_POSTFIELDS, $dataToSend);
         curl_setopt($this->curl, CURLOPT_RETURNTRANSFER, true);
@@ -96,11 +110,14 @@ class Requester {
         $info = curl_getinfo($this->curl);
         $httpStatus = $info["http_code"];
         $handlerResponse = new HandlerResponse($this->response);
+
         if ($handlerResponse->requestSuccessful()) {
             if ($httpStatus >= 400 && $httpStatus < 600) {
                 throw new SlicingDiceHTTPException("HTTP Error: " . $httpStatus);
             }
             return $this->response;
+        } else {
+            print_r($this->response);
         }
     }
 }
