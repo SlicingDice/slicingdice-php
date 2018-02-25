@@ -15,5 +15,6 @@ class URLResources {
     const QUERY_SAVED = "/query/saved/";
     const QUERY_DATA_EXTRACTION_RESULT = "/data_extraction/result/";
     const QUERY_DATA_EXTRACTION_SCORE = "/data_extraction/score/";
+    const QUERY_SQL = "/query/sql/";
 }
 ?>

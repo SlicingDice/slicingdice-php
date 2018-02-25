@@ -24,11 +24,10 @@ class SlicingDiceTester {
     public $numFails;
     public $failedTests;
     private $verbose;
+    private $perTestInsertion;
 
     function __construct($apiKey, $verboseOption=false) {
-        $this->client = new SlicingDice(array(
-            "masterKey" => $apiKey
-        ), true);
+        $this->client = new SlicingDice(array("masterKey" => $apiKey));
 
         // Translation table for columns with timestamp
         $this->columnTranslation = array();
@@ -54,12 +53,24 @@ class SlicingDiceTester {
         $testData = $this->loadTestData($queryType);
         $numTests = count($testData);
 
+        $this->perTestInsertion = array_key_exists('insert', $testData[0]);
+
+        if (!$this->perTestInsertion) {
+            print 'Running insert for SQL';
+            $insertionData = $this->loadTestData($queryType, "_insert");
+            foreach ($insertionData as $insert) {
+                $this->client->insert($insert);  
+            }
+            sleep($this->sleepTime);
+        }
+
         $counter = 0;
         foreach($testData as $test){
             $this->emptyColumnTranslation();
 
             $counter += 1;
             $name = $test["name"];
+
             print "($counter/$numTests) Executing test $name\n";
 
             if (array_key_exists('description', $test)){
@@ -68,8 +79,10 @@ class SlicingDiceTester {
 
             print "\n  Query type: $queryType \n";
             try{
-                $this->createColumns($test);
-                $this->insertData($test);
+                if ($this->perTestInsertion) {
+                    $this->createColumns($test);
+                    $this->insertData($test);
+                }
                 $result = $this->executeQuery($queryType, $test);
             } catch (\Exception $e){
                 $result = array("result" => array(
@@ -94,8 +107,8 @@ class SlicingDiceTester {
     *
     * @param string $queryType the type of the query
     */
-    private function loadTestData($queryType) {
-        $filename = __DIR__ . $this->path . $queryType . $this->extension;
+    private function loadTestData($queryType, $suffix="") {
+        $filename = __DIR__ . $this->path . $queryType . $suffix . $this->extension;
         $content = file_get_contents($filename);
         return json_decode($content, true);
     }
@@ -131,12 +144,12 @@ class SlicingDiceTester {
     * @param array $column the column to append timestamp
     */
     private function appendTimestampToColumnName($column){
-        $oldName = '"' . $column['api-name'] . '"';
+        $oldName = '"' . $column['api-name'] . '';
 
         $timestamp = $this->getTimestamp();
         $column['name'] = $column['name'] . $timestamp;
         $column['api-name'] = $column['api-name'] . $timestamp;
-        $newName = '"' . $column['api-name'] . '"';
+        $newName = '"' . $column['api-name'] . '';
 
         $this->columnTranslation[$oldName] = $newName;
         return $column;
@@ -200,7 +213,11 @@ class SlicingDiceTester {
     * @param array $data the query array
     */
     private function executeQuery($queryType, $data){
-        $queryData = $this->translateColumnNames($data["query"]);
+        if ($this->perTestInsertion) {
+            $queryData = $this->translateColumnNames($data["query"]);
+        } else {
+            $queryData = $data['query'];
+        }
         $result = null;
         echo "  Querying\n";
 
@@ -218,8 +235,10 @@ class SlicingDiceTester {
             $result = $this->client->aggregation($queryData);
         } else if ($queryType == "result"){
             $result = $this->client->result($queryData);
-        } else if ($queryType == "score"){
+        } else if ($queryType == "score") {
             $result = $this->client->score($queryData);
+        } else if ($queryType == "sql") {
+            $result = $this->client->sql($queryData);
         }
 
         return $result;
@@ -232,7 +251,11 @@ class SlicingDiceTester {
     * @param array $result the result array received
     */
     private function compareResult($expectedArray, $result){
-        $expected = $this->translateColumnNames($expectedArray["expected"]);
+        if ($this->perTestInsertion) {
+            $expected = $this->translateColumnNames($expectedArray["expected"]);
+        } else {
+            $expected = $expectedArray["expected"];
+        }
 
         foreach ($expectedArray["expected"] as $key => $value) {
             if($value == "ignore"){
@@ -313,13 +336,14 @@ function main(){
         'top_values',
         'aggregation',
         'result',
-        'score'
+        'score',
+        'sql'
     );
 
     // Use SlicingDiceTester with demo api key
     // To get another demo api key visit: http://panel.slicingdice.com/docs/#api-details-api-connection-api-keys-demo-key
     $sdTester = new SlicingDiceTester(
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfX3NhbHQiOiJkZW1vNDFtIiwicGVybWlzc2lvbl9sZXZlbCI6MywicHJvamVjdF9pZCI6MjAyLCJjbGllbnRfaWQiOjEwfQ.ncguKQpOLBE97Y8-ODSnpMjWNjQ7nx7ruyTSS4OXL-A');
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfX3NhbHQiOiIxNTE4NjA3ODQ0NDAzIiwicGVybWlzc2lvbl9sZXZlbCI6MywicHJvamVjdF9pZCI6NDY5NjYsImNsaWVudF9pZCI6OTUxfQ.S6LCWQDcLS1DEFy3lsqk2jTGIe5rJ5fsQIvWuuFBdkw');
 
     // run tests for each query type
     try{

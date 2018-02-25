@@ -16,7 +16,7 @@ class ColumnValidator {
         $this->validTypesColumns = array(
             "unique-id", "boolean", "string", "integer", "decimal",
             "enumerated", "date", "integer-time-series",
-            "decimal-time-series", "string-time-series");
+            "decimal-time-series", "string-time-series", "datetime");
     }
 
     /**
