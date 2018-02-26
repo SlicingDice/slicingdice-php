@@ -934,7 +934,7 @@ print_r($client->score($query));
 }
 ```
 
-### `sql(query)`
+### `sql($query)`
 Retrieve inserted values using a SQL syntax. This method corresponds to a POST request at /query/sql.
 
 #### Request example
