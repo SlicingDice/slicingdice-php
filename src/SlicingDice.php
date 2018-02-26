@@ -227,11 +227,11 @@ class SlicingDice {
 
     /**
     * Get count entity total queries
-    * @param array $tables An array containing the tables in which
+    * @param array $dimensions An array containing the dimensions in which
     *                      the total query will be performed
     */
-    public function countEntityTotal($tables=array()) {
-        $query = array("tables" => $tables);
+    public function countEntityTotal($dimensions=array()) {
+        $query = array("dimensions" => $dimensions);
         $url = $this->urlWrapper() . URLResources::QUERY_COUNT_ENTITY_TOTAL;
         return $this->makeRequest($url, "POST", 0, $query);
     }
@@ -260,13 +260,13 @@ class SlicingDice {
     * Get if exists entities SlicingDice
     *
     * @param array $ids     A list of ids
-    * @param string $table  In which table entities check be checked
+    * @param string $dimension  In which dimension entities check be checked
     */
-    public function existsEntity($ids, $table=NULL) {
+    public function existsEntity($ids, $dimension=NULL) {
         $url = $this->urlWrapper() . URLResources::QUERY_EXISTS_ENTITY;
         $query = array('ids' => $ids, );
-        if ($table) {
-            $query['table'] = $table;
+        if ($dimension) {
+            $query['dimension'] = $dimension;
         }
         return $this->makeRequest($url, "POST", 0, $query);
     }

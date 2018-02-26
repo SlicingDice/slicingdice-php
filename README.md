@@ -57,15 +57,15 @@ If this is the first register ever entered into the system,
 use Slicer\SlicingDice;
 
 // Configure the client
-$usesTestEndpoint = true;
-$client = new SlicingDice(array("masterKey" => "MASTER_API_KEY"), $usesTestEndpoint);
+
+$client = new SlicingDice(array("masterKey" => "MASTER_API_KEY"));
 
 // Inserting data
 $insertData = array(
     "user1@slicingdice.com" => array(
         "age" => 22
     ),
-    "auto-create" => array("table", "column")
+    "auto-create" => array("dimension", "column")
 );
 $client->insert($insertData);
 
@@ -95,9 +95,8 @@ print_r($client->countEntity($queryData));
 
 ### Constructor
 
-`_construct($key, $usesTestEndpoint=false, $timeout=60)`
+`_construct($key, $timeout=60)`
 * `$key (array)` - [API key](https://docs.slicingdice.com/docs/api-keys) to authenticate requests with the SlicingDice API.
-* `$usesTestEndpoint=false (boolean)` - If false the client will send requests to production end-point, otherwise to tests end-point.
 * `$timeout (int)` - Amount of time, in seconds, to wait for results for each request.
 
 ### `getDatabase()`
@@ -108,8 +107,8 @@ Get information about current database. This method corresponds to a `GET` reque
 ```php
 <?php
 use Slicer\SlicingDice;
-$usesTestEndpoint = true;
-$client = new SlicingDice(array("masterKey" => "MASTER_API_KEY"), $usesTestEndpoint);
+
+$client = new SlicingDice(array("masterKey" => "MASTER_API_KEY"));
 print_r($client->getDatabase());
 ?>
 ```
@@ -137,8 +136,8 @@ Get all created columns, both active and inactive ones. This method corresponds 
 ```php
 <?php
 use Slicer\SlicingDice;
-$usesTestEndpoint = true;
-$client = new SlicingDice(array("masterKey" => "MASTER_API_KEY"), $usesTestEndpoint);
+
+$client = new SlicingDice(array("masterKey" => "MASTER_API_KEY"));
 print_r($client->getColumns());
 ?>
 ```
@@ -179,8 +178,8 @@ Create a new column. This method corresponds to a [POST request at /column](http
 ```php
 <?php
 use Slicer\SlicingDice;
-$usesTestEndpoint = true;
-$client = new SlicingDice(array("masterKey" => "MASTER_API_KEY"), $usesTestEndpoint);
+
+$client = new SlicingDice(array("masterKey" => "MASTER_API_KEY"));
 $column = array(
     "name" => "Year",
     "api-name" => "year",
@@ -209,8 +208,8 @@ Insert data to existing entities or create new entities, if necessary. This meth
 ```php
 <?php
 use Slicer\SlicingDice;
-$usesTestEndpoint = true;
-$client = new SlicingDice(array("masterKey" => "MASTER_API_KEY"), $usesTestEndpoint);
+
+$client = new SlicingDice(array("masterKey" => "MASTER_API_KEY"));
 $insertData = array(
     "user1@slicingdice.com" => array(
         "car-model" => "Ford Ka",
@@ -244,7 +243,7 @@ $insertData = array(
             "date" => "2016-08-17T13:23:47+00:00"
         )
     ),
-    "auto-create" => array("table", "column")
+    "auto-create" => array("dimension", "column")
 );
 print_r($client->insert($insertData));
 ?>
@@ -261,16 +260,16 @@ print_r($client->insert($insertData));
 }
 ```
 
-### `existsEntity($ids, $table)`
-Verify which entities exist in a table (uses `default` table if not provided) given a list of entity IDs. This method corresponds to a [POST request at /query/exists/entity](https://docs.slicingdice.com/docs/exists).
+### `existsEntity($ids, $dimension)`
+Verify which entities exist in a dimension (uses `default` dimension if not provided) given a list of entity IDs. This method corresponds to a [POST request at /query/exists/entity](https://docs.slicingdice.com/docs/exists).
 
 #### Request example
 
 ```php
 <?php
 use Slicer\SlicingDice;
-$usesTestEndpoint = true;
-$client = new SlicingDice(array("masterKey" => "MASTER_API_KEY"), $usesTestEndpoint);
+
+$client = new SlicingDice(array("masterKey" => "MASTER_API_KEY"));
 $ids = array(
         "user1@slicingdice.com",
         "user2@slicingdice.com",
@@ -304,8 +303,8 @@ Count the number of inserted entities in the whole database. This method corresp
 ```php
 <?php
 use Slicer\SlicingDice;
-$usesTestEndpoint = true;
-$client = new SlicingDice(array("masterKey" => "MASTER_API_KEY"), $usesTestEndpoint);
+
+$client = new SlicingDice(array("masterKey" => "MASTER_API_KEY"));
 
 print_r($client->countEntityTotal());
 ?>
@@ -323,20 +322,20 @@ print_r($client->countEntityTotal());
 }
 ```
 
-### `countEntityTotal($tables)`
-Count the total number of inserted entities in the given tables. This method corresponds to a [POST request at /query/count/entity/total](https://docs.slicingdice.com/docs/total#section-counting-specific-tables).
+### `countEntityTotal($dimensions)`
+Count the total number of inserted entities in the given dimensions. This method corresponds to a [POST request at /query/count/entity/total](https://docs.slicingdice.com/docs/total#section-counting-specific-tables).
 
 #### Request example
 
 ```php
 <?php
 use Slicer\SlicingDice;
-$usesTestEndpoint = true;
-$client = new SlicingDice(array("masterKey" => "MASTER_API_KEY"), $usesTestEndpoint);
 
-$tables = array("default");
+$client = new SlicingDice(array("masterKey" => "MASTER_API_KEY"));
 
-print_r($client->countEntityTotal($tables));
+$dimensions = array("default");
+
+print_r($client->countEntityTotal($dimensions));
 ?>
 ```
 
@@ -360,8 +359,8 @@ Count the number of entities matching the given query. This method corresponds t
 ```php
 <?php
 use Slicer\SlicingDice;
-$usesTestEndpoint = true;
-$client = new SlicingDice(array("masterKey" => "MASTER_API_KEY"), $usesTestEndpoint);
+
+$client = new SlicingDice(array("masterKey" => "MASTER_API_KEY"));
 $query = array(
     array(
         "query-name" => "corolla-or-fit",
@@ -417,8 +416,8 @@ Count the number of occurrences for time-series events matching the given query.
 ```php
 <?php
 use Slicer\SlicingDice;
-$usesTestEndpoint = true;
-$client = new SlicingDice(array("masterKey" => "MASTER_API_KEY"), $usesTestEndpoint);
+
+$client = new SlicingDice(array("masterKey" => "MASTER_API_KEY"));
 $query = array(
     array(
         "query-name" => "test-drives-in-ny",
@@ -476,8 +475,8 @@ Return the top values for entities matching the given query. This method corresp
 ```php
 <?php
 use Slicer\SlicingDice;
-$usesTestEndpoint = true;
-$client = new SlicingDice(array("masterKey" => "MASTER_API_KEY"), $usesTestEndpoint);
+
+$client = new SlicingDice(array("masterKey" => "MASTER_API_KEY"));
 $query = array(
     "car-year" => array(
         "year" => 2
@@ -537,8 +536,8 @@ Return the aggregation of all columns in the given query. This method correspond
 ```php
 <?php
 use Slicer\SlicingDice;
-$usesTestEndpoint = true;
-$client = new SlicingDice(array("masterKey" => "MASTER_API_KEY"), $usesTestEndpoint);
+
+$client = new SlicingDice(array("masterKey" => "MASTER_API_KEY"));
 $query = array(
     "query" => array(
         array(
@@ -592,8 +591,8 @@ Get all saved queries. This method corresponds to a [GET request at /query/saved
 ```php
 <?php
 use Slicer\SlicingDice;
-$usesTestEndpoint = true;
-$client = new SlicingDice(array("masterKey" => "MASTER_API_KEY"), $usesTestEndpoint);
+
+$client = new SlicingDice(array("masterKey" => "MASTER_API_KEY"));
 print_r($client->getSavedQueries());
 ?>
 ```
@@ -646,8 +645,8 @@ Create a saved query at SlicingDice. This method corresponds to a [POST request 
 ```php
 <?php
 use Slicer\SlicingDice;
-$usesTestEndpoint = true;
-$client = new SlicingDice(array("masterKey" => "MASTER_API_KEY"), $usesTestEndpoint);
+
+$client = new SlicingDice(array("masterKey" => "MASTER_API_KEY"));
 $query = array(
     "name" => "my-saved-query",
     "type" => "count/entity",
@@ -703,8 +702,8 @@ Update an existing saved query at SlicingDice. This method corresponds to a [PUT
 ```php
 <?php
 use Slicer\SlicingDice;
-$usesTestEndpoint = true;
-$client = new SlicingDice(array("masterKey" => "MASTER_API_KEY"), $usesTestEndpoint);
+
+$client = new SlicingDice(array("masterKey" => "MASTER_API_KEY"));
 $newQuery = array(
     "type" => "count/entity",
     "query" => array(
@@ -758,8 +757,8 @@ Executed a saved query at SlicingDice. This method corresponds to a [GET request
 ```php
 <?php
 use Slicer\SlicingDice;
-$usesTestEndpoint = true;
-$client = new SlicingDice(array("masterKey" => "MASTER_API_KEY"), $usesTestEndpoint);
+
+$client = new SlicingDice(array("masterKey" => "MASTER_API_KEY"));
 print_r($client->getSavedQuery("my-saved-query"));
 ?>
 ```
@@ -798,8 +797,8 @@ Delete a saved query at SlicingDice. This method corresponds to a [DELETE reques
 ```php
 <?php
 use Slicer\SlicingDice;
-$usesTestEndpoint = true;
-$client = new SlicingDice(array("masterKey" => "MASTER_API_KEY"), $usesTestEndpoint);
+
+$client = new SlicingDice(array("masterKey" => "MASTER_API_KEY"));
 print_r($client->deleteSavedQuery("my-saved-query"));
 ?>
 ```
@@ -837,8 +836,8 @@ Retrieve inserted values for entities matching the given query. This method corr
 ```php
 <?php
 use Slicer\SlicingDice;
-$usesTestEndpoint = true;
-$client = new SlicingDice(array("masterKey" => "MASTER_API_KEY"), $usesTestEndpoint);
+
+$client = new SlicingDice(array("masterKey" => "MASTER_API_KEY"));
 $query = array(
     "query" => array(
         array(
@@ -889,8 +888,8 @@ Retrieve inserted values as well as their relevance for entities matching the gi
 ```php
 <?php
 use Slicer\SlicingDice;
-$usesTestEndpoint = true;
-$client = new SlicingDice(array("masterKey" => "MASTER_API_KEY"), $usesTestEndpoint);
+
+$client = new SlicingDice(array("masterKey" => "MASTER_API_KEY"));
 $query = array(
     "query" => array(
         array(
@@ -931,6 +930,34 @@ print_r($client->score($query));
       }
    },
    "page":1,
+   "status":"success"
+}
+```
+
+### `sql($query)`
+Retrieve inserted values using a SQL syntax. This method corresponds to a POST request at /query/sql.
+
+#### Request example
+
+```php
+<?php
+use Slicer\SlicingDice;
+
+$client = new SlicingDice(array("masterKey" => "MASTER_API_KEY"));
+$query = "SELECT COUNT(*) FROM default WHERE age BETWEEN 0 AND 49";
+print_r($client->sql($query));
+?>
+```
+
+#### Output example
+
+```json
+{
+   "took":0.063,
+   "result":[
+       {"COUNT": 3}
+   ],
+   "count":1,
    "status":"success"
 }
 ```
