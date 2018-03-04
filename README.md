@@ -937,7 +937,7 @@ print_r($client->score($query));
 ### `sql($query)`
 Retrieve inserted values using a SQL syntax. This method corresponds to a POST request at /query/sql.
 
-#### Request example
+#### Query statement
 
 ```php
 <?php
@@ -945,6 +945,17 @@ use Slicer\SlicingDice;
 
 $client = new SlicingDice(array("masterKey" => "MASTER_API_KEY"));
 $query = "SELECT COUNT(*) FROM default WHERE age BETWEEN 0 AND 49";
+print_r($client->sql($query));
+?>
+```
+
+#### Insert statement
+```php
+<?php
+use Slicer\SlicingDice;
+
+$client = new SlicingDice(array("masterKey" => "MASTER_API_KEY"));
+$query = "INSERT INTO default([entity-id], name, age) VALUES(1, 'john', 10)";
 print_r($client->sql($query));
 ?>
 ```
