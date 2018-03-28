@@ -144,12 +144,12 @@ class SlicingDiceTester {
     * @param array $column the column to append timestamp
     */
     private function appendTimestampToColumnName($column){
-        $oldName = '"' . $column['api-name'] . '';
+        $oldName = ' . $column['api-name'] . ';
 
         $timestamp = $this->getTimestamp();
         $column['name'] = $column['name'] . $timestamp;
         $column['api-name'] = $column['api-name'] . $timestamp;
-        $newName = '"' . $column['api-name'] . '';
+        $newName = ' . $column['api-name'] . ';
 
         $this->columnTranslation[$oldName] = $newName;
         return $column;
