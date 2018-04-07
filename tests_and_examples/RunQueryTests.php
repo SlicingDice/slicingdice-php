@@ -25,6 +25,7 @@ class SlicingDiceTester {
     public $failedTests;
     private $verbose;
     private $perTestInsertion;
+    private $insertSqlData = false;
 
     function __construct($apiKey, $verboseOption=false) {
         $this->client = new SlicingDice(array("masterKey" => $apiKey));
@@ -55,7 +56,7 @@ class SlicingDiceTester {
 
         $this->perTestInsertion = array_key_exists('insert', $testData[0]);
 
-        if (!$this->perTestInsertion) {
+        if (!$this->perTestInsertion and $this->$insertSqlData) {
             print 'Running insert for SQL';
             $insertionData = $this->loadTestData($queryType, "_insert");
             foreach ($insertionData as $insert) {
@@ -341,7 +342,7 @@ function main(){
 
     // Use SlicingDiceTester with demo api key
     // To get another demo api key visit: http://panel.slicingdice.com/docs/#api-details-api-connection-api-keys-demo-key
-    $sdTester = new SlicingDiceTester("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfX3NhbHQiOiJkZW1vMzcwNm0iLCJwZXJtaXNzaW9uX2xldmVsIjozLCJwcm9qZWN0X2lkIjoyMzcwNiwiY2xpZW50X2lkIjoxMH0.CqVeBW_1iUcxdj-MmhEHF5H--xNysCyVpPY_7Jl2-h8");
+    $sdTester = new SlicingDiceTester("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfX3NhbHQiOiIxNTIzMDY1ODQyNjU4IiwicGVybWlzc2lvbl9sZXZlbCI6MywicHJvamVjdF9pZCI6MzA1MDgsImNsaWVudF9pZCI6MjAzfQ.R3oKwcA9XoQcW_QBxcvqUNJS44AqCKjoK2Hz5uBnxmU");
 
     // run tests for each query type
     try{
