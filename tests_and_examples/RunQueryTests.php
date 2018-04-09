@@ -25,6 +25,7 @@ class SlicingDiceTester {
     public $failedTests;
     private $verbose;
     private $perTestInsertion;
+    private $insertSqlData = false;
 
     function __construct($apiKey, $verboseOption=false) {
         $this->client = new SlicingDice(array("masterKey" => $apiKey));
@@ -55,7 +56,7 @@ class SlicingDiceTester {
 
         $this->perTestInsertion = array_key_exists('insert', $testData[0]);
 
-        if (!$this->perTestInsertion) {
+        if (!$this->perTestInsertion and $this->$insertSqlData) {
             print 'Running insert for SQL';
             $insertionData = $this->loadTestData($queryType, "_insert");
             foreach ($insertionData as $insert) {
