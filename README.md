@@ -1,9 +1,12 @@
 # SlicingDice Official PHP Client (v2.0.1)
-### Build Status: [![CircleCI](https://circleci.com/gh/SlicingDice/slicingdice-php.svg?style=svg)](https://circleci.com/gh/SlicingDice/slicingdice-php)
 
-Official PHP client for [SlicingDice](http://www.slicingdice.com/), Data Warehouse and Analytics Database as a Service.  
+Official PHP client for [SlicingDice - Data Warehouse and Analytics Database as a Service](https://www.slicingdice.com/).
 
-[SlicingDice](http://www.slicingdice.com/) is a serverless, API-based, easy-to-use and really cost-effective alternative to Amazon Redshift and Google BigQuery.
+[SlicingDice](http://www.slicingdice.com/) is a serverless, SQL & API-based, easy-to-use and really cost-effective alternative to Amazon Redshift and Google BigQuery.
+
+### Build Status: [![CircleCI](https://circleci.com/gh/SlicingDice/slicingdice-php/tree/master.svg?style=svg)](https://circleci.com/gh/SlicingDice/slicingdice-php/tree/master)
+
+### Code Quality: [![Codacy Badge](https://api.codacy.com/project/badge/Grade/0d58ca92a6c54a41ad30e643bb846484)](https://www.codacy.com/app/SimbioseVentures/slicingdice-php?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=SlicingDice/slicingdice-php&amp;utm_campaign=Badge_Grade)
 
 ## Documentation
 
