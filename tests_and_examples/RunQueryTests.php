@@ -342,7 +342,7 @@ function main(){
 
     // Use SlicingDiceTester with demo api key
     // To get another demo api key visit: http://panel.slicingdice.com/docs/#api-details-api-connection-api-keys-demo-key
-    $sdTester = new SlicingDiceTester("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfX3NhbHQiOiJkZW1vNjcyNm0iLCJwZXJtaXNzaW9uX2xldmVsIjozLCJwcm9qZWN0X2lkIjoyNjcyNiwiY2xpZW50X2lkIjoxMH0.LUn6Pe4kfHWfXR6E4S38Yn_L_ofqvnYobIo6Mwe1mhY");
+    $sdTester = new SlicingDiceTester("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfX3NhbHQiOiJkZW1vNzc5NG0iLCJwZXJtaXNzaW9uX2xldmVsIjozLCJwcm9qZWN0X2lkIjoyNzc5NCwiY2xpZW50X2lkIjoxMH0.KvU4-ORIUjie0aApt6gabuDUNeBx0CGo4zYCoTHawyI");
 
     // run tests for each query type
     try{
