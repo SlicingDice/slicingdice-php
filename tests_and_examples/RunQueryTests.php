@@ -340,7 +340,7 @@ function main(){
         'sql'
     );
 
-    $apiKey = $_ENV["SD_API_KEY"] ? $_ENV["SD_API_KEY"] : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfX3NhbHQiOiJkZW1vNzc5NG0iLCJwZXJtaXNzaW9uX2xldmVsIjozLCJwcm9qZWN0X2lkIjoyNzc5NCwiY2xpZW50X2lkIjoxMH0.KvU4-ORIUjie0aApt6gabuDUNeBx0CGo4zYCoTHawyI"
+    $apiKey = $_ENV["SD_API_KEY"] ? $_ENV["SD_API_KEY"] : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfX3NhbHQiOiJkZW1vNzc5NG0iLCJwZXJtaXNzaW9uX2xldmVsIjozLCJwcm9qZWN0X2lkIjoyNzc5NCwiY2xpZW50X2lkIjoxMH0.KvU4-ORIUjie0aApt6gabuDUNeBx0CGo4zYCoTHawyI";
 
     // Use SlicingDiceTester with demo api key
     // To get another demo api key visit: http://panel.slicingdice.com/docs/#api-details-api-connection-api-keys-demo-key
