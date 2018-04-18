@@ -25,6 +25,7 @@ class SlicingDiceTester {
     public $failedTests;
     private $verbose;
     private $perTestInsertion;
+    private $insertSqlData = false;
 
     function __construct($apiKey, $verboseOption=false) {
         $this->client = new SlicingDice(array("masterKey" => $apiKey));
@@ -55,7 +56,7 @@ class SlicingDiceTester {
 
         $this->perTestInsertion = array_key_exists('insert', $testData[0]);
 
-        if (!$this->perTestInsertion) {
+        if (!$this->perTestInsertion and $this->$insertSqlData) {
             print 'Running insert for SQL';
             $insertionData = $this->loadTestData($queryType, "_insert");
             foreach ($insertionData as $insert) {
@@ -144,13 +145,12 @@ class SlicingDiceTester {
     * @param array $column the column to append timestamp
     */
     private function appendTimestampToColumnName($column){
-        $oldName = '"' . $column['api-name'] . '';
+        $oldName = '"' . $column['api-name'] . '"';
 
         $timestamp = $this->getTimestamp();
         $column['name'] = $column['name'] . $timestamp;
         $column['api-name'] = $column['api-name'] . $timestamp;
-        $newName = '"' . $column['api-name'] . '';
-
+        $newName = '"' . $column['api-name'] . '"';
         $this->columnTranslation[$oldName] = $newName;
         return $column;
     }
@@ -340,10 +340,11 @@ function main(){
         'sql'
     );
 
+    $apiKey = $_SERVER["SD_API_KEY"] ? $_SERVER["SD_API_KEY"] : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfX3NhbHQiOiJkZW1vNzc5NG0iLCJwZXJtaXNzaW9uX2xldmVsIjozLCJwcm9qZWN0X2lkIjoyNzc5NCwiY2xpZW50X2lkIjoxMH0.KvU4-ORIUjie0aApt6gabuDUNeBx0CGo4zYCoTHawyI";
+
     // Use SlicingDiceTester with demo api key
     // To get another demo api key visit: http://panel.slicingdice.com/docs/#api-details-api-connection-api-keys-demo-key
-    $sdTester = new SlicingDiceTester(
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfX3NhbHQiOiIxNTE4NjA3ODQ0NDAzIiwicGVybWlzc2lvbl9sZXZlbCI6MywicHJvamVjdF9pZCI6NDY5NjYsImNsaWVudF9pZCI6OTUxfQ.S6LCWQDcLS1DEFy3lsqk2jTGIe5rJ5fsQIvWuuFBdkw');
+    $sdTester = new SlicingDiceTester($apiKey);
 
     // run tests for each query type
     try{
