@@ -56,7 +56,7 @@ class SlicingDiceTester {
 
         $this->perTestInsertion = array_key_exists('insert', $testData[0]);
 
-        if (!$this->perTestInsertion and $this->$insertSqlData) {
+        if (!$this->perTestInsertion and $this->insertSqlData) {
             print 'Running insert for SQL';
             $insertionData = $this->loadTestData($queryType, "_insert");
             foreach ($insertionData as $insert) {
