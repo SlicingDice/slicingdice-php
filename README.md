@@ -1,4 +1,4 @@
-# SlicingDice Official PHP Client (v2.0.1)
+# SlicingDice Official PHP Client (v2.0.2)
 
 Official PHP client for [SlicingDice - Data Warehouse and Analytics Database as a Service](https://www.slicingdice.com/).
 
