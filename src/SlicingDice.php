@@ -340,7 +340,17 @@ class SlicingDice {
 
     public function sql($query) {
         $url = $this->urlWrapper() . URLResources::QUERY_SQL;
-        return $this->makeRequest($url, "POST", 2, $query, true);
+        return $this->makeRequest($url, "POST", 0, $query, true);
+    }
+
+    public function delete($query) {
+        $url = $this->urlWrapper() . URLResources::DELETE;
+        return $this->makeRequest($url, "POST", 2, $query);
+    }
+
+    public function update($query) {
+        $url = $this->urlWrapper() . URLResources::UPDATE;
+        return $this->makeRequest($url, "POST", 2, $query);
     }
 }
 ?>

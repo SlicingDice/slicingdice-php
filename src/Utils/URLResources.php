@@ -16,5 +16,7 @@ class URLResources {
     const QUERY_DATA_EXTRACTION_RESULT = "/data_extraction/result/";
     const QUERY_DATA_EXTRACTION_SCORE = "/data_extraction/score/";
     const QUERY_SQL = "/sql/";
+    const DELETE = "/delete/";
+    const UPDATE = "/update/";
 }
 ?>
