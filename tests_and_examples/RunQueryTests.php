@@ -67,6 +67,7 @@ class SlicingDiceTester {
 
         $counter = 0;
         foreach($testData as $test){
+            $queryType_ = $queryType;
             $this->emptyColumnTranslation();
 
             $counter += 1;
@@ -84,7 +85,16 @@ class SlicingDiceTester {
                     $this->createColumns($test);
                     $this->insertData($test);
                 }
-                $result = $this->executeQuery($queryType, $test);
+
+                if ($queryType == "update" or $queryType == "delete") {
+                    $result_additionals = $this->runAdditionalOperations($queryType, $test);
+                    if (!$result_additionals) {
+                        continue;
+                    }
+                    $queryType_ = "count_entity";
+                }
+
+                $result = $this->executeQuery($queryType_, $test);
             } catch (\Exception $e){
                 $result = array("result" => array(
                         "error" => $e->getMessage()
@@ -95,6 +105,53 @@ class SlicingDiceTester {
             echo "\n";
         }
     }
+
+    /**
+     * Method used to run delete and update operations, this operations
+     * are executed before the query and the result comparison
+     */
+    private function runAdditionalOperations($query_type, $test) {
+        $query_data = $this->translateColumnNames($test['additional_operation']);
+        if ($query_type == 'delete') {
+            print "  Deleting";
+        }
+        else {
+            print "  Updating";
+        }
+
+        if ($this->verbose) {
+            print_r($query_data);
+        }
+         
+        $result = null;
+        if ($query_type == 'delete') {
+            $result = $this->client->delete($query_data);
+        }
+        else if ($query_type == 'update') {
+            $result = $this->client->update($query_data);
+        }
+         
+        $expected = $this->translateColumnNames($test['result_additional']);
+        foreach ($expected as $key => $value) {
+            if ($value == "ignore") {
+                continue;
+            }
+
+            if (!array_key_exists($key, $result) || array_diff($expected[$key], $result[$key])){
+                $this->numFails += 1;
+                array_push($this->failedTests, $test["name"]);
+
+                print_r('  Expected: "' . $key . '": ' . json_encode($expected[$key]) . "\n");
+                print_r('  Result: "' . $key . '": ' . json_encode($result[$key]) .  "\n");
+                echo "  Status: Failed\n";
+                $this->updateResults();
+                return false;
+            }
+        }
+        $this->numSuccess += 1;
+        print "  Status: Passed";
+        return true;
+     }
 
     /**
     * Reset column translation
@@ -262,7 +319,7 @@ class SlicingDiceTester {
                 continue;
             }
 
-            if (!array_key_exists($key, $result) || array_diff_key($expected[$key], $result[$key])){
+            if (!array_key_exists($key, $result) || array_diff($expected[$key], $result[$key])){
                 $this->numFails += 1;
                 array_push($this->failedTests, $expectedArray["name"]);
 
@@ -337,7 +394,9 @@ function main(){
         'aggregation',
         'result',
         'score',
-        'sql'
+        'sql',
+        'delete',
+        'update'
     );
 
     $apiKey = $_SERVER["SD_API_KEY"] ? $_SERVER["SD_API_KEY"] : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfX3NhbHQiOiJkZW1vNzc5NG0iLCJwZXJtaXNzaW9uX2xldmVsIjozLCJwcm9qZWN0X2lkIjoyNzc5NCwiY2xpZW50X2lkIjoxMH0.KvU4-ORIUjie0aApt6gabuDUNeBx0CGo4zYCoTHawyI";
