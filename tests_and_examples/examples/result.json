@@ -334,7 +334,7 @@
         }
     }, 
     {
-        "name": "Test for a \"RESULT\" query using columns \"BOOLEAN\", \"INTEGER\", \"DATETIME\" and \"STRING-TIME-SERIES\", operator \"AND\" and parameters \"EQUALS\", \"BETWEEN\" and \"MINFREQ\".",
+        "name": "Test for a \"RESULT\" query using columns \"BOOLEAN\", \"INTEGER\", \"DATETIME\" and \"STRING-EVENT\", operator \"AND\" and parameters \"EQUALS\", \"BETWEEN\" and \"MINFREQ\".",
         "columns": [
             {
                 "type": "boolean",
@@ -355,7 +355,7 @@
                 "name": "datetime_test_column"
             },
             {
-                "type": "string-time-series",
+                "type": "string-event",
                 "api-name": "time-series-string-test-column",
                 "name": "time_series_string_test_column"
             }
@@ -2314,7 +2314,7 @@
         }
     },
     {
-        "name": "Test for a \"RESULT\" query using columns \"BOOLEAN\", \"INTEGER\", \"DATETIME\" and \"INTEGER-TIME-SERIES\", operator \"AND\" and parameters \"EQUALS\", \"BETWEEN\" and \"MINFREQ\".",
+        "name": "Test for a \"RESULT\" query using columns \"BOOLEAN\", \"INTEGER\", \"DATETIME\" and \"INTEGER-EVENT\", operator \"AND\" and parameters \"EQUALS\", \"BETWEEN\" and \"MINFREQ\".",
         "columns": [
             {
                 "type": "boolean",
@@ -2335,7 +2335,7 @@
                 "name": "datetime_test_column"
             },
             {
-                "type": "integer-time-series",
+                "type": "integer-event",
                 "api-name": "time-series-integer-test-column",
                 "name": "time_series_integer_test_column"
             }
@@ -4294,7 +4294,7 @@
         }
     },
     {
-        "name": "Test for a \"RESULT\" query using columns \"BOOLEAN\", \"INTEGER\", \"DATETIME\" and \"DECIMAL-TIME-SERIES\", operator \"AND\" and parameters \"EQUALS\", \"BETWEEN\" and \"MINFREQ\".",
+        "name": "Test for a \"RESULT\" query using columns \"BOOLEAN\", \"INTEGER\", \"DATETIME\" and \"DECIMAL-EVENT\", operator \"AND\" and parameters \"EQUALS\", \"BETWEEN\" and \"MINFREQ\".",
         "columns": [
             {
                 "type": "boolean",
@@ -4315,7 +4315,7 @@
                 "name": "datetime_test_column"
             },
             {
-                "type": "decimal-time-series",
+                "type": "decimal-event",
                 "api-name": "time-series-decimal-test-column",
                 "name": "time_series_decimal_test_column",
                 "decimal-places": 3
