@@ -15,8 +15,8 @@ class ColumnValidator {
         $this->queryData = $query;
         $this->validTypesColumns = array(
             "unique-id", "boolean", "string", "integer", "decimal",
-            "enumerated", "date", "integer-time-series",
-            "decimal-time-series", "string-time-series", "datetime");
+            "date", "integer-event",
+            "decimal-event", "string-event", "datetime");
     }
 
     /**
@@ -63,12 +63,12 @@ class ColumnValidator {
     * Verify if decimal has a valid type
     */
     private function validateDecimalType($query) {
-        $decimalTypes = array("decimal", "decimal-time-series");
+        $decimalTypes = array("decimal", "decimal-event");
         $columnType = $query["type"];
         if (!in_array($columnType, $decimalTypes)){
             throw new InvalidColumnException(
                 "This column is only accepted on type 'decimal' or " .
-                "'decimal-time-series'");
+                "'decimal-event'");
         }
     }
 
@@ -121,9 +121,6 @@ class ColumnValidator {
         $columnType = $query["type"];
         if ($columnType == "string") {
             $this->checkStringIntegrity($query);
-        }
-        if ($columnType == "enumerated") { 
-            $this->validateEnumerate($query);
         }
         if (array_key_exists("description", $query)) {
             $this->validateDescription($query);
