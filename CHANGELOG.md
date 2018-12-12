@@ -4,6 +4,7 @@
 ### Added
 - UPDATE support
 - DELETE support
+- Fix bug on the SlicingDiceException constructor
 
 ## [2.0.2]
 ### Updated
