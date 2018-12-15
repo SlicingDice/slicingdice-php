@@ -5126,7 +5126,7 @@
     }
   },
   {
-    "name": "Test for a \"COUNT ENTITY\" query using columns \"BOOLEAN\", \"INTEGER\" and \"STRING-TIME-SERIES\", operators \"AND\", \"OR\" and \"NOT\" and parameters \"EQUALS\", \"RANGE\", \"BETWEEN\" and \"MINFREQ\".",
+    "name": "Test for a \"COUNT ENTITY\" query using columns \"BOOLEAN\", \"INTEGER\" and \"STRING-EVENT\", operators \"AND\", \"OR\" and \"NOT\" and parameters \"EQUALS\", \"RANGE\", \"BETWEEN\" and \"MINFREQ\".",
     "columns": [
       {
         "storage": "latest-value",
@@ -5142,7 +5142,7 @@
       },
       {
         "api-name": "time-series-string-test-column",
-        "type": "string-time-series",
+        "type": "string-event",
         "name": "time_series_string_test_column"
       }
     ],
@@ -6994,7 +6994,7 @@
     }
   },
   {
-    "name": "Test for a \"COUNT ENTITY\" query using columns \"BOOLEAN\", \"INTEGER\",  \"STRING-TIME-SERIES\" and \"STRING-TIME-SERIES\", operators \"AND\", \"OR\" and \"FREQGROUP\" and parameters \"EQUALS\", \"RANGE\", \"BETWEEN\" and \"MINFREQ\".",
+    "name": "Test for a \"COUNT ENTITY\" query using columns \"BOOLEAN\", \"INTEGER\",  \"STRING-EVENT\" and \"STRING-EVENT\", operators \"AND\", \"OR\" and \"FREQGROUP\" and parameters \"EQUALS\", \"RANGE\", \"BETWEEN\" and \"MINFREQ\".",
     "columns": [
       {
         "storage": "latest-value",
@@ -7010,12 +7010,12 @@
       },
       {
         "api-name": "time-series-string-test-column",
-        "type": "string-time-series",
+        "type": "string-event",
         "name": "time_series_string_test_column"
       },
       {
         "api-name": "time-series-string-test-column-2",
-        "type": "string-time-series",
+        "type": "string-event",
         "name": "time_series_string_test_column_2"
       }
     ],
@@ -9074,7 +9074,7 @@
     }
   },
   {
-    "name": "Test for a \"COUNT ENTITY\" query using columns \"STRING\", \"BOOLEAN\" and \"INTEGER-TIME-SERIES\", operators \"AND\" and \"OR\" and parameters \"EQUALS\", \"BETWEEN\" and \"MINFREQ\".",
+    "name": "Test for a \"COUNT ENTITY\" query using columns \"STRING\", \"BOOLEAN\" and \"INTEGER-EVENT\", operators \"AND\" and \"OR\" and parameters \"EQUALS\", \"BETWEEN\" and \"MINFREQ\".",
     "columns": [
       {
         "type": "string",
@@ -9091,7 +9091,7 @@
       },
       {
         "api-name": "time-series-integer-test-column",
-        "type": "integer-time-series",
+        "type": "integer-event",
         "name": "time_series_integer_test_column"
       }
     ],
@@ -10935,7 +10935,7 @@
     }
   },
   {
-    "name": "Test for a \"COUNT ENTITY\" query using columns \"STRING\", \"BOOLEAN\" and \"DECIMAL-TIME-SERIES\", operators \"AND\" and \"OR\" and parameters \"EQUALS\", \"BETWEEN\" and \"MINFREQ\".",
+    "name": "Test for a \"COUNT ENTITY\" query using columns \"STRING\", \"BOOLEAN\" and \"DECIMAL-EVENT\", operators \"AND\" and \"OR\" and parameters \"EQUALS\", \"BETWEEN\" and \"MINFREQ\".",
     "columns": [
       {
         "type": "string",
@@ -10954,7 +10954,7 @@
         "api-name": "time-series-decimal-test-column",
         "decimal-places": 3,
         "name": "time_series_decimal_test_column",
-        "type": "decimal-time-series"
+        "type": "decimal-event"
       }
     ],
     "insert": {
@@ -12797,7 +12797,7 @@
     }
   },
   {
-    "name": "Test for a \"COUNT ENTITY\" query using columns \"STRING\" and \"INTEGER-TIME-SERIES\", operators \"AND\", \"OR\" and \"NOT\" and parameters \"EQUALS\", \"RANGE\", \"BETWEEN\" and \"MINFREQ\".",
+    "name": "Test for a \"COUNT ENTITY\" query using columns \"STRING\" and \"INTEGER-EVENT\", operators \"AND\", \"OR\" and \"NOT\" and parameters \"EQUALS\", \"RANGE\", \"BETWEEN\" and \"MINFREQ\".",
     "columns": [
       {
         "type": "string",
@@ -12808,7 +12808,7 @@
       },
       {
         "api-name": "time-series-integer-test-column",
-        "type": "integer-time-series",
+        "type": "integer-event",
         "name": "time_series_integer_test_column"
       }
     ],
@@ -14546,7 +14546,7 @@
     }
   },
   {
-    "name": "Test for a \"COUNT ENTITY\" query using columns \"STRING\" and \"DECIMAL-TIME-SERIES\", operators \"AND\", \"OR\" and \"NOT\" and parameters \"EQUALS\", \"RANGE\", \"BETWEEN\" and \"MINFREQ\".",
+    "name": "Test for a \"COUNT ENTITY\" query using columns \"STRING\" and \"DECIMAL-EVENT\", operators \"AND\", \"OR\" and \"NOT\" and parameters \"EQUALS\", \"RANGE\", \"BETWEEN\" and \"MINFREQ\".",
     "columns": [
       {
         "type": "string",
@@ -14559,7 +14559,7 @@
         "api-name": "time-series-decimal-test-column",
         "decimal-places": 3,
         "name": "time_series_decimal_test_column",
-        "type": "decimal-time-series"
+        "type": "decimal-event"
       }
     ],
     "insert": {
@@ -16296,7 +16296,7 @@
     }
   },
   {
-    "name": "Test for a \"COUNT ENTITY\" query using columns \"INTEGER\" and \"STRING-TIME-SERIES\", operator \"AND\" and parameters \"EQUALS\", \"BETWEEN\" and \"MINFREQ\" with UTC timezone when inserting and querying.",
+    "name": "Test for a \"COUNT ENTITY\" query using columns \"INTEGER\" and \"STRING-EVENT\", operator \"AND\" and parameters \"EQUALS\", \"BETWEEN\" and \"MINFREQ\" with UTC timezone when inserting and querying.",
     "columns": [
       {
         "storage": "latest-value",
@@ -16306,7 +16306,7 @@
       },
       {
         "api-name": "time-series-string-test-column",
-        "type": "string-time-series",
+        "type": "string-event",
         "name": "time_series_string_test_column"
       }
     ],
@@ -18042,7 +18042,7 @@
     }
   },
   {
-    "name": "Test for a \"COUNT ENTITY\" query using columns \"INTEGER\" and \"STRING-TIME-SERIES\", operator \"AND\" and parameters \"EQUALS\", \"BETWEEN\" and \"MINFREQ\" with +3h timezone when inserting.",
+    "name": "Test for a \"COUNT ENTITY\" query using columns \"INTEGER\" and \"STRING-EVENT\", operator \"AND\" and parameters \"EQUALS\", \"BETWEEN\" and \"MINFREQ\" with +3h timezone when inserting.",
     "columns": [
       {
         "storage": "latest-value",
@@ -18052,7 +18052,7 @@
       },
       {
         "api-name": "time-series-string-test-column",
-        "type": "string-time-series",
+        "type": "string-event",
         "name": "time_series_string_test_column"
       }
     ],
@@ -19788,7 +19788,7 @@
     }
   },
   {
-    "name": "Test for a \"COUNT ENTITY\" query using columns \"INTEGER\" and \"STRING-TIME-SERIES\", operator \"AND\" and parameters \"EQUALS\", \"BETWEEN\" and \"MINFREQ\" with -3h timezone when inserting.",
+    "name": "Test for a \"COUNT ENTITY\" query using columns \"INTEGER\" and \"STRING-EVENT\", operator \"AND\" and parameters \"EQUALS\", \"BETWEEN\" and \"MINFREQ\" with -3h timezone when inserting.",
     "columns": [
       {
         "storage": "latest-value",
@@ -19798,7 +19798,7 @@
       },
       {
         "api-name": "time-series-string-test-column",
-        "type": "string-time-series",
+        "type": "string-event",
         "name": "time_series_string_test_column"
       }
     ],
@@ -21534,7 +21534,7 @@
     }
   },
   {
-    "name": "Test for a \"COUNT ENTITY\" query using columns \"INTEGER\" and \"STRING-TIME-SERIES\", operator \"AND\" and parameters \"EQUALS\", \"BETWEEN\" and \"MINFREQ\" with +3h timezone when inserting and querying.",
+    "name": "Test for a \"COUNT ENTITY\" query using columns \"INTEGER\" and \"STRING-EVENT\", operator \"AND\" and parameters \"EQUALS\", \"BETWEEN\" and \"MINFREQ\" with +3h timezone when inserting and querying.",
     "columns": [
       {
         "storage": "latest-value",
@@ -21544,7 +21544,7 @@
       },
       {
         "api-name": "time-series-string-test-column",
-        "type": "string-time-series",
+        "type": "string-event",
         "name": "time_series_string_test_column"
       }
     ],
@@ -26091,7 +26091,7 @@
     }
   },
   {
-    "name": "Test for a \"COUNT ENTITY\" query using columns \"INTEGER\" and \"STRING-TIME-SERIES\", operator \"AND\" and parameters \"EQUALS\", \"BETWEEN\" and \"MINFREQ\" with relative interval containing \"NOW\" and \"SECONDS\".",
+    "name": "Test for a \"COUNT ENTITY\" query using columns \"INTEGER\" and \"STRING-EVENT\", operator \"AND\" and parameters \"EQUALS\", \"BETWEEN\" and \"MINFREQ\" with relative interval containing \"NOW\" and \"SECONDS\".",
     "columns": [
       {
         "storage": "latest-value",
@@ -26101,7 +26101,7 @@
       },
       {
         "api-name": "time-series-string-test-column",
-        "type": "string-time-series",
+        "type": "string-event",
         "name": "time_series_string_test_column"
       }
     ],
@@ -27537,7 +27537,7 @@
     }
   },
   {
-    "name": "Test for a \"COUNT ENTITY\" query using columns \"INTEGER\" and \"STRING-TIME-SERIES\", operator \"AND\" and parameters \"EQUALS\", \"BETWEEN\" and \"MINFREQ\" with relative interval containing \"NOW\" and \"MINUTE\".",
+    "name": "Test for a \"COUNT ENTITY\" query using columns \"INTEGER\" and \"STRING-EVENT\", operator \"AND\" and parameters \"EQUALS\", \"BETWEEN\" and \"MINFREQ\" with relative interval containing \"NOW\" and \"MINUTE\".",
     "columns": [
       {
         "storage": "latest-value",
@@ -27547,7 +27547,7 @@
       },
       {
         "api-name": "time-series-string-test-column",
-        "type": "string-time-series",
+        "type": "string-event",
         "name": "time_series_string_test_column"
       }
     ],
@@ -28983,7 +28983,7 @@
     }
   },
   {
-    "name": "Test for a \"COUNT ENTITY\" query using columns \"INTEGER\" and \"STRING-TIME-SERIES\", operator \"AND\" and parameters \"EQUALS\", \"BETWEEN\" and \"MINFREQ\" with relative interval containing \"NOW\" and \"HOUR\".",
+    "name": "Test for a \"COUNT ENTITY\" query using columns \"INTEGER\" and \"STRING-EVENT\", operator \"AND\" and parameters \"EQUALS\", \"BETWEEN\" and \"MINFREQ\" with relative interval containing \"NOW\" and \"HOUR\".",
     "columns": [
       {
         "storage": "latest-value",
@@ -28993,7 +28993,7 @@
       },
       {
         "api-name": "time-series-string-test-column",
-        "type": "string-time-series",
+        "type": "string-event",
         "name": "time_series_string_test_column"
       }
     ],
@@ -30429,7 +30429,7 @@
     }
   },
   {
-    "name": "Test for a \"COUNT ENTITY\" query using columns \"INTEGER\" and \"STRING-TIME-SERIES\", operator \"AND\" and parameters \"EQUALS\", \"BETWEEN\" and \"MINFREQ\" with relative interval containing \"NOW\" and \"DAY\".",
+    "name": "Test for a \"COUNT ENTITY\" query using columns \"INTEGER\" and \"STRING-EVENT\", operator \"AND\" and parameters \"EQUALS\", \"BETWEEN\" and \"MINFREQ\" with relative interval containing \"NOW\" and \"DAY\".",
     "columns": [
       {
         "storage": "latest-value",
@@ -30439,7 +30439,7 @@
       },
       {
         "api-name": "time-series-string-test-column",
-        "type": "string-time-series",
+        "type": "string-event",
         "name": "time_series_string_test_column"
       }
     ],
@@ -31875,7 +31875,7 @@
     }
   },
   {
-    "name": "Test for a \"COUNT ENTITY\" query using columns \"INTEGER\" and \"STRING-TIME-SERIES\", operator \"AND\" and parameters \"EQUALS\", \"BETWEEN\" and \"MINFREQ\" with relative interval containing \"NOW\" and \"WEEK\".",
+    "name": "Test for a \"COUNT ENTITY\" query using columns \"INTEGER\" and \"STRING-EVENT\", operator \"AND\" and parameters \"EQUALS\", \"BETWEEN\" and \"MINFREQ\" with relative interval containing \"NOW\" and \"WEEK\".",
     "columns": [
       {
         "storage": "latest-value",
@@ -31885,7 +31885,7 @@
       },
       {
         "api-name": "time-series-string-test-column",
-        "type": "string-time-series",
+        "type": "string-event",
         "name": "time_series_string_test_column"
       }
     ],
@@ -33321,7 +33321,7 @@
     }
   },
   {
-    "name": "Test for a \"COUNT ENTITY\" query using columns \"INTEGER\" and \"STRING-TIME-SERIES\", operator \"AND\" and parameters \"EQUALS\", \"BETWEEN\" and \"MINFREQ\" with relative interval containing \"NOW\" and \"MONTH\".",
+    "name": "Test for a \"COUNT ENTITY\" query using columns \"INTEGER\" and \"STRING-EVENT\", operator \"AND\" and parameters \"EQUALS\", \"BETWEEN\" and \"MINFREQ\" with relative interval containing \"NOW\" and \"MONTH\".",
     "columns": [
       {
         "storage": "latest-value",
@@ -33331,7 +33331,7 @@
       },
       {
         "api-name": "time-series-string-test-column",
-        "type": "string-time-series",
+        "type": "string-event",
         "name": "time_series_string_test_column"
       }
     ],
@@ -34767,7 +34767,7 @@
     }
   },
   {
-    "name": "Test for a \"COUNT ENTITY\" query using columns \"INTEGER\" and \"STRING-TIME-SERIES\", operator \"AND\" and parameters \"EQUALS\", \"BETWEEN\" and \"MINFREQ\" with relative interval containing \"NOW\" and \"YEAR\".",
+    "name": "Test for a \"COUNT ENTITY\" query using columns \"INTEGER\" and \"STRING-EVENT\", operator \"AND\" and parameters \"EQUALS\", \"BETWEEN\" and \"MINFREQ\" with relative interval containing \"NOW\" and \"YEAR\".",
     "columns": [
       {
         "storage": "latest-value",
@@ -34777,7 +34777,7 @@
       },
       {
         "api-name": "time-series-string-test-column",
-        "type": "string-time-series",
+        "type": "string-event",
         "name": "time_series_string_test_column"
       }
     ],
@@ -36213,7 +36213,7 @@
     }
   },
   {
-    "name": "Test for a \"COUNT ENTITY\" query using columns \"INTEGER\" and \"STRING-TIME-SERIES\", operator \"AND\" and parameters \"EQUALS\", \"BETWEEN\" and \"MINFREQ\" with UTC timezone when inserting and querying and relative interval containing \"WEEK\".",
+    "name": "Test for a \"COUNT ENTITY\" query using columns \"INTEGER\" and \"STRING-EVENT\", operator \"AND\" and parameters \"EQUALS\", \"BETWEEN\" and \"MINFREQ\" with UTC timezone when inserting and querying and relative interval containing \"WEEK\".",
     "columns": [
       {
         "storage": "latest-value",
@@ -36223,7 +36223,7 @@
       },
       {
         "api-name": "time-series-string-test-column",
-        "type": "string-time-series",
+        "type": "string-event",
         "name": "time_series_string_test_column"
       }
     ],
@@ -37959,7 +37959,7 @@
     }
   },
   {
-    "name": "Test for a \"COUNT ENTITY\" query using columns \"INTEGER\" and \"STRING-TIME-SERIES\", operator \"AND\" and parameters \"EQUALS\", \"BETWEEN\" and \"MINFREQ\" with relative interval containing \"TODAY\".",
+    "name": "Test for a \"COUNT ENTITY\" query using columns \"INTEGER\" and \"STRING-EVENT\", operator \"AND\" and parameters \"EQUALS\", \"BETWEEN\" and \"MINFREQ\" with relative interval containing \"TODAY\".",
     "columns": [
       {
         "storage": "latest-value",
@@ -37969,7 +37969,7 @@
       },
       {
         "api-name": "time-series-string-test-column",
-        "type": "string-time-series",
+        "type": "string-event",
         "name": "time_series_string_test_column"
       }
     ],

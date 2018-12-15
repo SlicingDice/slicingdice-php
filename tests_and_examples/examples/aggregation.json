@@ -6451,10 +6451,10 @@
         }
     },
     {
-        "name": "Test for an \"AGGREGATION\" query using column \"INTEGER-TIME-SERIES\" and parameter \"BETWEEN\".",
+        "name": "Test for an \"AGGREGATION\" query using column \"INTEGER-EVENT\" and parameter \"BETWEEN\".",
         "columns": [
             {
-                "type": "integer-time-series",
+                "type": "integer-event",
                 "api-name": "time-series-integer-test-column",
                 "name": "time_series_integer_test_column"
             }
@@ -7278,10 +7278,10 @@
         }
     },
     {
-        "name": "Test for an \"AGGREGATION\" query using column \"STRING-TIME-SERIES\" and parameters \"EQUALS\" and \"BETWEEN\".",
+        "name": "Test for an \"AGGREGATION\" query using column \"STRING-EVENT\" and parameters \"EQUALS\" and \"BETWEEN\".",
         "columns": [
             {
-                "type": "string-time-series",
+                "type": "string-event",
                 "api-name": "time-series-string-test-column",
                 "name": "time_series_string_test_column"
             }
@@ -8916,10 +8916,10 @@
         }
     },
     {
-        "name": "Test for an \"AGGREGATION\" query using column \"INTEGER-TIME-SERIES\" and parameters \"EQUALS\" and \"BETWEEN\".",
+        "name": "Test for an \"AGGREGATION\" query using column \"INTEGER-EVENT\" and parameters \"EQUALS\" and \"BETWEEN\".",
         "columns": [
             {
-                "type": "integer-time-series",
+                "type": "integer-event",
                 "api-name": "time-series-integer-test-column",
                 "name": "time_series_integer_test_column"
             }
@@ -10554,13 +10554,13 @@
         }
     },
     {
-        "name": "Test for an \"AGGREGATION\" query using column \"DECIMAL-TIME-SERIES\" and parameters \"EQUALS\" and \"BETWEEN\".",
+        "name": "Test for an \"AGGREGATION\" query using column \"DECIMAL-EVENT\" and parameters \"EQUALS\" and \"BETWEEN\".",
         "columns": [
             {
                 "decimal-places": 3,
                 "api-name": "time-series-decimal-test-column",
                 "name": "time_series_decimal_test_column",
-                "type": "decimal-time-series"
+                "type": "decimal-event"
             }
         ],
         "insert": {
@@ -12193,10 +12193,10 @@
         }
     },
     {
-        "name": "Test for an \"AGGREGATION\" query using column \"INTEGER-TIME-SERIES\" and parameter \"BETWEEN\" with \"MIN\" metric.",
+        "name": "Test for an \"AGGREGATION\" query using column \"INTEGER-EVENT\" and parameter \"BETWEEN\" with \"MIN\" metric.",
         "columns": [
             {
-                "type": "integer-time-series",
+                "type": "integer-event",
                 "api-name": "time-series-integer-test-column",
                 "name": "time_series_integer_test_column"
             }
@@ -13025,10 +13025,10 @@
         }
     },
     {
-        "name": "Test for an \"AGGREGATION\" query using column \"INTEGER-TIME-SERIES\" and parameter \"BETWEEN\" with \"MAX\" metric.",
+        "name": "Test for an \"AGGREGATION\" query using column \"INTEGER-EVENT\" and parameter \"BETWEEN\" with \"MAX\" metric.",
         "columns": [
             {
-                "type": "integer-time-series",
+                "type": "integer-event",
                 "api-name": "time-series-integer-test-column",
                 "name": "time_series_integer_test_column"
             }
@@ -13857,10 +13857,10 @@
         }
     },
     {
-        "name": "Test for an \"AGGREGATION\" query using column \"INTEGER-TIME-SERIES\" and parameter \"BETWEEN\" with \"SUM\" metric.",
+        "name": "Test for an \"AGGREGATION\" query using column \"INTEGER-EVENT\" and parameter \"BETWEEN\" with \"SUM\" metric.",
         "columns": [
             {
-                "type": "integer-time-series",
+                "type": "integer-event",
                 "api-name": "time-series-integer-test-column",
                 "name": "time_series_integer_test_column"
             }
@@ -14689,10 +14689,10 @@
         }
     },
     {
-        "name": "Test for an \"AGGREGATION\" query using column \"INTEGER-TIME-SERIES\" and parameter \"BETWEEN\" with \"COUNT-EVENTS\" metric.",
+        "name": "Test for an \"AGGREGATION\" query using column \"INTEGER-EVENT\" and parameter \"BETWEEN\" with \"COUNT-EVENTS\" metric.",
         "columns": [
             {
-                "type": "integer-time-series",
+                "type": "integer-event",
                 "api-name": "time-series-integer-test-column",
                 "name": "time_series_integer_test_column"
             }
@@ -15521,13 +15521,13 @@
         }
     },
     {
-        "name": "Test for an \"AGGREGATION\" query using column \"DECIMAL-TIME-SERIES\" and parameter \"BETWEEN\" with \"MIN\" metric.",
+        "name": "Test for an \"AGGREGATION\" query using column \"DECIMAL-EVENT\" and parameter \"BETWEEN\" with \"MIN\" metric.",
         "columns": [
             {
                 "decimal-places": 3,
                 "api-name": "time-series-decimal-test-column",
                 "name": "time_series_decimal_test_column",
-                "type": "decimal-time-series"
+                "type": "decimal-event"
             }
         ],
         "insert": {
@@ -16354,13 +16354,13 @@
         }
     },
     {
-        "name": "Test for an \"AGGREGATION\" query using column \"DECIMAL-TIME-SERIES\" and parameter \"BETWEEN\" with \"MAX\" metric.",
+        "name": "Test for an \"AGGREGATION\" query using column \"DECIMAL-EVENT\" and parameter \"BETWEEN\" with \"MAX\" metric.",
         "columns": [
             {
                 "decimal-places": 3,
                 "api-name": "time-series-decimal-test-column",
                 "name": "time_series_decimal_test_column",
-                "type": "decimal-time-series"
+                "type": "decimal-event"
             }
         ],
         "insert": {
@@ -17187,13 +17187,13 @@
         }
     },
     {
-        "name": "Test for an \"AGGREGATION\" query using column \"DECIMAL-TIME-SERIES\" and parameter \"BETWEEN\" with \"SUM\" metric.",
+        "name": "Test for an \"AGGREGATION\" query using column \"DECIMAL-EVENT\" and parameter \"BETWEEN\" with \"SUM\" metric.",
         "columns": [
             {
                 "decimal-places": 3,
                 "api-name": "time-series-decimal-test-column",
                 "name": "time_series_decimal_test_column",
-                "type": "decimal-time-series"
+                "type": "decimal-event"
             }
         ],
         "insert": {
@@ -18020,13 +18020,13 @@
         }
     },
     {
-        "name": "Test for an \"AGGREGATION\" query using column \"DECIMAL-TIME-SERIES\" and parameter \"BETWEEN\" with \"COUNT-EVENTS\" metric.",
+        "name": "Test for an \"AGGREGATION\" query using column \"DECIMAL-EVENT\" and parameter \"BETWEEN\" with \"COUNT-EVENTS\" metric.",
         "columns": [
             {
                 "decimal-places": 3,
                 "api-name": "time-series-decimal-test-column",
                 "name": "time_series_decimal_test_column",
-                "type": "decimal-time-series"
+                "type": "decimal-event"
             }
         ],
         "insert": {
@@ -18853,7 +18853,7 @@
         }
     },
     {
-        "name": "Test for an \"AGGREGATION\" query using columns \"STRING\", \"INTEGER\" and \"STRING-TIME-SERIES\", operator \"AND\" and parameters \"EQUALS\" and \"BETWEEN\".",
+        "name": "Test for an \"AGGREGATION\" query using columns \"STRING\", \"INTEGER\" and \"STRING-EVENT\", operator \"AND\" and parameters \"EQUALS\" and \"BETWEEN\".",
         "columns": [
             {
                 "storage": "latest-value",
@@ -18869,7 +18869,7 @@
                 "api-name": "integer-test-column"
             },
             {
-                "type": "string-time-series",
+                "type": "string-event",
                 "api-name": "time-series-string-test-column",
                 "name": "time_series_string_test_column"
             }
@@ -20714,7 +20714,7 @@
         }
     },
     {
-        "name": "Test for an \"AGGREGATION\" query using columns \"STRING\", \"INTEGER\" and \"INTEGER-TIME-SERIES\", operator \"AND\" and parameters \"EQUALS\" and \"BETWEEN\".",
+        "name": "Test for an \"AGGREGATION\" query using columns \"STRING\", \"INTEGER\" and \"INTEGER-EVENT\", operator \"AND\" and parameters \"EQUALS\" and \"BETWEEN\".",
         "columns": [
             {
                 "storage": "latest-value",
@@ -20730,7 +20730,7 @@
                 "api-name": "integer-test-column"
             },
             {
-                "type": "integer-time-series",
+                "type": "integer-event",
                 "api-name": "time-series-integer-test-column",
                 "name": "time_series_integer_test_column"
             }
@@ -22575,7 +22575,7 @@
         }
     },
     {
-        "name": "Test for an \"AGGREGATION\" query using columns \"STRING\", \"INTEGER\" and \"DECIMAL-TIME-SERIES\", operator \"AND\" and parameters \"EQUALS\" and \"BETWEEN\".",
+        "name": "Test for an \"AGGREGATION\" query using columns \"STRING\", \"INTEGER\" and \"DECIMAL-EVENT\", operator \"AND\" and parameters \"EQUALS\" and \"BETWEEN\".",
         "columns": [
             {
                 "storage": "latest-value",
@@ -22594,7 +22594,7 @@
                 "decimal-places": 3,
                 "api-name": "time-series-decimal-test-column",
                 "name": "time_series_decimal_test_column",
-                "type": "decimal-time-series"
+                "type": "decimal-event"
             }
         ],
         "insert": {
@@ -24437,7 +24437,7 @@
         }
     },
     {
-        "name": "Test for an \"AGGREGATION\" query using columns \"STRING\", \"INTEGER\" and \"STRING-TIME-SERIES\", operator \"OR\" and parameters \"EQUALS\" and \"BETWEEN\".",
+        "name": "Test for an \"AGGREGATION\" query using columns \"STRING\", \"INTEGER\" and \"STRING-EVENT\", operator \"OR\" and parameters \"EQUALS\" and \"BETWEEN\".",
         "columns": [
             {
                 "storage": "latest-value",
@@ -24453,7 +24453,7 @@
                 "api-name": "integer-test-column"
             },
             {
-                "type": "string-time-series",
+                "type": "string-event",
                 "api-name": "time-series-string-test-column",
                 "name": "time_series_string_test_column"
             }
@@ -26298,7 +26298,7 @@
         }
     },
     {
-        "name": "Test for an \"AGGREGATION\" query using columns \"STRING\", \"INTEGER\" and \"INTEGER-TIME-SERIES\", operator \"OR\" and parameters \"EQUALS\" and \"BETWEEN\".",
+        "name": "Test for an \"AGGREGATION\" query using columns \"STRING\", \"INTEGER\" and \"INTEGER-EVENT\", operator \"OR\" and parameters \"EQUALS\" and \"BETWEEN\".",
         "columns": [
             {
                 "storage": "latest-value",
@@ -26314,7 +26314,7 @@
                 "api-name": "integer-test-column"
             },
             {
-                "type": "integer-time-series",
+                "type": "integer-event",
                 "api-name": "time-series-integer-test-column",
                 "name": "time_series_integer_test_column"
             }
@@ -28159,7 +28159,7 @@
         }
     },
     {
-        "name": "Test for an \"AGGREGATION\" query using columns \"STRING\", \"INTEGER\" and \"DECIMAL-TIME-SERIES\", operator \"OR\" and parameters \"EQUALS\" and \"BETWEEN\".",
+        "name": "Test for an \"AGGREGATION\" query using columns \"STRING\", \"INTEGER\" and \"DECIMAL-EVENT\", operator \"OR\" and parameters \"EQUALS\" and \"BETWEEN\".",
         "columns": [
             {
                 "storage": "latest-value",
@@ -28178,7 +28178,7 @@
                 "decimal-places": 3,
                 "api-name": "time-series-decimal-test-column",
                 "name": "time_series_decimal_test_column",
-                "type": "decimal-time-series"
+                "type": "decimal-event"
             }
         ],
         "insert": {
@@ -30021,7 +30021,7 @@
         }
     },
     {
-        "name": "Test for an \"AGGREGATION\" query using columns \"STRING\" and \"STRING-TIME-SERIES\" and parameters \"EQUALS\" and \"BETWEEN\".",
+        "name": "Test for an \"AGGREGATION\" query using columns \"STRING\" and \"STRING-EVENT\" and parameters \"EQUALS\" and \"BETWEEN\".",
         "columns": [
             {
                 "storage": "latest-value",
@@ -30031,7 +30031,7 @@
                 "api-name": "string-test-column"
             },
             {
-                "type": "string-time-series",
+                "type": "string-event",
                 "api-name": "time-series-string-test-column",
                 "name": "time_series_string_test_column"
             }
@@ -31770,7 +31770,7 @@
         }
     },
     {
-        "name": "Test for an \"AGGREGATION\" query using columns \"STRING\" and \"INTEGER-TIME-SERIES\" and parameters \"EQUALS\" and \"BETWEEN\".",
+        "name": "Test for an \"AGGREGATION\" query using columns \"STRING\" and \"INTEGER-EVENT\" and parameters \"EQUALS\" and \"BETWEEN\".",
         "columns": [
             {
                 "storage": "latest-value",
@@ -31780,7 +31780,7 @@
                 "api-name": "string-test-column"
             },
             {
-                "type": "integer-time-series",
+                "type": "integer-event",
                 "api-name": "time-series-integer-test-column",
                 "name": "time_series_integer_test_column"
             }
@@ -33519,7 +33519,7 @@
         }
     },
     {
-        "name": "Test for an \"AGGREGATION\" query using columns \"STRING\" and \"DECIMAL-TIME-SERIES\" and parameters \"EQUALS\" and \"BETWEEN\".",
+        "name": "Test for an \"AGGREGATION\" query using columns \"STRING\" and \"DECIMAL-EVENT\" and parameters \"EQUALS\" and \"BETWEEN\".",
         "columns": [
             {
                 "storage": "latest-value",
@@ -33532,7 +33532,7 @@
                 "decimal-places": 3,
                 "api-name": "time-series-decimal-test-column",
                 "name": "time_series_decimal_test_column",
-                "type": "decimal-time-series"
+                "type": "decimal-event"
             }
         ],
         "insert": {
@@ -35269,10 +35269,10 @@
         }
     },
     {
-        "name": "Test for an \"AGGREGATION\" query using column \"INTEGER-TIME-SERIES\" and parameter \"BETWEEN\" with \"MIN\" metric and histogram.",
+        "name": "Test for an \"AGGREGATION\" query using column \"INTEGER-EVENT\" and parameter \"BETWEEN\" with \"MIN\" metric and histogram.",
         "columns": [
             {
-                "type": "integer-time-series",
+                "type": "integer-event",
                 "api-name": "time-series-integer-test-column",
                 "name": "time_series_integer_test_column"
             }
@@ -36908,10 +36908,10 @@
         }
     },
     {
-        "name": "Test for an \"AGGREGATION\" query using column \"INTEGER-TIME-SERIES\" and parameter \"BETWEEN\" with \"MAX\" metric and histogram.",
+        "name": "Test for an \"AGGREGATION\" query using column \"INTEGER-EVENT\" and parameter \"BETWEEN\" with \"MAX\" metric and histogram.",
         "columns": [
             {
-                "type": "integer-time-series",
+                "type": "integer-event",
                 "api-name": "time-series-integer-test-column",
                 "name": "time_series_integer_test_column"
             }
@@ -38547,10 +38547,10 @@
         }
     },
     {
-        "name": "Test for an \"AGGREGATION\" query using column \"INTEGER-TIME-SERIES\" and parameter \"BETWEEN\" with \"AVG\" metric and histogram.",
+        "name": "Test for an \"AGGREGATION\" query using column \"INTEGER-EVENT\" and parameter \"BETWEEN\" with \"AVG\" metric and histogram.",
         "columns": [
             {
-                "type": "integer-time-series",
+                "type": "integer-event",
                 "api-name": "time-series-integer-test-column",
                 "name": "time_series_integer_test_column"
             }
@@ -40186,10 +40186,10 @@
         }
     },
     {
-        "name": "Test for an \"AGGREGATION\" query using column \"INTEGER-TIME-SERIES\" and parameter \"BETWEEN\" with \"SUM\" metric and histogram.",
+        "name": "Test for an \"AGGREGATION\" query using column \"INTEGER-EVENT\" and parameter \"BETWEEN\" with \"SUM\" metric and histogram.",
         "columns": [
             {
-                "type": "integer-time-series",
+                "type": "integer-event",
                 "api-name": "time-series-integer-test-column",
                 "name": "time_series_integer_test_column"
             }
@@ -41825,10 +41825,10 @@
         }
     },
     {
-        "name": "Test for an \"AGGREGATION\" query using column \"INTEGER-TIME-SERIES\" and parameter \"BETWEEN\" with \"COUNT-EVENTS\" metric and histogram.",
+        "name": "Test for an \"AGGREGATION\" query using column \"INTEGER-EVENT\" and parameter \"BETWEEN\" with \"COUNT-EVENTS\" metric and histogram.",
         "columns": [
             {
-                "type": "integer-time-series",
+                "type": "integer-event",
                 "api-name": "time-series-integer-test-column",
                 "name": "time_series_integer_test_column"
             }
@@ -43464,13 +43464,13 @@
         }
     },
     {
-        "name": "Test for an \"AGGREGATION\" query using column \"DECIMAL-TIME-SERIES\" and parameter \"BETWEEN\" with \"MIN\" metric and histogram.",
+        "name": "Test for an \"AGGREGATION\" query using column \"DECIMAL-EVENT\" and parameter \"BETWEEN\" with \"MIN\" metric and histogram.",
         "columns": [
             {
                 "decimal-places": 3,
                 "api-name": "time-series-decimal-test-column",
                 "name": "time_series_decimal_test_column",
-                "type": "decimal-time-series"
+                "type": "decimal-event"
             }
         ],
         "insert": {
@@ -45104,13 +45104,13 @@
         }
     },
     {
-        "name": "Test for an \"AGGREGATION\" query using column \"DECIMAL-TIME-SERIES\" and parameter \"BETWEEN\" with \"MAX\" metric and histogram.",
+        "name": "Test for an \"AGGREGATION\" query using column \"DECIMAL-EVENT\" and parameter \"BETWEEN\" with \"MAX\" metric and histogram.",
         "columns": [
             {
                 "decimal-places": 3,
                 "api-name": "time-series-decimal-test-column",
                 "name": "time_series_decimal_test_column",
-                "type": "decimal-time-series"
+                "type": "decimal-event"
             }
         ],
         "insert": {
@@ -46744,13 +46744,13 @@
         }
     },
     {
-        "name": "Test for an \"AGGREGATION\" query using column \"DECIMAL-TIME-SERIES\" and parameter \"BETWEEN\" with \"AVG\" metric and histogram.",
+        "name": "Test for an \"AGGREGATION\" query using column \"DECIMAL-EVENT\" and parameter \"BETWEEN\" with \"AVG\" metric and histogram.",
         "columns": [
             {
                 "decimal-places": 3,
                 "api-name": "time-series-decimal-test-column",
                 "name": "time_series_decimal_test_column",
-                "type": "decimal-time-series"
+                "type": "decimal-event"
             }
         ],
         "insert": {
@@ -48384,13 +48384,13 @@
         }
     },
     {
-        "name": "Test for an \"AGGREGATION\" query using column \"DECIMAL-TIME-SERIES\" and parameter \"BETWEEN\" with \"SUM\" metric and histogram.",
+        "name": "Test for an \"AGGREGATION\" query using column \"DECIMAL-EVENT\" and parameter \"BETWEEN\" with \"SUM\" metric and histogram.",
         "columns": [
             {
                 "decimal-places": 3,
                 "api-name": "time-series-decimal-test-column",
                 "name": "time_series_decimal_test_column",
-                "type": "decimal-time-series"
+                "type": "decimal-event"
             }
         ],
         "insert": {
@@ -50024,13 +50024,13 @@
         }
     },
     {
-        "name": "Test for an \"AGGREGATION\" query using column \"DECIMAL-TIME-SERIES\" and parameter \"BETWEEN\" with \"COUNT-EVENTS\" metric and histogram.",
+        "name": "Test for an \"AGGREGATION\" query using column \"DECIMAL-EVENT\" and parameter \"BETWEEN\" with \"COUNT-EVENTS\" metric and histogram.",
         "columns": [
             {
                 "decimal-places": 3,
                 "api-name": "time-series-decimal-test-column",
                 "name": "time_series_decimal_test_column",
-                "type": "decimal-time-series"
+                "type": "decimal-event"
             }
         ],
         "insert": {
@@ -51664,10 +51664,10 @@
         }
     },
     {
-        "name": "Test for an \"AGGREGATION\" query using column \"INTEGER-TIME-SERIES\" and parameter \"BETWEEN\" with \"MIN\" metric.",
+        "name": "Test for an \"AGGREGATION\" query using column \"INTEGER-EVENT\" and parameter \"BETWEEN\" with \"MIN\" metric.",
         "columns": [
             {
-                "type": "integer-time-series",
+                "type": "integer-event",
                 "api-name": "time-series-integer-test-column",
                 "name": "time_series_integer_test_column"
             }
@@ -53328,10 +53328,10 @@
         }
     },
     {
-        "name": "Test for an \"AGGREGATION\" query using column \"INTEGER-TIME-SERIES\" and parameter \"BETWEEN\" with \"MAX\" metric.",
+        "name": "Test for an \"AGGREGATION\" query using column \"INTEGER-EVENT\" and parameter \"BETWEEN\" with \"MAX\" metric.",
         "columns": [
             {
-                "type": "integer-time-series",
+                "type": "integer-event",
                 "api-name": "time-series-integer-test-column",
                 "name": "time_series_integer_test_column"
             }
@@ -54992,10 +54992,10 @@
         }
     },
     {
-        "name": "Test for an \"AGGREGATION\" query using column \"INTEGER-TIME-SERIES\" and parameter \"BETWEEN\" with \"AVG\" metric.",
+        "name": "Test for an \"AGGREGATION\" query using column \"INTEGER-EVENT\" and parameter \"BETWEEN\" with \"AVG\" metric.",
         "columns": [
             {
-                "type": "integer-time-series",
+                "type": "integer-event",
                 "api-name": "time-series-integer-test-column",
                 "name": "time_series_integer_test_column"
             }
@@ -56656,10 +56656,10 @@
         }
     },
     {
-        "name": "Test for an \"AGGREGATION\" query using column \"INTEGER-TIME-SERIES\" and parameter \"BETWEEN\" with UTC timezone when inserting.",
+        "name": "Test for an \"AGGREGATION\" query using column \"INTEGER-EVENT\" and parameter \"BETWEEN\" with UTC timezone when inserting.",
         "columns": [
             {
-                "type": "integer-time-series",
+                "type": "integer-event",
                 "api-name": "time-series-integer-test-column",
                 "name": "time_series_integer_test_column"
             }
@@ -57483,10 +57483,10 @@
         }
     },
     {
-        "name": "Test for an \"AGGREGATION\" query using column \"INTEGER-TIME-SERIES\" and parameter \"BETWEEN\" with -3h timezone when inserting.",
+        "name": "Test for an \"AGGREGATION\" query using column \"INTEGER-EVENT\" and parameter \"BETWEEN\" with -3h timezone when inserting.",
         "columns": [
             {
-                "type": "integer-time-series",
+                "type": "integer-event",
                 "api-name": "time-series-integer-test-column",
                 "name": "time_series_integer_test_column"
             }
@@ -58310,10 +58310,10 @@
         }
     },
     {
-        "name": "Test for an \"AGGREGATION\" query using column \"INTEGER-TIME-SERIES\" and parameter \"BETWEEN\" with +3h timezone when inserting.",
+        "name": "Test for an \"AGGREGATION\" query using column \"INTEGER-EVENT\" and parameter \"BETWEEN\" with +3h timezone when inserting.",
         "columns": [
             {
-                "type": "integer-time-series",
+                "type": "integer-event",
                 "api-name": "time-series-integer-test-column",
                 "name": "time_series_integer_test_column"
             }
@@ -59140,10 +59140,10 @@
         }
     },
     {
-        "name": "Test for an \"AGGREGATION\" query using column \"INTEGER-TIME-SERIES\" and parameter \"BETWEEN\" with +3h timezone when inserting and querying.",
+        "name": "Test for an \"AGGREGATION\" query using column \"INTEGER-EVENT\" and parameter \"BETWEEN\" with +3h timezone when inserting and querying.",
         "columns": [
             {
-                "type": "integer-time-series",
+                "type": "integer-event",
                 "api-name": "time-series-integer-test-column",
                 "name": "time_series_integer_test_column"
             }
@@ -59967,10 +59967,10 @@
         }
     },
     {
-        "name": "Test for an \"AGGREGATION\" query using column \"INTEGER-TIME-SERIES\" and parameter \"BETWEEN\" with UTC timezone when inserting and relative interval containing \"WEEK\".",
+        "name": "Test for an \"AGGREGATION\" query using column \"INTEGER-EVENT\" and parameter \"BETWEEN\" with UTC timezone when inserting and relative interval containing \"WEEK\".",
         "columns": [
             {
-                "type": "integer-time-series",
+                "type": "integer-event",
                 "api-name": "time-series-integer-test-column",
                 "name": "time_series_integer_test_column"
             }
@@ -60794,10 +60794,10 @@
         }
     },
     {
-        "name": "Test for an \"AGGREGATION\" query using column \"INTEGER-TIME-SERIES\" and parameter \"BETWEEN\" with UTC timezone when querying and relative interval containing \"NOW\".",
+        "name": "Test for an \"AGGREGATION\" query using column \"INTEGER-EVENT\" and parameter \"BETWEEN\" with UTC timezone when querying and relative interval containing \"NOW\".",
         "columns": [
             {
-                "type": "integer-time-series",
+                "type": "integer-event",
                 "api-name": "time-series-integer-test-column",
                 "name": "time_series_integer_test_column"
             }
@@ -61522,10 +61522,10 @@
         }
     },
     {
-        "name": "Test for an \"AGGREGATION\" query using column \"INTEGER-TIME-SERIES\" and parameter \"BETWEEN\" with relative interval containing \"NOW\" and \"SECONDS\".",
+        "name": "Test for an \"AGGREGATION\" query using column \"INTEGER-EVENT\" and parameter \"BETWEEN\" with relative interval containing \"NOW\" and \"SECONDS\".",
         "columns": [
             {
-                "type": "integer-time-series",
+                "type": "integer-event",
                 "api-name": "time-series-integer-test-column",
                 "name": "time_series_integer_test_column"
             }
@@ -62250,10 +62250,10 @@
         }
     },
     {
-        "name": "Test for an \"AGGREGATION\" query using column \"INTEGER-TIME-SERIES\" and parameter \"BETWEEN\" with \"MIN\" metric and relative interval containing \"NOW\" and \"MINUTE\".",
+        "name": "Test for an \"AGGREGATION\" query using column \"INTEGER-EVENT\" and parameter \"BETWEEN\" with \"MIN\" metric and relative interval containing \"NOW\" and \"MINUTE\".",
         "columns": [
             {
-                "type": "integer-time-series",
+                "type": "integer-event",
                 "api-name": "time-series-integer-test-column",
                 "name": "time_series_integer_test_column"
             }
@@ -62978,10 +62978,10 @@
         }
     },
     {
-        "name": "Test for an \"AGGREGATION\" query using column \"INTEGER-TIME-SERIES\" and parameter \"BETWEEN\" with relative interval containing \"NOW\" and \"HOUR\".",
+        "name": "Test for an \"AGGREGATION\" query using column \"INTEGER-EVENT\" and parameter \"BETWEEN\" with relative interval containing \"NOW\" and \"HOUR\".",
         "columns": [
             {
-                "type": "integer-time-series",
+                "type": "integer-event",
                 "api-name": "time-series-integer-test-column",
                 "name": "time_series_integer_test_column"
             }
@@ -63706,10 +63706,10 @@
         }
     },
     {
-        "name": "Test for an \"AGGREGATION\" query using column \"INTEGER-TIME-SERIES\" and parameter \"BETWEEN\" with relative interval containing \"NOW\" and \"DAY\".",
+        "name": "Test for an \"AGGREGATION\" query using column \"INTEGER-EVENT\" and parameter \"BETWEEN\" with relative interval containing \"NOW\" and \"DAY\".",
         "columns": [
             {
-                "type": "integer-time-series",
+                "type": "integer-event",
                 "api-name": "time-series-integer-test-column",
                 "name": "time_series_integer_test_column"
             }
@@ -64434,10 +64434,10 @@
         }
     },
     {
-        "name": "Test for an \"AGGREGATION\" query using column \"INTEGER-TIME-SERIES\" and parameter \"BETWEEN\" with relative interval containing \"NOW\" and \"WEEK\".",
+        "name": "Test for an \"AGGREGATION\" query using column \"INTEGER-EVENT\" and parameter \"BETWEEN\" with relative interval containing \"NOW\" and \"WEEK\".",
         "columns": [
             {
-                "type": "integer-time-series",
+                "type": "integer-event",
                 "api-name": "time-series-integer-test-column",
                 "name": "time_series_integer_test_column"
             }
@@ -65162,10 +65162,10 @@
         }
     },
     {
-        "name": "Test for an \"AGGREGATION\" query using column \"INTEGER-TIME-SERIES\" and parameter \"BETWEEN\" with relative interval containing \"NOW\" and \"MONTH\".",
+        "name": "Test for an \"AGGREGATION\" query using column \"INTEGER-EVENT\" and parameter \"BETWEEN\" with relative interval containing \"NOW\" and \"MONTH\".",
         "columns": [
             {
-                "type": "integer-time-series",
+                "type": "integer-event",
                 "api-name": "time-series-integer-test-column",
                 "name": "time_series_integer_test_column"
             }
@@ -65890,10 +65890,10 @@
         }
     },
     {
-        "name": "Test for an \"AGGREGATION\" query using column \"INTEGER-TIME-SERIES\" and parameter \"BETWEEN\" with relative interval containing \"NOW\" and \"YEAR\".",
+        "name": "Test for an \"AGGREGATION\" query using column \"INTEGER-EVENT\" and parameter \"BETWEEN\" with relative interval containing \"NOW\" and \"YEAR\".",
         "columns": [
             {
-                "type": "integer-time-series",
+                "type": "integer-event",
                 "api-name": "time-series-integer-test-column",
                 "name": "time_series_integer_test_column"
             }
@@ -66618,10 +66618,10 @@
         }
     },
     {
-        "name": "Test for an \"AGGREGATION\" query using column \"INTEGER-TIME-SERIES\" and parameter \"BETWEEN\" with +3h timezone when inserting and querying.",
+        "name": "Test for an \"AGGREGATION\" query using column \"INTEGER-EVENT\" and parameter \"BETWEEN\" with +3h timezone when inserting and querying.",
         "columns": [
             {
-                "type": "integer-time-series",
+                "type": "integer-event",
                 "api-name": "time-series-integer-test-column",
                 "name": "time_series_integer_test_column"
             }
@@ -67445,10 +67445,10 @@
         }
     },
     {
-        "name": "Test for an \"AGGREGATION\" query using column \"INTEGER-TIME-SERIES\" and parameter \"BETWEEN\" with UTC timezone when inserting and relative interval containing \"WEEK\".",
+        "name": "Test for an \"AGGREGATION\" query using column \"INTEGER-EVENT\" and parameter \"BETWEEN\" with UTC timezone when inserting and relative interval containing \"WEEK\".",
         "columns": [
             {
-                "type": "integer-time-series",
+                "type": "integer-event",
                 "api-name": "time-series-integer-test-column",
                 "name": "time_series_integer_test_column"
             }
@@ -68272,10 +68272,10 @@
         }
     },
     {
-        "name": "Test for an \"AGGREGATION\" query using column \"INTEGER-TIME-SERIES\" and parameter \"BETWEEN\" with relative interval containing \"TODAY\".",
+        "name": "Test for an \"AGGREGATION\" query using column \"INTEGER-EVENT\" and parameter \"BETWEEN\" with relative interval containing \"TODAY\".",
         "columns": [
             {
-                "type": "integer-time-series",
+                "type": "integer-event",
                 "api-name": "time-series-integer-test-column",
                 "name": "time_series_integer_test_column"
             }

@@ -334,7 +334,7 @@
         }
     }, 
     {
-        "name": "Test for a \"SCORE\" query using columns \"STRING\", \"BOOLEAN\", \"INTEGER\", \"DATETIME\", \"STRING-TIME-SERIES\" and \"STRING-TIME-SERIES\", operators \"AND\", \"OR\" and \"FREQGROUP\" and parameters \"EQUALS\", \"BETWEEN\" and \"MINFREQ\".",
+        "name": "Test for a \"SCORE\" query using columns \"STRING\", \"BOOLEAN\", \"INTEGER\", \"DATETIME\", \"STRING-EVENT\" and \"STRING-EVENT\", operators \"AND\", \"OR\" and \"FREQGROUP\" and parameters \"EQUALS\", \"BETWEEN\" and \"MINFREQ\".",
         "columns": [
             {
                 "storage": "latest-value",
@@ -362,12 +362,12 @@
                 "name": "datetime_test_column"
             },
             {
-                "type": "string-time-series",
+                "type": "string-event",
                 "api-name": "time-series-string-test-column",
                 "name": "time_series_string_test_column"
             },
             {
-                "type": "string-time-series",
+                "type": "string-event",
                 "api-name": "time-series-string-test-second-column",
                 "name": "time_series_string_test_column_2"
             }
@@ -2560,7 +2560,7 @@
         }
     },
     {
-        "name": "Test for a \"SCORE\" query using columns \"STRING\", \"BOOLEAN\", \"INTEGER\", \"DATETIME\", \"INTEGER-TIME-SERIES\" and \"DECIMAL-TIME-SERIES\", operators \"AND\", \"OR\" and \"FREQGROUP\" and parameters \"EQUALS\", \"BETWEEN\" and \"MINFREQ\".",
+        "name": "Test for a \"SCORE\" query using columns \"STRING\", \"BOOLEAN\", \"INTEGER\", \"DATETIME\", \"INTEGER-EVENT\" and \"DECIMAL-EVENT\", operators \"AND\", \"OR\" and \"FREQGROUP\" and parameters \"EQUALS\", \"BETWEEN\" and \"MINFREQ\".",
         "columns": [
             {
                 "storage": "latest-value",
@@ -2588,12 +2588,12 @@
                 "name": "datetime_test_column"
             },
             {
-                "type": "integer-time-series",
+                "type": "integer-event",
                 "api-name": "time-series-integer-test-column",
                 "name": "time_series_integer_test_column"
             },
             {
-                "type": "decimal-time-series",
+                "type": "decimal-event",
                 "api-name": "time-series-decimal-test-column",
                 "name": "time_series_decimal_test_column_2",
                 "decimal-places": 3
@@ -4787,7 +4787,7 @@
         }
     },
     {
-        "name": "Test for a \"SCORE\" query using columns \"STRING\", \"BOOLEAN\", \"INTEGER\", \"DATETIME\", \"INTEGER-TIME-SERIES\" and \"DECIMAL-TIME-SERIES\", operators \"AND\", \"OR\" and \"FREQGROUP\" and parameters \"EQUALS\", \"BETWEEN\" and \"MINFREQ\" WITH TIME SERIES COLUMN.",
+        "name": "Test for a \"SCORE\" query using columns \"STRING\", \"BOOLEAN\", \"INTEGER\", \"DATETIME\", \"INTEGER-EVENT\" and \"DECIMAL-EVENT\", operators \"AND\", \"OR\" and \"FREQGROUP\" and parameters \"EQUALS\", \"BETWEEN\" and \"MINFREQ\" WITH TIME SERIES COLUMN.",
         "columns": [
             {
                 "storage": "latest-value",
@@ -4815,12 +4815,12 @@
                 "name": "datetime_test_column"
             },
             {
-                "type": "integer-time-series",
+                "type": "integer-event",
                 "api-name": "time-series-integer-test-column",
                 "name": "time_series_integer_test_column"
             },
             {
-                "type": "decimal-time-series",
+                "type": "decimal-event",
                 "api-name": "time-series-decimal-test-column",
                 "name": "time_series_decimal_test_column_2",
                 "decimal-places": 3

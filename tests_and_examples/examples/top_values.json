@@ -1,10 +1,10 @@
 [
     {
-        "name": "Test for a \"TOP VALUES\" query using column \"STRING-TIME-SERIES\" and parameter \"EQUALS\".",
+        "name": "Test for a \"TOP VALUES\" query using column \"STRING-EVENT\" and parameter \"EQUALS\".",
         "columns": [
             {
                 "api-name": "time-series-string-test-column",
-                "type": "string-time-series",
+                "type": "string-event",
                 "name": "time_series_string_test_column"
             }
         ],
@@ -2265,11 +2265,11 @@
         }
     },
     {
-        "name": "Test for a \"TOP VALUES\" query using column \"STRING-TIME-SERIES\" and parameter \"CONTAINS\".",
+        "name": "Test for a \"TOP VALUES\" query using column \"STRING-EVENT\" and parameter \"CONTAINS\".",
         "columns": [
             {
                 "api-name": "time-series-string-test-column",
-                "type": "string-time-series",
+                "type": "string-event",
                 "name": "time_series_string_test_column"
             }
         ],
@@ -3849,11 +3849,11 @@
         }
     },
     {
-        "name": "Test for a \"TOP VALUES\" query using column \"STRING-TIME-SERIES\", operator \"NOT\" and parameter \"NOT-CONTAINS\".",
+        "name": "Test for a \"TOP VALUES\" query using column \"STRING-EVENT\", operator \"NOT\" and parameter \"NOT-CONTAINS\".",
         "columns": [
             {
                 "api-name": "time-series-string-test-column",
-                "type": "string-time-series",
+                "type": "string-event",
                 "name": "time_series_string_test_column"
             }
         ],
@@ -5435,11 +5435,11 @@
         }
     },
     {
-        "name": "Test for a \"TOP VALUES\" query using column \"STRING-TIME-SERIES\" and parameter \"STARTS-WITH\".",
+        "name": "Test for a \"TOP VALUES\" query using column \"STRING-EVENT\" and parameter \"STARTS-WITH\".",
         "columns": [
             {
                 "api-name": "time-series-string-test-column",
-                "type": "string-time-series",
+                "type": "string-event",
                 "name": "time_series_string_test_column"
             }
         ],
@@ -7019,11 +7019,11 @@
         }
     },
     {
-        "name": "Test for a \"TOP VALUES\" query using column \"STRING-TIME-SERIES\" and parameter \"ENDS-WITH\".",
+        "name": "Test for a \"TOP VALUES\" query using column \"STRING-EVENT\" and parameter \"ENDS-WITH\".",
         "columns": [
             {
                 "api-name": "time-series-string-test-column",
-                "type": "string-time-series",
+                "type": "string-event",
                 "name": "time_series_string_test_column"
             }
         ],
@@ -8603,11 +8603,11 @@
         }
     },
     {
-        "name": "Test for a \"TOP VALUES\" query using column \"STRING-TIME-SERIES\" and parameter \"EQUALS\" with UTC timezone when inserting.",
+        "name": "Test for a \"TOP VALUES\" query using column \"STRING-EVENT\" and parameter \"EQUALS\" with UTC timezone when inserting.",
         "columns": [
             {
                 "api-name": "time-series-string-test-column",
-                "type": "string-time-series",
+                "type": "string-event",
                 "name": "time_series_string_test_column"
             }
         ],
@@ -9846,11 +9846,11 @@
         }
     },
     {
-        "name": "Test for a \"TOP VALUES\" query using column \"STRING-TIME-SERIES\" and parameter \"EQUALS\" with -3h timezone when inserting.",
+        "name": "Test for a \"TOP VALUES\" query using column \"STRING-EVENT\" and parameter \"EQUALS\" with -3h timezone when inserting.",
         "columns": [
             {
                 "api-name": "time-series-string-test-column",
-                "type": "string-time-series",
+                "type": "string-event",
                 "name": "time_series_string_test_column"
             }
         ],
@@ -11089,11 +11089,11 @@
         }
     },
     {
-        "name": "Test for a \"TOP VALUES\" query using column \"STRING-TIME-SERIES\" and parameter \"EQUALS\" with +3h timezone when inserting.",
+        "name": "Test for a \"TOP VALUES\" query using column \"STRING-EVENT\" and parameter \"EQUALS\" with +3h timezone when inserting.",
         "columns": [
             {
                 "api-name": "time-series-string-test-column",
-                "type": "string-time-series",
+                "type": "string-event",
                 "name": "time_series_string_test_column"
             }
         ],
@@ -12332,11 +12332,11 @@
         }
     },
     {
-        "name": "Test for a \"TOP VALUES\" query using column \"STRING-TIME-SERIES\" and parameter \"CONTAINS\" with different values",
+        "name": "Test for a \"TOP VALUES\" query using column \"STRING-EVENT\" and parameter \"CONTAINS\" with different values",
         "columns": [
             {
                 "api-name": "time-series-string-test-column",
-                "type": "string-time-series",
+                "type": "string-event",
                 "name": "time_series_string_test_column"
             }
         ],
